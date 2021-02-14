@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
-class NewName extends Component {
+class NewUser extends Component {
     render() {
         return (
             <div>
                 <form onSubmit={this.props.handleSubmit}>
                     <input
                         type="text"
-                        name="newName"
+                        user="newUser"
                         value={this.props.value}
                         onChange={this.props.handleChange}
-                        placeholder="New Name"
+                        placeholder="New User"
                         autoFocus
                         autoComplete='off'
                     />
@@ -21,4 +21,4 @@ class NewName extends Component {
     }
 }
 
-export default NewName;
+export default NewUser;

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import Results from './components/Results';
-import NewName from './components/NewName';
+import NewUser from './components/NewUser';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      user: '',
       names: [],
       loading: true
     };
@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   handleChange(event) {
-    this.setState({ name: event.target.value });
+    this.setState({ user: event.target.value });
   }
 
   async handleSubmit(event) {
@@ -25,19 +25,19 @@ class App extends Component {
     this.setState({
       loading: true,
     })
-    await fetch('/addname/' + this.state.name, {
+    await fetch('/addUser/' + this.state.user, {
       method: 'GET'
     });
-    this.getNames()
+    this.getUsers()
   }
 
 
-  getNames() {
-    fetch('/getnames/')
+  getUsers() {
+    fetch('/getUsers/')
       .then(response => response.json())
       .then(json => {
         this.setState({
-          name: '',
+          user: '',
           names: json,
           loading: false
         })
@@ -45,14 +45,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getNames();
+    this.getUsers();
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <NewName handleChange={this.handleChange} handleSubmit={this.handleSubmit} value={this.state.name} />
+          <NewUser handleChange={this.handleChange} handleSubmit={this.handleSubmit} value={this.state.user} />
           {this.state.loading ? <h1>Loading</h1> : <Results {...this.state} />}
         </header>
       </div>

@@ -5,7 +5,7 @@ class Results extends Component {
         return (
             this.props.names.map(row => 
                 <div key={row.id}>
-                    {row.name}
+                    {row.user}
                 </div>
             )
         )
