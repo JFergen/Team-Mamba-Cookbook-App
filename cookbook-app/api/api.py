@@ -1,16 +1,28 @@
 from flask import Flask, redirect, url_for
 from pymongo import MongoClient
 from flask_cors import CORS, cross_origin
+import logging
 import json
+from logging.handlers import RotatingFileHandler
+from cookbookdatabase.db_connection import DatabaseConnection
 
 app = Flask(__name__)
+
+handler = RotatingFileHandler('log.log', maxBytes=10000, backupCount=1)
+handler.setLevel(logging.INFO)
+app.logger.addHandler(handler)
+
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-mongoClient = MongoClient('mongodb+srv://aaron:Fcdallas28%23@cluster0.h9bru.mongodb.net/Cookbook?retryWrites=true&w=majority')
-db = mongoClient.get_database('Cookbook')
-names_col = db.get_collection('Users')
+# mongoClient = MongoClient('mongodb+srv://aaron:Fcdallas28%23@cluster0.h9bru.mongodb.net/Cookbook?retryWrites=true&w=majority')
+# db = mongoClient.get_database('Cookbook')
+
+
+dbConnection = DatabaseConnection.getInstance()
+names_col = dbConnection.getTable('users_table')
+
 
 @app.route('/addUser/<user>/')
 def addUser(user):
@@ -27,3 +39,4 @@ def getUsers():
 
 if __name__ == "__main__":
     app.run(debug=True)
+  
