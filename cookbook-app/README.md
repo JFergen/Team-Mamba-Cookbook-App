@@ -19,8 +19,7 @@ How to run on Windows:
   1. Open a terminal and cd into cookbook-app
       - run this command: yarn start-api
   2. Open a second terminal and cd into cookbook-app/api
-      - run these commands: ./venv/Scripts/activate
-                             yarn start
+      - run these commands: ./venv/Scripts/activate and then yarn start
                              
                       
   
