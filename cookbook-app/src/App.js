@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GoogleBtn from './GoogleBtn';
 import './App.css';
 // import Results from './components/Results';
 // import NewUser from './components/NewUser';
@@ -63,31 +64,31 @@ import './App.css';
 
 class App extends React.Component {
 
-  componentDidMount() {
-    console.log('Loading');
+  // componentDidMount() {
+  //   console.log('Loading');
 
-    window.gapi.load('auth2', () => {
-      window.gapi.auth2.init({
-        client_id: '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleusercontent.com'
-      });
+  //   window.gapi.load('auth2', () => {
+  //     window.gapi.auth2.init({
+  //       client_id: '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleusercontent.com'
+  //     });
 
-      window.gapi.load('signin2', () => {
-        const params = {
-          onSuccess: () => {
-            console.log('User has finished signing in!')
-          }
-        }
-        window.gapi.signin2.render('loginButton', params);
-      })
+  //     window.gapi.load('signin2', () => {
+  //       const params = {
+  //         onSuccess: () => {
+  //           console.log('User has finished signing in!')
+  //         }
+  //       }
+  //       window.gapi.signin2.render('loginButton', params);
+  //     })
 
-    });
-  }
+  //   });
+  // }
 
   render() {
     return (
       <div className='App'>
         <h1>Welcome to the Cookbook App!</h1>
-        <button id="loginButton">Sign in with Google</button>
+        <GoogleBtn/>
       </div>
     )
   }
