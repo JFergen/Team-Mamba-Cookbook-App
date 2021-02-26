@@ -2,9 +2,7 @@
 import React, { Component } from 'react'
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
-
 const CLIENT_ID = '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleusercontent.com';
-
 
 class GoogleBtn extends Component {
    constructor(props) {
@@ -28,6 +26,7 @@ class GoogleBtn extends Component {
         accessToken: response.accessToken
       }));
     }
+    localStorage.setItem('loggedIn', true);
   }
 
   logout (response) {
@@ -35,14 +34,17 @@ class GoogleBtn extends Component {
       isLogined: false,
       accessToken: ''
     }));
+    localStorage.setItem('loggedIn', false);
   }
 
   handleLoginFailure (response) {
     alert('Failed to log in')
+    localStorage.setItem('loggedIn', false);
   }
 
   handleLogoutFailure (response) {
     alert('Failed to log out')
+    localStorage.setItem('loggedIn', true);
   }
 
   render() {

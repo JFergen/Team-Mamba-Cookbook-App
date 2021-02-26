@@ -41,3 +41,10 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.header > li {
+  display: inline-block;
+  zoom: 1;
+  display: inline;
+}
+
