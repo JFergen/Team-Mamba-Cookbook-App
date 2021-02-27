@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import DatabaseDriver from './database/DatabaseDriver';
 
 const CLIENT_ID = '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleusercontent.com';
 
@@ -20,6 +21,8 @@ class GoogleBtn extends Component {
   }
 
   login (response) {
+
+    DatabaseDriver.getAllRecipes().then(data => console.log(data))
     if(response.accessToken){
       this.setState(state => ({
         isLogined: true,
