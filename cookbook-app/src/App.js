@@ -14,6 +14,7 @@ import './App.css';
 class App extends React.Component {
   render() {
     return (
+      //  Navbar
       <BrowserRouter>
         <Navbar bg="light" expand="lg">
           <IconContext.Provider value ={{size:70}}> {/*Change the size/style of icons here */}
@@ -37,6 +38,7 @@ class App extends React.Component {
           </Navbar.Collapse>  
         </Navbar>
 
+        {/* Routes */}
         <Route path="/" exact component={Home}/>
         <Route path="/discover" component={Discover}/>
         <Route path="/create" component={Create}/>
