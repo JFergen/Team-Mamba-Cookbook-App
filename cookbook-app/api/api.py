@@ -3,6 +3,7 @@ from pymongo import MongoClient
 from flask_cors import CORS, cross_origin
 import logging
 import json
+from bson.json_util import dumps
 from logging.handlers import RotatingFileHandler
 from cookbookdatabase.db_connection import DatabaseConnection
 
@@ -36,6 +37,10 @@ def getUsers():
         for name in names_col.find({}).sort("user"):
             names_json.append({"user": name['user'], "id": str(name['_id'])})
     return json.dumps(names_json)
+
+@app.route('/getAllRecipes/')
+def getRecipes():
+    return dumps(dbConnection.getTable('recipes_table').find({}))
 
 if __name__ == "__main__":
     app.run(debug=True)

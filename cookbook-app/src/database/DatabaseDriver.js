@@ -1,7 +1,14 @@
 
 class DatabaseDriver {
-    constructor() {
 
+    static async getAllRecipes() {
+        return fetch('/getAllRecipes').then(response =>
+            response.json().then(data => {
+                console.log(data);
+            })
+        );
     }
 
 }
+
+export default DatabaseDriver;
