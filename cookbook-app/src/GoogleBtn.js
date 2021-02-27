@@ -21,8 +21,6 @@ class GoogleBtn extends Component {
   }
 
   login (response) {
-
-    DatabaseDriver.getAllRecipes().then(data => console.log(data))
     if(response.accessToken){
       this.setState(state => ({
         isLogined: true,
