@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, request
 from pymongo import MongoClient
 from flask_cors import CORS, cross_origin
 import logging
@@ -6,6 +6,9 @@ import json
 from bson.json_util import dumps
 from logging.handlers import RotatingFileHandler
 from cookbookdatabase.db_connection import DatabaseConnection
+from cookbookdatabase.tables.table_names import *
+import sys
+import requests
 
 app = Flask(__name__)
 
@@ -22,25 +25,31 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 dbConnection = DatabaseConnection.getInstance()
-names_col = dbConnection.getTable('users_table')
+# names_col = dbConnection.getTable('users_table')
 
 
-@app.route('/addUser/<user>/')
-def addUser(user):
-    names_col.insert_one({"user": user.lower()})
-    return redirect(url_for('getUsers'))
+# @app.route('/addUser/<user>/')
+# def addUser(user):
+#     names_col.insert_one({"user": user.lower()})
+#     return redirect(url_for('getUsers'))
 
-@app.route('/getUsers/')
-def getUsers():
-    names_json = []
-    if names_col.find({}):
-        for name in names_col.find({}).sort("user"):
-            names_json.append({"user": name['user'], "id": str(name['_id'])})
-    return json.dumps(names_json)
+# @app.route('/getUsers/')
+# def getUsers():
+#     names_json = []
+#     if names_col.find({}):
+#         for name in names_col.find({}).sort("user"):
+#             names_json.append({"user": name['user'], "id": str(name['_id'])})
+#     return json.dumps(names_json)
 
 @app.route('/getAllRecipes/')
-def getRecipes():
-    return dumps(dbConnection.getTable('recipes_table').find({}))
+def getAllRecipes():
+    return dumps(dbConnection.getTable(RECIPES_TABLE_NAME).find({}))
+
+@app.route('/addRecipe/', methods=['POST'])
+def addRecipe():
+    body = request.get_json()
+    dbConnection.getTable('recipes_table').insert_one(body)
+    return "ok", 200
 
 if __name__ == "__main__":
     app.run(debug=True)
