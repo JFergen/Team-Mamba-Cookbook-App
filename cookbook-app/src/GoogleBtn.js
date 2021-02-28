@@ -31,12 +31,6 @@ class GoogleBtn extends Component {
   }
 
   logout (response) {
-    const data = {
-      "name": "lasagna",
-      "ingredients": ["cheese", "tomato sauce", "other stuff"],
-      "directions": "not sure"
-  }
-    DatabaseDriver.addRecipe(data);
     this.setState(state => ({
       isLogined: false,
       accessToken: ''

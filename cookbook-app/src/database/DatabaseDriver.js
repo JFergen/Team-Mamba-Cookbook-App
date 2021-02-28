@@ -10,7 +10,6 @@ class DatabaseDriver {
     }
 
     static addRecipe(recipe) {
-        console.log("adding recipe");
         fetch('/addRecipe/', {
             method: 'POST',
             cache: "no-cache",

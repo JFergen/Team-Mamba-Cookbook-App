@@ -48,7 +48,7 @@ def getAllRecipes():
 @app.route('/addRecipe/', methods=['POST'])
 def addRecipe():
     body = request.get_json()
-    dbConnection.getTable('recipes_table').insert_one(body)
+    dbConnection.getTable(RECIPES_TABLE_NAME).insert_one(body)
     return "ok", 200
 
 if __name__ == "__main__":
