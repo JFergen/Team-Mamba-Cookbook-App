@@ -1,97 +1,50 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap';
+import {BrowserRouter, Route} from "react-router-dom";
+import { IconContext } from 'react-icons';
+import { MdHome } from 'react-icons/md';
+import GoogleBtn from './GoogleBtn';
+import Home from './pages/Home/Home';
+import Discover from './pages/Discover/Discover';
+import Create from './pages/Create/Create';
+import Saved from './pages/Saved/Saved';
+import Profile from './pages/Profile/Profile';
+
 import './App.css';
-// import Results from './components/Results';
-// import NewUser from './components/NewUser';
-// import { render } from 'react-dom';
-
-// class App extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       user: '',
-//       names: [],
-//       loading: true
-//     };
-
-//     this.handleChange = this.handleChange.bind(this);
-//     this.handleSubmit = this.handleSubmit.bind(this);
-//   }
-
-//   handleChange(event) {
-//     this.setState({ user: event.target.value });
-//   }
-
-//   async handleSubmit(event) {
-//     event.preventDefault();
-//     this.setState({
-//       loading: true,
-//     })
-//     await fetch('/addUser/' + this.state.user, {
-//       method: 'GET'
-//     });
-//     this.getUsers()
-//   }
-
-
-//   getUsers() {
-//     fetch('/getUsers/')
-//       .then(response => response.json())
-//       .then(json => {
-//         this.setState({
-//           user: '',
-//           names: json,
-//           loading: false
-//         })
-//       })
-//   }
-
-//   componentDidMount() {
-//     this.getUsers();
-//   }
-
-//   render() {
-//     return (
-//       <div className="App">
-//         <header className="App-header">
-//           <NewUser handleChange={this.handleChange} handleSubmit={this.handleSubmit} value={this.state.user} />
-//           {this.state.loading ? <h1>Loading</h1> : <Results {...this.state} />}
-//         </header>
-//       </div>
-//     );
-//   }
-// }
-
 class App extends React.Component {
-
-  componentDidMount() {
-    console.log('Loading');
-
-    window.gapi.load('auth2', () => {
-      window.gapi.auth2.init({
-        client_id: '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleusercontent.com'
-      });
-
-      window.gapi.load('signin2', () => {
-        const params = {
-          onSuccess: () => {
-            console.log('User has finished signing in!')
-          }
-        }
-        window.gapi.signin2.render('loginButton', params);
-      })
-
-    });
-  }
-
   render() {
     return (
-      <div className='App'>
-        <h1>Welcome to the Cookbook App!</h1>
-        <button id="loginButton">Sign in with Google</button>
-      </div>
+      <BrowserRouter>
+        <Navbar bg="light" expand="lg">
+          <IconContext.Provider value ={{size:70}}> {/*Change the size/style of icons here */}
+            <Navbar.Brand href="/"><MdHome/></Navbar.Brand>
+          </IconContext.Provider>
+          <Navbar.Collapse id="navbar">
+            <Nav className="mr-auto">
+              <Nav.Link href="discover">Discover</Nav.Link>
+              <Nav.Link href="saved">Saved</Nav.Link>
+              <Nav.Link href="create">Create</Nav.Link>
+            </Nav>
+            <Form inline>
+              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+              <Button variant="outline-success">Search</Button>
+            </Form>
+            <Nav className="ml-sm-4">
+              <Nav.Link href="#test">
+                <GoogleBtn/>
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>  
+        </Navbar>
+
+        <Route path="/" exact component={Home}/>
+        <Route path="/discover" component={Discover}/>
+        <Route path="/create" component={Create}/>
+        <Route path="/saved" component={Saved}/>
+        <Route path="/profile" component={Profile}/>
+    </BrowserRouter>
     )
   }
-  
 }
 
 export default App;
