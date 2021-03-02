@@ -19,7 +19,7 @@ class GoogleBtn extends Component {
     this.handleLogoutFailure = this.handleLogoutFailure.bind(this);
   }
 
-  login (response) {
+  login (response) { // should maybe be moved to the login page it seems.
     if(response.accessToken){
       this.setState(state => ({
         isLogined: true,
@@ -29,7 +29,7 @@ class GoogleBtn extends Component {
     localStorage.setItem('loggedIn', true);
   }
 
-  logout (response) {
+  logout (response) { // should open login page
     this.setState(state => ({
       isLogined: false,
       accessToken: ''

@@ -5,7 +5,7 @@ class Login extends Component {
     render() {
         return (
             <div className="center">
-                <h1>Welcome to the Login Screen!</h1>
+                <h1>Login through Google bellow!</h1>
                 <GoogleBtn/>
             </div>
         )

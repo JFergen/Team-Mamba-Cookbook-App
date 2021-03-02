@@ -1,15 +1,10 @@
 import React from 'react';
 import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap';
-import {BrowserRouter, Route} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { IconContext } from 'react-icons';
 import { MdHome } from 'react-icons/md';
 import GoogleBtn from './GoogleBtn';
-import Home from './pages/Home/Home';
-import Discover from './pages/Discover/Discover';
-import Create from './pages/Create/Create';
-import Saved from './pages/Saved/Saved';
-import Profile from './pages/Profile/Profile';
-
+import AllRoutes from './Routes/AllRoutes';
 import './App.css';
 class App extends React.Component {
   render() {
@@ -36,12 +31,9 @@ class App extends React.Component {
             </Nav>
           </Navbar.Collapse>  
         </Navbar>
+ 
+        <AllRoutes />
 
-        <Route path="/" exact component={Home}/>
-        <Route path="/discover" component={Discover}/>
-        <Route path="/create" component={Create}/>
-        <Route path="/saved" component={Saved}/>
-        <Route path="/profile" component={Profile}/>
     </BrowserRouter>
     )
   }
