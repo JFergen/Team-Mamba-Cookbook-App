@@ -9,8 +9,8 @@ import Discover from './pages/Discover/Discover';
 import Create from './pages/Create/Create';
 import Saved from './pages/Saved/Saved';
 import Profile from './pages/Profile/Profile';
-
 import './App.css';
+
 class App extends React.Component {
   render() {
     return (

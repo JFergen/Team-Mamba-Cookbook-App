@@ -22,7 +22,7 @@ class GoogleBtn extends Component {
 
   login (response) {
 
-    DatabaseDriver.getAllRecipes().then(data => console.log(data))
+    //DatabaseDriver.getAllRecipes().then(data => console.log(data)) TODO:: Save recipes in redux/local storage instead of calling on homepage everytime
     if(response.accessToken){
       this.setState(state => ({
         isLogined: true,
