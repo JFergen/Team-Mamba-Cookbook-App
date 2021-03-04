@@ -6,7 +6,6 @@ import { setUser } from './store/actions/user_actions';
 import DatabaseDriver from './database/DatabaseDriver';
 
 const CLIENT_ID = '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleusercontent.com';
-
 class GoogleBtn extends Component {
    constructor(props) {
     super(props);

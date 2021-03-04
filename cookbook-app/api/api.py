@@ -56,10 +56,10 @@ def addRecipe():
 @app.route('/addUser/', methods=['POST'])
 def addUser():
     body = request.get_json()
-    userEmail=list(body.items())[0][1]
-    str(userEmail)
-    #print(userEmail)
-    result=dbConnection.getTable(USERS_TABLE_NAME).find({'email': userEmail}).count()
+    googleID=list(body.items())[0][1]
+    str(googleID)
+    #print(googleID)
+    result=dbConnection.getTable(USERS_TABLE_NAME).find({'googleId': googleID}).count()
     #print(result)
     if result == 0:
         dbConnection.getTable(USERS_TABLE_NAME).insert_one(body)
