@@ -8,7 +8,7 @@ class DatabaseConnection:
     __mongoClient = MongoClient(DB_CONNECTION_URI)
     __db = __mongoClient.get_database(COOKBOOK_DATABASE_NAME)
 
-    __cookbookTables = None
+    __cookbookTables = None 
 
     @staticmethod
     def getInstance():

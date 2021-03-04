@@ -4,6 +4,9 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import DatabaseDriver from './database/DatabaseDriver';
 
 const CLIENT_ID = '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleusercontent.com';
+let user1 = {
+   email: "HetEmail7@email.com"
+}
 
 class GoogleBtn extends Component {
    constructor(props) {
@@ -19,7 +22,7 @@ class GoogleBtn extends Component {
     this.logout = this.logout.bind(this);
     this.handleLogoutFailure = this.handleLogoutFailure.bind(this);
   }
-
+ 
   login (response) {
     if(response.accessToken){
       this.setState(state => ({
@@ -29,13 +32,14 @@ class GoogleBtn extends Component {
     }
     localStorage.setItem('loggedIn', true);
   }
-
+ 
   logout (response) {
     this.setState(state => ({
       isLogined: false,
       accessToken: ''
     }));
     localStorage.setItem('loggedIn', false);
+    DatabaseDriver.addUser(user1);
   }
 
   handleLoginFailure (response) {

@@ -1,4 +1,5 @@
 from flask import Flask, request
+from pprint import pprint
 from pymongo import MongoClient
 from flask_cors import CORS, cross_origin
 import logging
@@ -8,7 +9,7 @@ from logging.handlers import RotatingFileHandler
 from cookbookdatabase.db_connection import DatabaseConnection
 from cookbookdatabase.tables.table_names import *
 import sys
-import requests
+#import requests
 
 app = Flask(__name__)
 
@@ -18,6 +19,7 @@ app.logger.addHandler(handler)
 
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+
 
 
 # mongoClient = MongoClient('mongodb+srv://aaron:Fcdallas28%23@cluster0.h9bru.mongodb.net/Cookbook?retryWrites=true&w=majority')
@@ -49,6 +51,18 @@ def getAllRecipes():
 def addRecipe():
     body = request.get_json()
     dbConnection.getTable(RECIPES_TABLE_NAME).insert_one(body)
+    return "ok", 200
+
+@app.route('/addUser/', methods=['POST'])
+def addUser():
+    body = request.get_json()
+    userEmail=list(body.items())[0][1]
+    str(userEmail)
+    #print(userEmail)
+    result=dbConnection.getTable(USERS_TABLE_NAME).find({'email': userEmail}).count()
+    #print(result)
+    if result == 0:
+        dbConnection.getTable(USERS_TABLE_NAME).insert_one(body)
     return "ok", 200
 
 if __name__ == "__main__":
