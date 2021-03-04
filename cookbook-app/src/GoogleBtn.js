@@ -5,9 +5,13 @@ import DatabaseDriver from './database/DatabaseDriver';
 
 const CLIENT_ID = '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleusercontent.com';
 let user1 = {
-   email: "HetEmail7@email.com"
+  "googleId":"102050791948382455788",
+  "imageUrl":"https://lh6.googleusercontent.com/-KC74Snclp3Q/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucntQOC3sXogI58I0t2M-KneOAAauw/s96-c/photo.jpg",
+  "email":"josephfergen150@gmail.com",
+  "name":"Joseph Fergen",
+  "givenName":"Joseph",
+  "familyName":"Fergen"
 }
-
 class GoogleBtn extends Component {
    constructor(props) {
     super(props);
