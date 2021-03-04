@@ -21,6 +21,8 @@ class GoogleBtn extends Component {
   }
 
   login (response) {
+    // TODO:: Save the user's profile in redux here
+    console.log(response.profileObj); 
     if(response.accessToken){
       this.setState(state => ({
         isLogined: true,
