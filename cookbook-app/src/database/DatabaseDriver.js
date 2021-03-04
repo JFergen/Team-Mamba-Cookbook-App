@@ -6,6 +6,30 @@ class DatabaseDriver {
             })
         );
     }
+
+    static addRecipe(recipe) {
+        fetch('/addRecipe/', {
+            method: 'POST',
+            cache: "no-cache",
+            headers:{
+                "content_type":"application/json",
+            },
+            body: JSON.stringify(recipe)
+        }
+        );
+    }
+
+    static addUser(user) {
+        fetch('/addUser/', {
+            method: 'POST',
+            cache: "no-cache",
+            headers:{
+                "content_type":"application/json",
+            },
+            body: JSON.stringify(user)
+        }
+        );
+    }
 }
 
 export default DatabaseDriver;

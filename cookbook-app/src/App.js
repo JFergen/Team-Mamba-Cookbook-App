@@ -1,8 +1,9 @@
 import React from 'react';
-import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap';
+import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
 import {BrowserRouter, Route} from "react-router-dom";
 import { IconContext } from 'react-icons';
 import { MdHome } from 'react-icons/md';
+import { connect } from 'react-redux';
 import GoogleBtn from './GoogleBtn';
 import Home from './pages/Home/Home';
 import Discover from './pages/Discover/Discover';
@@ -13,6 +14,7 @@ import './App.css';
 
 class App extends React.Component {
   render() {
+    console.log(this.props.user);
     return (
       //  Navbar
       <BrowserRouter>
@@ -30,11 +32,14 @@ class App extends React.Component {
               <FormControl type="text" placeholder="Search" className="mr-sm-2" />
               <Button variant="outline-success">Search</Button>
             </Form>
-            <Nav className="ml-sm-4">
-              <Nav.Link href="#test">
-                <GoogleBtn/>
-              </Nav.Link>
-            </Nav>
+            { this.props.user ?
+              <NavDropdown title={this.props.user.name}>
+              <NavDropdown.Item href="profile">Profile</NavDropdown.Item>
+              <NavDropdown.Divider/>
+              <NavDropdown.Item><GoogleBtn/></NavDropdown.Item>
+              </NavDropdown>: <GoogleBtn/>
+            }
+            
           </Navbar.Collapse>  
         </Navbar>
 
@@ -49,4 +54,8 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  user: state.usrReducer.user
+})
+
+export default connect(mapStateToProps)(App);
