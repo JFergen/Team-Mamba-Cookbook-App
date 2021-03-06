@@ -1,32 +1,7 @@
 
 class DatabaseDriver {
 
-    static async getAllRecipes() {
-        return fetch('/getAllRecipes').then(response =>
-            response.json().then(data => {
-               return data;
-            })
-        );
-    }
-
-    // static post(body) {
-    //     fetch('/post/', {
-    //         method: 'POST',
-    //         cache: "no-cache",
-    //         headers:{
-    //             "content_type":"application/json",
-    //         },
-    //         body: JSON.stringify(body)
-    //     }
-    //     );
-    // }
-
-    // static addRecipe(recipe) {
-    //     DatabaseDriver.post({
-    //         table_name: 'recipes_table',
-    //         data: recipe
-    //     });
-    // }
+    // Users
 
     static login(user) {
         fetch('/login/', {
@@ -39,6 +14,10 @@ class DatabaseDriver {
         }
         );
     }
+
+    // End Users
+
+    // Recipes
 
     static addRecipe(userId, recipe) {
         recipe.user_id = userId
@@ -66,6 +45,37 @@ class DatabaseDriver {
             cache: "no-cache",
         });
     }
+
+    static async getRecipesFromUser(userId) {
+        return fetch('/getRecipesFromUser/' + String(userId)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
+    // End Recipes
+
+    // Comments
+
+    static addComment(recipe_id, comment) {
+        var comment_to_add = {
+            recipe_id: recipe_id,
+            comment: comment
+        }
+
+        fetch('/addComment/', {
+            method: 'POST',
+            cache: "no-cache",
+            headers:{
+                "content_type":"application/json",
+            },
+            body: JSON.stringify(comment_to_add)
+        }
+        );
+    }
+
+    // End Comments
 }
 
 export default DatabaseDriver;

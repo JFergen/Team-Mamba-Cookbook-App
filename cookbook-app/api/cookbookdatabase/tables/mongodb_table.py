@@ -1,4 +1,5 @@
 from logger import log
+from bson.json_util import dumps
 
 class MongoDbTable:
     def __init__(self, table_name, table):
@@ -25,8 +26,9 @@ class MongoDbTable:
     def doesIdExist(self, id):
         return self._table.find({'_id': id}).count() > 0
 
-    def getAll(self):
-        return _table.find({})
+    def getAll(self, field, value):
+        recipes = list(self._table.find({field: value}))
+        return dumps(recipes)
 
     def insert(self, data):
         return self._table.insert_one(data)

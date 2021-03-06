@@ -24,6 +24,12 @@ class RecipesTable(MongoDbTable):
         log('Deleted recipe from database: ' + str(recipe_id))
         db_connection.USERS_TABLE.delete_recipe(user_id, recipe_id)
 
+    def add_comment(self, recipe_id, comment_id):
+        super().add_to_set(recipe_id, 'comments', comment_id)
+
+    def getRecipesFromUser(self, user_id):
+        return super().getAll('user_id', int(user_id))
+
 
 # user {
 #     id,

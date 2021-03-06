@@ -23,6 +23,11 @@ class GoogleBtn extends Component {
 
   login (response) {
 
+    DatabaseDriver.addComment('60430aab226578b9f6dbd185', {
+      'text': 'this is a commennt',
+      'user_id': 123455
+    })
+
     if(response.accessToken){
       this.setState(state => ({
         isLogined: true,
