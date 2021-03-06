@@ -1,3 +1,4 @@
+from flask import Flask, request, g
 from pymongo import MongoClient
 from flask_cors import CORS, cross_origin
 from logger import log
@@ -10,6 +11,9 @@ app = Flask(__name__)
 
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+
+
 
 
 # Users Table
@@ -58,7 +62,5 @@ def addComment():
 
 # end Comments Table
 
-
 if __name__ == "__main__":
     app.run(debug=True)
-  
