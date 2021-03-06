@@ -2,10 +2,11 @@
 import { getDefaultNormalizer } from '@testing-library/dom';
 import React, { Component } from 'react'
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { connect } from 'react-redux';
+import { setUser } from './store/actions/user_actions';
 import DatabaseDriver from './database/DatabaseDriver';
 
 const CLIENT_ID = '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleusercontent.com';
-
 class GoogleBtn extends Component {
    constructor(props) {
     super(props);
@@ -20,29 +21,28 @@ class GoogleBtn extends Component {
     this.logout = this.logout.bind(this);
     this.handleLogoutFailure = this.handleLogoutFailure.bind(this);
   }
-
+ 
   login (response) {
-
-    DatabaseDriver.addComment('60430aab226578b9f6dbd185', {
-      'text': 'this is a commennt',
-      'user_id': 123455
-    })
-
+    // TODO:: Save the user's profile in redux here
     if(response.accessToken){
-      this.setState(state => ({
+      this.setState({
         isLogined: true,
         accessToken: response.accessToken
-      }));
+      });
     }
+    this.props.setUser(response.profileObj);
+    DatabaseDriver.login(response.profileObj);  // Add user to the database
     localStorage.setItem('loggedIn', true);
+    
   }
-
+ 
   logout (response) {
-    this.setState(state => ({
+    this.setState({
       isLogined: false,
       accessToken: ''
-    }));
+    });
     localStorage.setItem('loggedIn', false);
+    window.location.reload(true);
   }
 
   handleLoginFailure (response) {
@@ -80,4 +80,8 @@ class GoogleBtn extends Component {
   }
 }
 
-export default GoogleBtn;
+const mapStateToProps = (state) => ({
+  user: state.usrReducer.user
+})
+
+export default connect(mapStateToProps, { setUser }) (GoogleBtn);
