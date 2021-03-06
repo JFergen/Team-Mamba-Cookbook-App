@@ -1,4 +1,5 @@
 
+import { getDefaultNormalizer } from '@testing-library/dom';
 import React, { Component } from 'react'
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import DatabaseDriver from './database/DatabaseDriver';
@@ -21,6 +22,7 @@ class GoogleBtn extends Component {
   }
 
   login (response) {
+
     if(response.accessToken){
       this.setState(state => ({
         isLogined: true,
