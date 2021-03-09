@@ -11,7 +11,6 @@ import Create from './pages/Create/Create';
 import Saved from './pages/Saved/Saved';
 import Profile from './pages/Profile/Profile';
 import './App.css';
-import Card from './Cards/index.js'
 
 class App extends React.Component {
   render() {
