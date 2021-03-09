@@ -6,7 +6,6 @@ import store from './store';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import Card from './Cards/index.js'
 
 console.log(localStorage.getItem('loggedIn'));
 
