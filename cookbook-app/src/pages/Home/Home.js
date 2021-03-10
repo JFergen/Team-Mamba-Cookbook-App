@@ -14,11 +14,14 @@ class Home extends Component {
     }
 
     async componentDidMount() {
-        const data = await DatabaseDriver.getUsersRecipes('108347274282317384205');
-        console.log(data);
-        this.setState({ recipes: data })
+        // const data = await DatabaseDriver.getUsersRecipes('108347274282317384205');
+        // console.log(data);
+        // this.setState({ recipes: data })
+        const data = await DatabaseDriver.getAllRecipes();  // Get recipes from the database
+        this.setState({ recipes: data })                    // Set the recipes in the state
     }
 
+    //  Render an item in the list
     renderItem(index, key) {
         return (
             <div 

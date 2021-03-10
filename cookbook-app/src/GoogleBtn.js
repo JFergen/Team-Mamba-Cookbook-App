@@ -23,15 +23,14 @@ class GoogleBtn extends Component {
   }
  
   login (response) {
-    // TODO:: Save the user's profile in redux here
     if(response.accessToken){
       this.setState({
         isLogined: true,
         accessToken: response.accessToken
       });
     }
-    this.props.setUser(response.profileObj);
-    DatabaseDriver.login(response.profileObj);  // Add user to the database
+    this.props.setUser(response.profileObj);  // Save user's profile in redux
+    DatabaseDriver.addUser(response.profileObj);  // Add user to the database
     localStorage.setItem('loggedIn', true);
     
   }
