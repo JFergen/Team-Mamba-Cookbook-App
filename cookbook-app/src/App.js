@@ -11,10 +11,6 @@ import './App.css';
 
 class App extends React.Component {
 
-  componentDidMount(){
-    console.log('I work!')
-  }
-
   render() {
     return (
       <BrowserRouter>
@@ -41,9 +37,11 @@ class App extends React.Component {
                 <Logout />
               </Nav.Link>
             </Nav>
-          </Navbar.Collapse>  
+          </Navbar.Collapse>
         </Navbar>
+        {console.log('about to call allroutes')}
         <AllRoutes />
+        {console.log('ran all me routes and they returned.')}
       </React.Fragment>
       </Switch>
       </BrowserRouter>

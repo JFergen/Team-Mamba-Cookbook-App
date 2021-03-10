@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { GoogleLogin } from 'react-google-login';
+import Create from '../Create/Create';
+import { Redirect } from "react-router-dom";
 
 
 const CLIENT_ID = '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleusercontent.com';
@@ -23,15 +25,13 @@ class Login extends Component {
     */
 
     onSuccess(response){
+        console.log('and thats on success');
         console.log('[Login Success] currentUser: ', response);
             //sets state in class to issignedin
-        this.setState({
-            isSignedIn: true
-        });
+        this.setState({isSignedIn: true});
             //sets local storage to loggedin
-        localStorage.setItem('loggedin', true);
+        localStorage.setItem('loggedin', 'true');
             //redirect to homepage after sucess
-        this.props.history.push("/Home");
       };
 
 
@@ -41,17 +41,25 @@ class Login extends Component {
 
 
     getContent(){
-        if(localStorage.getItem('loggedin') === true) // assigns state status
-            //this.state.isSignedIn = true;
-            this.setState({isSignedIn: true});
+        console.log('getContent called');
+
+            console.log('loginpage localstorage state: ', localStorage.getItem('loggedin'));
+            console.log('loginpage state:', this.state.isSignedIn);
+            
             // for some reason, the way this code runs, this cannot reference local storage to work. I think it updates in an odd way.
         if(this.state.isSignedIn) { //changes screen if logged in.
-            return <h1>You are logged in already!</h1>
-        } else { // returns loggin screen if not logged in
+            console.log('time for redirect call in login')
+            return (<Redirect to='/create' />)
+        }
+        else { // returns loggin screen if not logged in
+            console.log('returning layoutformat for login');
             return (
             <div>
+                {console.log('aledgedly not loggedin, login please')}
                 <h1>Login through Google below!</h1>
+                {console.log('header passed')}
                 <div>
+                {console.log('passing button')}
                     <GoogleLogin
                         clientId={CLIENT_ID}
                         buttonText="Login"
@@ -61,6 +69,7 @@ class Login extends Component {
                         style={{ marginTop: '100px' }}
                         isSignedIn={true}
                     />
+                    {console.log('button passed')}
                 </div>
             </div>
             )
@@ -70,7 +79,9 @@ class Login extends Component {
     render() { //just calls get content
         return (
             <div className="center">
+                {console.log('calling getcontent')}
                 {this.getContent()}
+                {console.log('get content has returned')}
             </div>
         )
     };

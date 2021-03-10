@@ -7,26 +7,20 @@ const CLIENT_ID = '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleuser
 class Logout extends React.Component{
   constructor(props) {
     super(props)
-    this.state = {
-      isSignedIn: false
-    }
+
     this.onSuccess = this.onSuccess.bind(this);
   }
 
   onSuccess(){
     console.log('Logout sucess');
 
-    this.setState({
-      isSignedIn: false
-    })
+    localStorage.setItem('loggedin', 'false');
+    
+      // just rerenders the page by adjusting the state
+    this.setState({ state: this.state });
 
-    localStorage.setItem('loggedin', false);
 
-    //this.props.history.push("/Login"); This doesn't seem to work.
-
-        //---------------------------------
-        //redirect to login page here
-        //---------------------------------
+    //re render page, logining out
   };
   
   render(){
