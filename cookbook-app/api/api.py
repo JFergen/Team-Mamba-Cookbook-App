@@ -27,6 +27,13 @@ def login():
 
     return 'ok', 200
 
+
+@app.route('/deleteUser/<user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    db_connection.USERS_TABLE.delete_user(user_id)
+
+    return 'ok', 200
+
 # End Users Table
 
 

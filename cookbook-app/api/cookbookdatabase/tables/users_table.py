@@ -30,5 +30,5 @@ class UsersTable(MongoDbTable):
     def modify(self):
         pass
 
-    def remove(self):
-        pass
+    def delete_user(self, user_id):
+        super().delete(user_id)

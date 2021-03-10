@@ -14,6 +14,13 @@ class DatabaseDriver {
         );
     }
 
+    static deleteUser(userId) {
+        fetch('/deleteUser/' + userId, {
+            method: 'DELETE',
+            cache: "no-cache",
+        });
+    }
+
     // End Users
 
     // Recipes
