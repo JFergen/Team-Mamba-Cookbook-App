@@ -52,6 +52,19 @@ class DatabaseDriver {
         });
     }
 
+    static updateRecipe(recipe) {
+        fetch('/updateRecipe/', {
+            method: 'POST',
+            cache: "no-cache",
+            headers:{
+                "content_type":"application/json",
+            },
+            body: JSON.stringify(recipe)
+        }
+        );
+
+    }
+
     static async getUsersRecipes(userId) {
         return fetch('/getUsersRecipes/' + String(userId)).then(response =>
             response.json().then(data => {

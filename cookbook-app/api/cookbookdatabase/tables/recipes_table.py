@@ -14,9 +14,11 @@ class RecipesTable(MongoDbTable):
         db_connection.USERS_TABLE.add_recipe( recipe['user_id'], insert_result.inserted_id)
 
 
+    def update_recipe(self, recipe):
+        recipe_id = ObjectId(recipe['_id'])
+        del recipe['_id']
 
-    def modify(self):
-        pass
+        super().update(recipe_id, recipe)
 
     def delete_recipe(self, user_id, recipe_id):
         super().delete(recipe_id)

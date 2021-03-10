@@ -14,7 +14,8 @@ class Home extends Component {
     }
 
     async componentDidMount() {
-        const data = await DatabaseDriver.getUsersRecipes('108347274282317384205000');
+        const data = await DatabaseDriver.getUsersRecipes('108347274282317384205');
+        console.log(data);
         this.setState({ recipes: data })
     }
 

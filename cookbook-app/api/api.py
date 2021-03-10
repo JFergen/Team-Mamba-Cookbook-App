@@ -47,6 +47,16 @@ def add_recipe():
 
     return 'ok', 200
 
+
+@app.route('/updateRecipe/', methods=['POST'])
+def update_recipe():
+    recipe = request.get_json()
+
+    db_connection.RECIPES_TABLE.update_recipe(recipe)
+
+    return 'ok', 200
+
+
 @app.route('/getUsersRecipes/<user_id>', methods=['GET'])
 def get_users_recipes(user_id):
   return db_connection.RECIPES_TABLE.get_users_recipes(user_id)

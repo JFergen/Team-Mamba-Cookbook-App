@@ -36,8 +36,8 @@ class MongoDbTable:
     def add_to_set(self, id, field, new_value):
         return self._table.update_one({'_id': id}, { '$addToSet': { field: new_value }})
 
-    def modify(self):
-        pass
+    def update(self, id, data):
+        self._table.update({'_id': id}, {"$set": data})
 
     def delete(self, id):
         self._table.delete_one( { '_id': id } )
