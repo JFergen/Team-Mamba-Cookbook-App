@@ -32,6 +32,9 @@ class App extends React.Component {
               <FormControl type="text" placeholder="Search" className="mr-sm-2" />
               <Button variant="outline-success">Search</Button>
             </Form>
+
+            {/* Display name of user if logged in along with dropdown to go to profile. Otherwise show loginbutton */}
+            {/* TODO:: This needs to probably be updated when Jon finishes login screen functionality */}
             { this.props.user ?
               <NavDropdown title={this.props.user.name}>
               <NavDropdown.Item href="profile">Profile</NavDropdown.Item>
@@ -54,6 +57,7 @@ class App extends React.Component {
   }
 }
 
+//  Allow use of google profile information from redux
 const mapStateToProps = (state) => ({
   user: state.usrReducer.user
 })
