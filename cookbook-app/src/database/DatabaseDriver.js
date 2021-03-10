@@ -45,8 +45,8 @@ class DatabaseDriver {
         });
     }
 
-    static async getRecipesFromUser(userId) {
-        return fetch('/getRecipesFromUser/' + String(userId)).then(response =>
+    static async getUsersRecipes(userId) {
+        return fetch('/getUsersRecipes/' + String(userId)).then(response =>
             response.json().then(data => {
                return data;
             })

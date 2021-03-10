@@ -23,10 +23,10 @@ class MongoDbTable:
     def set_table(self, table):
         self.table = table
 
-    def doesIdExist(self, id):
+    def does_id_exist(self, id):
         return self._table.find({'_id': id}).count() > 0
 
-    def getAll(self, field, value):
+    def get_all(self, field, value):
         recipes = list(self._table.find({field: value}))
         return dumps(recipes)
 
