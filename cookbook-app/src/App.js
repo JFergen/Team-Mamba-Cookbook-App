@@ -42,7 +42,6 @@ class App extends React.Component {
               <NavDropdown.Item><GoogleBtn/></NavDropdown.Item>
               </NavDropdown>: <GoogleBtn/>
             }
-            
           </Navbar.Collapse>  
         </Navbar>
 
