@@ -17,7 +17,7 @@ class UsersTable(MongoDbTable):
     def add_user(self, new_user):
         new_user['_id'] = new_user['googleId']
         del new_user['googleId']
-        log('User added to the database: ' + new_user)
+        log('User added to the database: ' + str(new_user))
         super().insert(new_user)
 
     def add_recipe(self, user_id, recipe_id):
