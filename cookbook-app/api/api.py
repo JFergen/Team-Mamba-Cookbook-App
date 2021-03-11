@@ -1,47 +1,94 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, request, g
 from pymongo import MongoClient
 from flask_cors import CORS, cross_origin
-import logging
+from logger import log
 import json
 from bson.json_util import dumps
-from logging.handlers import RotatingFileHandler
-from cookbookdatabase.db_connection import DatabaseConnection
+from bson.objectid import ObjectId
+import cookbookdatabase.db_connection as db_connection
+from cookbookdatabase.tables.table_names import *
 
 app = Flask(__name__)
-
-handler = RotatingFileHandler('log.log', maxBytes=10000, backupCount=1)
-handler.setLevel(logging.INFO)
-app.logger.addHandler(handler)
 
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-# mongoClient = MongoClient('mongodb+srv://aaron:Fcdallas28%23@cluster0.h9bru.mongodb.net/Cookbook?retryWrites=true&w=majority')
-# db = mongoClient.get_database('Cookbook')
 
 
-dbConnection = DatabaseConnection.getInstance()
-names_col = dbConnection.getTable('users_table')
+
+# Users Table
+
+@app.route('/login/', methods=['POST'])
+def login():
+    user_info = request.get_json()
+
+    db_connection.USERS_TABLE.login(user_info)
+
+    return 'ok', 200
 
 
-@app.route('/addUser/<user>/')
-def addUser(user):
-    names_col.insert_one({"user": user.lower()})
-    return redirect(url_for('getUsers'))
+@app.route('/deleteUser/<user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    db_connection.USERS_TABLE.delete_user(user_id)
 
-@app.route('/getUsers/')
-def getUsers():
-    names_json = []
-    if names_col.find({}):
-        for name in names_col.find({}).sort("user"):
-            names_json.append({"user": name['user'], "id": str(name['_id'])})
-    return json.dumps(names_json)
+    return 'ok', 200
 
-@app.route('/getAllRecipes/')
-def getRecipes():
-    return dumps(dbConnection.getTable('recipes_table').find({}))
+# End Users Table
+
+
+# Recipes Table
+
+@app.route('/addRecipe/', methods=['POST'])
+def add_recipe():
+    recipe = request.get_json()
+
+    db_connection.RECIPES_TABLE.add_recipe(recipe)
+
+    return 'ok', 200
+
+
+@app.route('/updateRecipe/', methods=['POST'])
+def update_recipe():
+    recipe = request.get_json()
+
+    db_connection.RECIPES_TABLE.update_recipe(recipe)
+
+    return 'ok', 200
+
+
+@app.route('/getUsersRecipes/<user_id>', methods=['GET'])
+def get_users_recipes(user_id):
+  return db_connection.RECIPES_TABLE.get_users_recipes(user_id)
+    
+
+
+@app.route('/deleteRecipe/<recipe>', methods=['DELETE'])
+def delete_recipe(recipe):
+    recipe = json.loads(recipe)
+
+    user_id = recipe['user_id']
+    recipe_id = ObjectId(recipe['recipe_id'])
+
+    db_connection.RECIPES_TABLE.delete_recipe(user_id, recipe_id)
+
+    return 'ok', 200
+
+# End Recipes Table
+
+
+
+# Comments Table
+
+@app.route('/addComment/', methods=['POST'])
+def add_comment():
+    comment = request.get_json()
+
+    db_connection.COMMENTS_TABLE.add_comment(comment)
+
+    return 'ok', 200
+
+# end Comments Table
 
 if __name__ == "__main__":
     app.run(debug=True)
-  

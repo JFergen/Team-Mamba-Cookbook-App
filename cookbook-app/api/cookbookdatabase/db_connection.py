@@ -1,31 +1,19 @@
 from pymongo import MongoClient
-from cookbookdatabase.tables.table_names import TABLE_NAMES, COOKBOOK_DATABASE_NAME
+from cookbookdatabase.tables.table_names import COOKBOOK_DATABASE_NAME
+from cookbookdatabase.tables.recipes_table import RecipesTable
+from cookbookdatabase.tables.users_table import UsersTable
+from cookbookdatabase.tables.comments_table import CommentsTable
 from cookbookdatabase.credentials import DB_CONNECTION_URI
+from logger import log
 
-class DatabaseConnection:
-    __theInstance = None
+__MONGO_CLIENT = MongoClient(DB_CONNECTION_URI)
 
-    __mongoClient = MongoClient(DB_CONNECTION_URI)
-    __db = __mongoClient.get_database(COOKBOOK_DATABASE_NAME)
+log('Connected to Database')
 
-    __cookbookTables = None
+__DB = __MONGO_CLIENT.get_database(COOKBOOK_DATABASE_NAME)
 
-    @staticmethod
-    def getInstance():
-        if DatabaseConnection.__theInstance == None:
-            return DatabaseConnection()
-        else:
-            return DatabaseConnection.__theInstance
+USERS_TABLE = UsersTable( __DB.get_collection('users_table') )
 
-    def __init__(self):
-        if DatabaseConnection.__theInstance != None:
-            raise Exception("This class is a singleton. Use getInstance() instead.")
-        else:
-            self.__initializeTables()
-            DatabaseConnection.__theInstance = self
+RECIPES_TABLE = RecipesTable( __DB.get_collection('recipes_table') )
 
-    def __initializeTables(self):
-        self.__cookbookTables = { table_name: self.__db.get_collection(table_name) for table_name in TABLE_NAMES }
-
-    def getTable(self, table_name):
-        return self.__cookbookTables[table_name]
+COMMENTS_TABLE = CommentsTable( __DB.get_collection('comments_table') )
