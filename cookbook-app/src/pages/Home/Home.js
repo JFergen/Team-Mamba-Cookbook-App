@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import DatabaseDriver from '../../database/DatabaseDriver';
 import ReactList from 'react-list';
 import './Home.css';
-import Card from '../../Cards'
-
+import { Card } from "react-bootstrap";
+import {MdSave, MdChatBubbleOutline} from 'react-icons/md'
+import { IconContext } from 'react-icons';
 class Home extends Component {
     constructor() {
         super();
@@ -53,16 +54,34 @@ class Home extends Component {
     }
 
     render() {
-        return(
-            <div className="App">
-                <Card
-                title='Card Title'
-                imageURL='https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F4f%2F82%2F8d%2F4f828d05f82b8b7aedfe8be6a7d9d2a3.png&imgrefurl=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F350366046007007479%2F&tbnid=-3dOdBkeOueX-M&vet=12ahUKEwjm8rqXsqHvAhW6gU4HHTwGCCsQMygBegUIARCoAQ..i&docid=exUuJz2767CCOM&w=2500&h=2539&q=coding%20meme&ved=2ahUKEwjm8rqXsqHvAhW6gU4HHTwGCCsQMygBegUIARCoAQ'
-                body='This is our reciepe'
-                ingredient='everything available'
-                time='0 mins'
-                 />
-            </div>
+        return (
+            <Card>
+                <Card.Header class="bg-secondary text-center">
+                    <h class="text-dark text-center font-weight-bold ">Pasta Food Stuff </h>
+                    <IconContext.Provider value={{ style: {verticalAlign: 'middle', justifyContent: 'end'} }}>
+                        {/* <a href="#" class="btn btn-default d-flex justify-content-end"> */}
+                            <MdSave />
+                            {/* </a> */}
+                    </IconContext.Provider>
+                </Card.Header>
+            
+                    <Card.Body class="p-1 mb-200 table-warning">
+                    <Card.Img variant="rounded float-left" src="//placehold.it/200" width="auto" height="auto" />
+                            <Card.Text class="text-dark">
+                                This reciepe is all about being super good, super yummy and wow it is so easy to cook its so crazy. Please take a look at it and you will love it I promise. I have made it my mission in life to bless those with this recipe passed on through my family. You are welcome.  
+                            </Card.Text>
+                            <Card.Text class="text-dark text-center">
+                                Ingredients
+                            </Card.Text>
+                        <a href="#" class="nav-link text-primary"><MdChatBubbleOutline /> Comments</a>
+                        <a href="#" class="btn btn-primary pull-right" id="right-panel-link">Recipe Page</a>
+                    </Card.Body>
+                <Card.Footer class="p-2 mb-200 bg-secondary">
+                <h class=" text-light text-left font-weight-bold"> Made by:</h>
+                <a href="#" class="btn btn-default font-weight-bold">User</a> 
+                <h class="text-right text-dark d-flex justify-content-end">3:08am</h>
+                </Card.Footer>
+            </Card>
         )
     }
 }
