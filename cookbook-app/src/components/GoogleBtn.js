@@ -1,4 +1,5 @@
 
+import { getDefaultNormalizer } from '@testing-library/dom';
 import React, { Component } from 'react'
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { connect } from 'react-redux';
@@ -29,7 +30,7 @@ class GoogleBtn extends Component {
       });
     }
     this.props.setUser(response.profileObj);  // Save user's profile in redux
-    DatabaseDriver.addUser(response.profileObj);  // Add user to the database
+    DatabaseDriver.login(response.profileObj);  // Add user to the database
     localStorage.setItem('loggedIn', true);
     
   }
