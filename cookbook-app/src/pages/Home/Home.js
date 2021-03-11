@@ -38,48 +38,66 @@ class Home extends Component {
         )
     }
 
-    render() {
-        return (
-            <div className="home">
-                <h1>Welcome to the Home Area!</h1>
-                <div className="list">
-                    <ReactList
-                        itemRenderer={this.renderItem}
-                        length={this.state.recipes.length}
-                        type='uniform'
-                    />
-                </div>
-            </div>
-        )
-    }
+    // render() {
+    //     return (
+    //         <div className="home">
+    //             <h1>Welcome to the Home Area!</h1>
+    //             <div className="list">
+    //                 <ReactList
+    //                     itemRenderer={this.renderItem}
+    //                     length={this.state.recipes.length}
+    //                     type='uniform'
+    //                 />
+    //             </div>
+    //         </div>
+    //     )
+    // }
 
     render() {
         return (
-            <Card>
-                <Card.Header class="bg-secondary text-center">
-                    <h class="text-dark text-center font-weight-bold ">Pasta Food Stuff </h>
-                    <IconContext.Provider value={{ style: {verticalAlign: 'middle', justifyContent: 'end'} }}>
-                        {/* <a href="#" class="btn btn-default d-flex justify-content-end"> */}
-                            <MdSave />
-                            {/* </a> */}
-                    </IconContext.Provider>
+            <Card className="m-3">
+                <Card.Header className="p-0 text-center bg-secondary">
+                        <h class="text-dark font-weight-bold">Pasta Food Stuff</h>
+                        <a href="#" class="float-right" style={{color: 'black'}}><MdSave/></a>
                 </Card.Header>
-            
-                    <Card.Body class="p-1 mb-200 table-warning">
-                    <Card.Img variant="rounded float-left" src="//placehold.it/200" width="auto" height="auto" />
-                            <Card.Text class="text-dark">
-                                This reciepe is all about being super good, super yummy and wow it is so easy to cook its so crazy. Please take a look at it and you will love it I promise. I have made it my mission in life to bless those with this recipe passed on through my family. You are welcome.  
-                            </Card.Text>
-                            <Card.Text class="text-dark text-center">
-                                Ingredients
-                            </Card.Text>
-                        <a href="#" class="nav-link text-primary"><MdChatBubbleOutline /> Comments</a>
-                        <a href="#" class="btn btn-primary pull-right" id="right-panel-link">Recipe Page</a>
+                    <Card.Body class="table-warning">
+                        <Card.Img variant="rounded float-left mr-4" src="//placehold.it/200" width="auto" height="auto" />
+                        <Card.Text className="mt-2 text-dark">
+                            This reciepe is all about being super good, super yummy and wow it is so easy to cook its so crazy. Please take a look at it and you will love it I promise. I have made it my mission in life to bless those with this recipe passed on through my family. You are welcome.  
+                        </Card.Text>
+                        <div class="d-flex justify-content-around">
+                            <div class='one'>
+                                <Card.Text className="text-dark">
+                                    Ingredients
+                                </Card.Text>
+                                <div class="box">
+                                    test
+                                </div>
+                            </div>
+                            <div class='two'>
+                                <Card.Text className="text-dark">
+                                    Info
+                                </Card.Text>
+                                <div class="box">
+                                    test
+                                </div>
+                            </div>
+                            <div class='three'>
+                                <Card.Text className="text-dark">
+                                    Directions
+                                </Card.Text>
+                                <div class="box">
+                                    test
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="nav-link text-primary float-left"><MdChatBubbleOutline/>Comments</a>
+                        <a href="#" class="btn btn-primary float-right float-bottom" id="right-panel-link">Recipe Page</a>
                     </Card.Body>
-                <Card.Footer class="p-2 mb-200 bg-secondary">
-                <h class=" text-light text-left font-weight-bold"> Made by:</h>
-                <a href="#" class="btn btn-default font-weight-bold">User</a> 
-                <h class="text-right text-dark d-flex justify-content-end">3:08am</h>
+                <Card.Footer class="p-0 bg-secondary">
+                    <h class="text-light font-weight-bold"> Made by:</h>
+                    <a href="#" style={{paddingLeft: 8, color: 'blue'}}>User</a> 
+                    <h class="text-dark float-right">3:08am</h>
                 </Card.Footer>
             </Card>
         )
