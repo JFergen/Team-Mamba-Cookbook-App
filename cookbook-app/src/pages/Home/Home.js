@@ -19,7 +19,7 @@ class Home extends Component {
     }
 
     //  Render an item in the list
-    renderItem(index, key) {
+    renderItem(index, key) {    // THIS IS WHERE CARD COMPONENT WILL GO
         return (
             <div 
                 key={key}

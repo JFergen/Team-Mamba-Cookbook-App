@@ -2,8 +2,8 @@
 import React, { Component } from 'react'
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { connect } from 'react-redux';
-import { setUser } from './store/actions/user_actions';
-import DatabaseDriver from './database/DatabaseDriver';
+import { setUser } from '../store/actions/user_actions';
+import DatabaseDriver from '../database/DatabaseDriver';
 
 const CLIENT_ID = '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleusercontent.com';
 class GoogleBtn extends Component {

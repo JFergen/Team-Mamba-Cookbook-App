@@ -4,7 +4,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import { IconContext } from 'react-icons';
 import { MdHome } from 'react-icons/md';
 import { connect } from 'react-redux';
-import GoogleBtn from './GoogleBtn';
+import GoogleBtn from './components/GoogleBtn';
 import Home from './pages/Home/Home';
 import Discover from './pages/Discover/Discover';
 import Create from './pages/Create/Create';
