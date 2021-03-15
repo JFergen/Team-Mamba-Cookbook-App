@@ -27,8 +27,8 @@ class MongoDbTable:
         return self._table.find({'_id': id}).count() > 0
 
     def get_all(self, field, value):
-        recipes = list(self._table.find({field: value}))
-        return dumps(recipes)
+        documents = list(self._table.find({field: value}))
+        return dumps(documents)
 
     def insert(self, data):
         return self._table.insert_one(data)
