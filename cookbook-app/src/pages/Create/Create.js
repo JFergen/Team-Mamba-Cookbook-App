@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import {Form} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import {Form, Button} from 'react-bootstrap';
+import DatabaseDriver from '../../database/DatabaseDriver';
 
 class Create extends Component {
     render() {
+        console.log(this.props.user);
         return (
             <div className="d-flex justify-content-center">
                 <Form className="m-3 text-center card bg-dark p-3">
@@ -25,10 +28,26 @@ class Create extends Component {
                             Must be a direct link to an image
                         </Form.Text>
                     </Form.Group>
+                    <Button 
+                        variant="primary" 
+                        type="submit"
+                        onClick={() => {DatabaseDriver.addRecipe(this.props.user.googleId, {
+                            'name': 'pizza',
+                            'ingredients': ['sauce', 'cheese'],
+                            'directions': 'do stuff'
+                        })}}
+                    >
+                        Create
+                    </Button>
                 </Form>
             </div>
         )
     }
 }
 
-export default Create;
+//  Allow use of google profile information from redux
+const mapStateToProps = (state) => ({
+    user: state.usrReducer.user
+})
+
+export default connect(mapStateToProps)(Create);

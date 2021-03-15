@@ -14,7 +14,6 @@ import './App.css';
 
 class App extends React.Component {
   render() {
-    console.log(this.props.user);
     return (
       //  Navbar
       <BrowserRouter>
