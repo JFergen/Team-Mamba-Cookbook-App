@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "bootstrap": "^4.6.0",
+    "react-awesome-stars-rating": "^0.3.0",
     "yarn": "^1.22.10"
   }
 }
