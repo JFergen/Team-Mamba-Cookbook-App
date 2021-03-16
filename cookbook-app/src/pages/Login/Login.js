@@ -2,36 +2,31 @@ import React, { Component } from 'react'
 import { GoogleLogin } from 'react-google-login';
 import Create from '../Create/Create';
 import { Redirect } from "react-router-dom";
+import DatabaseDriver from '../../database/DatabaseDriver';
+import { setUser } from '../../store/actions/user_actions';
 
 
 const CLIENT_ID = '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleusercontent.com';
 
 class Login extends Component {
+
     constructor(props) {
         super(props)
-        this.state = {
-            isSignedIn: false
-        }
-        this.onSuccess = this.onSuccess.bind(this);
     };
 
     /*
-
     no idea how this works, but it does.
-
     For some reason, it will only properly update the state and load the correct page if the state is modified.
     Also only way to communicate with rest of program is by changing localstorage. So have to modify both.
-
     */
 
     onSuccess(response){
-        console.log('and thats on success');
         console.log('[Login Success] currentUser: ', response);
-            //sets state in class to issignedin
-        this.setState({isSignedIn: true});
-            //sets local storage to loggedin
+
         localStorage.setItem('loggedin', 'true');
-            //redirect to homepage after sucess
+        console.log('i set item');
+        //this.props.setUser(response.profileObj);  // Save user's profile in redux
+        //DatabaseDriver.addUser(response.profileObj);  // Add user to the database
       };
 
 
@@ -41,25 +36,20 @@ class Login extends Component {
 
 
     getContent(){
-        console.log('getContent called');
-
-            console.log('loginpage localstorage state: ', localStorage.getItem('loggedin'));
-            console.log('loginpage state:', this.state.isSignedIn);
-            
+        console.log('getting content - in content');
             // for some reason, the way this code runs, this cannot reference local storage to work. I think it updates in an odd way.
-        if(this.state.isSignedIn) { //changes screen if logged in.
-            console.log('time for redirect call in login')
+        //if(this.state.isSignedIn) { //changes screen if logged in.
+        //    return (<Redirect to='/create' />)
+        //}
+        if(localStorage.getItem('loggedin') === 'true'){
             return (<Redirect to='/create' />)
         }
         else { // returns loggin screen if not logged in
-            console.log('returning layoutformat for login');
+            console.log('in getcontent else statement');
             return (
             <div>
-                {console.log('aledgedly not loggedin, login please')}
                 <h1>Login through Google below!</h1>
-                {console.log('header passed')}
                 <div>
-                {console.log('passing button')}
                     <GoogleLogin
                         clientId={CLIENT_ID}
                         buttonText="Login"
@@ -69,26 +59,25 @@ class Login extends Component {
                         style={{ marginTop: '100px' }}
                         isSignedIn={true}
                     />
-                    {console.log('button passed')}
                 </div>
             </div>
             )
         }
     }
 
+
     render() { //just calls get content
+        console.log('getting content');
         return (
             <div className="center">
-                {console.log('calling getcontent')}
                 {this.getContent()}
-                {console.log('get content has returned')}
             </div>
         )
     };
 
-    mapStateToProps(state) {
-        return { todos: state.todos }
-      }
+//    mapStateToProps(state) {
+//        return { todos: state.todos }
+ //     }
 
 }
 
