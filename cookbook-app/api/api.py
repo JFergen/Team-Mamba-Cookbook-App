@@ -73,9 +73,9 @@ def update_comment():
 
     return 'ok', 200
 
-# @app.route('/getRecipeComments/<recipe_id>', methods=['GET'])
-# def get_recipe_comments(recipe_id):
-#   return db_connection.COMMENTS_TABLE.get_recipe_comments(recipe_id)
+@app.route('/getRecipeComments/<recipe_id>', methods=['GET'])
+def get_recipe_comments(recipe_id):
+  return db_connection.COMMENTS_TABLE.get_recipe_comments(recipe_id)
 
 
 @app.route('/getUsersRecipes/<user_id>', methods=['GET'])
