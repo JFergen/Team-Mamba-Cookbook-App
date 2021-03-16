@@ -22,6 +22,7 @@ How to run on Windows:
       - run these commands: ./venv/Scripts/activate & yarn start
                              
 Node install:
+
 npm install --save react-bootstrap bootstrap@3
 
 npm install react-google-login
