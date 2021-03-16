@@ -73,6 +73,23 @@ class DatabaseDriver {
         );
     }
 
+
+    static async getRecipesFromTag(tag) {
+        return fetch('/getRecipesFromTag/' + tag).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
+    static async get_5_random_recipes(number) {
+        return fetch('/get5RandomRecipes/' + String(number)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
     // End Recipes
 
     // Comments
@@ -94,6 +111,36 @@ class DatabaseDriver {
         );
     }
 
+    static updateComment(comment) {
+        fetch('/updateComment/', {
+            method: 'POST',
+            cache: "no-cache",
+            headers:{
+                "content_type":"application/json",
+            },
+            body: JSON.stringify(comment)
+        }
+        );
+
+    }
+
+    static async getRecipeComments(recipeId) {
+        return fetch('/getRecipeComments/' + String(recipeId)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
+    static deleteComment(commentId) {
+        fetch('/deleteComment/' + commentId, {
+            method: 'DELETE',
+            cache: "no-cache",
+        });
+    }
+
+
+    
     // End Comments
 }
 

@@ -13,6 +13,8 @@ class RecipesTable(MongoDbTable):
         log('Recipe added to the database: ' + str(recipe))
         db_connection.USERS_TABLE.add_recipe( recipe['user_id'], insert_result.inserted_id)
 
+    def get_recipes_from_tag(self, tag):
+        return super().get_all('tags', tag)
 
     def update_recipe(self, recipe):
         recipe_id = ObjectId(recipe['_id'])
@@ -30,4 +32,7 @@ class RecipesTable(MongoDbTable):
 
     def get_users_recipes(self, user_id):
         return super().get_all('user_id', user_id)
+
+    def get_5_random_recipes(self, number):
+        return super().get_random_docs(number)
 

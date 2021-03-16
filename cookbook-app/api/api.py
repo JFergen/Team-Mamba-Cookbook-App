@@ -14,7 +14,9 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-
+@app.route('/getRecipesFromTag/<tag>', methods=['GET'])
+def get_recipes_from_tag(tag):
+  return db_connection.RECIPES_TABLE.get_recipes_from_tag(tag)
 
 
 # Users Table
@@ -34,6 +36,12 @@ def delete_user(user_id):
 
     return 'ok', 200
 
+# @app.route('/deleteComment/<comment_id>', methods=['DELETE'])
+# def delete_comment(comment_id):
+#     db_connection.COMMENTS_TABLE.delete_comment(comment_id)
+
+#     return 'ok', 200
+
 # End Users Table
 
 
@@ -46,6 +54,7 @@ def add_recipe():
     db_connection.RECIPES_TABLE.add_recipe(recipe)
 
     return 'ok', 200
+    
 
 
 @app.route('/updateRecipe/', methods=['POST'])
@@ -56,10 +65,27 @@ def update_recipe():
 
     return 'ok', 200
 
+# @app.route('/updateComment/', methods=['POST'])
+# def update_comment():
+#     comment = request.get_json()
+
+#     db_connection.COMMENTS_TABLE.update_comment(comment)
+
+#     return 'ok', 200
+
+# @app.route('/getRecipeComments/<recipe_id>', methods=['GET'])
+# def get_recipe_comments(recipe_id):
+#   return db_connection.COMMENTS_TABLE.get_recipe_comments(recipe_id)
+
 
 @app.route('/getUsersRecipes/<user_id>', methods=['GET'])
 def get_users_recipes(user_id):
   return db_connection.RECIPES_TABLE.get_users_recipes(user_id)
+
+
+# @app.route('/get5RandomRecipes/<number>', methods=['GET'])
+# def get_5_random_recipes(number):
+#   return db_connection.RECIPES_TABLE.get_5_random_recipes(int(number))
     
 
 
