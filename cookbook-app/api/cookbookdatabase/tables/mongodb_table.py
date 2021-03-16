@@ -27,8 +27,12 @@ class MongoDbTable:
         return self._table.find({'_id': id}).count() > 0
 
     def get_all(self, field, value):
-        recipes = list(self._table.find({field: value}))
-        return dumps(recipes)
+        docs = list(self._table.find({field: value}))
+        return dumps(docs)
+
+    def get_random_docs(self, number):
+        random_docs = list(self._table.aggregate([{'$sample': {'size': number}}]))
+        return dumps(random_docs)
 
     def insert(self, data):
         return self._table.insert_one(data)
