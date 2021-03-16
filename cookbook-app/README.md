@@ -21,5 +21,7 @@ How to run on Windows:
   2. Open a second terminal and cd into cookbook-app/api
       - run these commands: ./venv/Scripts/activate & yarn start
                              
-                      
+Node install:
+npm install --save react-bootstrap bootstrap@3
+npm install react-google-login
   
