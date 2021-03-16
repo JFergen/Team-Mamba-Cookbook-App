@@ -36,11 +36,11 @@ def delete_user(user_id):
 
     return 'ok', 200
 
-# @app.route('/deleteComment/<comment_id>', methods=['DELETE'])
-# def delete_comment(comment_id):
-#     db_connection.COMMENTS_TABLE.delete_comment(comment_id)
+@app.route('/deleteComment/<comment_id>', methods=['DELETE'])
+def delete_comment(comment_id):
+    db_connection.COMMENTS_TABLE.delete_comment(comment_id)
 
-#     return 'ok', 200
+    return 'ok', 200
 
 # End Users Table
 
