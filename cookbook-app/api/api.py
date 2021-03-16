@@ -6,7 +6,6 @@ import json
 from bson.json_util import dumps
 from bson.objectid import ObjectId
 import cookbookdatabase.db_connection as db_connection
-from cookbookdatabase.tables.table_names import *
 
 app = Flask(__name__)
 
