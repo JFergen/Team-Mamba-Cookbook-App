@@ -23,5 +23,6 @@ How to run on Windows:
                              
 Node install:
 npm install --save react-bootstrap bootstrap@3
+
 npm install react-google-login
   
