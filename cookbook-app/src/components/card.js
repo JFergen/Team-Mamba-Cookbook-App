@@ -27,7 +27,7 @@ class CardComponent extends Component {
                                 test
                             </div>
                         </div>
-                        <div class='two'> Info
+                        <div class='two'> Description
                             <div class="box">
                                 test
                             </div>

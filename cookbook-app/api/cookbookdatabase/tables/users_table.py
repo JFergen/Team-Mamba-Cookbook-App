@@ -1,4 +1,5 @@
 from cookbookdatabase.tables.mongodb_table import MongoDbTable
+from bson.objectid import ObjectId
 from logger import log
 
 class UsersTable(MongoDbTable):
@@ -7,8 +8,9 @@ class UsersTable(MongoDbTable):
         super().__init__("users_table", table)
 
     def login(self, user):
-        id = user['googleId']
-        if not super().doesIdExist(id):
+        user_id = user['googleId']
+
+        if not super().does_id_exist(user_id):
             self.add_user(user)
             
 
@@ -28,5 +30,5 @@ class UsersTable(MongoDbTable):
     def modify(self):
         pass
 
-    def remove(self):
-        pass
+    def delete_user(self, user_id):
+        super().delete(user_id)

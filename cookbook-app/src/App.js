@@ -4,7 +4,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import { IconContext } from 'react-icons';
 import { MdHome } from 'react-icons/md';
 import { connect } from 'react-redux';
-import GoogleBtn from './GoogleBtn';
+import GoogleBtn from './components/GoogleBtn';
 import Home from './pages/Home/Home';
 import Discover from './pages/Discover/Discover';
 import Create from './pages/Create/Create';
@@ -14,7 +14,6 @@ import './App.css';
 
 class App extends React.Component {
   render() {
-    console.log(this.props.user);
     return (
       //  Navbar
       <BrowserRouter>
@@ -32,6 +31,9 @@ class App extends React.Component {
               <FormControl type="text" placeholder="Search" className="mr-sm-2" />
               <Button variant="outline-success">Search</Button>
             </Form>
+
+            {/* Display name of user if logged in along with dropdown to go to profile. Otherwise show loginbutton */}
+            {/* TODO:: This needs to probably be updated when Jon finishes login screen functionality */}
             { this.props.user ?
               <NavDropdown title={this.props.user.name}>
               <NavDropdown.Item href="profile">Profile</NavDropdown.Item>
@@ -39,7 +41,6 @@ class App extends React.Component {
               <NavDropdown.Item><GoogleBtn/></NavDropdown.Item>
               </NavDropdown>: <GoogleBtn/>
             }
-            
           </Navbar.Collapse>  
         </Navbar>
 
@@ -54,6 +55,7 @@ class App extends React.Component {
   }
 }
 
+//  Allow use of google profile information from redux
 const mapStateToProps = (state) => ({
   user: state.usrReducer.user
 })

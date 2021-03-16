@@ -45,7 +45,6 @@
     float: left;
     width: 200px;
     height: 200px;
-    object-fit: contain;    
-    margin: auto 5px;
+    object-fit: contain;
 
 }

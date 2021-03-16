@@ -14,6 +14,13 @@ class DatabaseDriver {
         );
     }
 
+    static deleteUser(userId) {
+        fetch('/deleteUser/' + userId, {
+            method: 'DELETE',
+            cache: "no-cache",
+        });
+    }
+
     // End Users
 
     // Recipes
@@ -45,8 +52,21 @@ class DatabaseDriver {
         });
     }
 
-    static async getRecipesFromUser(userId) {
-        return fetch('/getRecipesFromUser/' + String(userId)).then(response =>
+    static updateRecipe(recipe) {
+        fetch('/updateRecipe/', {
+            method: 'POST',
+            cache: "no-cache",
+            headers:{
+                "content_type":"application/json",
+            },
+            body: JSON.stringify(recipe)
+        }
+        );
+
+    }
+
+    static async getUsersRecipes(userId) {
+        return fetch('/getUsersRecipes/' + String(userId)).then(response =>
             response.json().then(data => {
                return data;
             })
