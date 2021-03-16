@@ -82,8 +82,8 @@ class DatabaseDriver {
         );
     }
 
-    static async get_5_random_recipes(number) {
-        return fetch('/get5RandomRecipes/' + String(number)).then(response =>
+    static async get_n_random_recipes(number) {
+        return fetch('/getNRandomRecipes/' + String(number)).then(response =>
             response.json().then(data => {
                return data;
             })
