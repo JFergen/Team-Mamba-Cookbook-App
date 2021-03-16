@@ -1,5 +1,4 @@
 from pymongo import MongoClient
-from cookbookdatabase.tables.table_names import COOKBOOK_DATABASE_NAME
 from cookbookdatabase.tables.recipes_table import RecipesTable
 from cookbookdatabase.tables.users_table import UsersTable
 from cookbookdatabase.tables.comments_table import CommentsTable
