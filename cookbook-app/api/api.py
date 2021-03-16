@@ -65,13 +65,13 @@ def update_recipe():
 
     return 'ok', 200
 
-# @app.route('/updateComment/', methods=['POST'])
-# def update_comment():
-#     comment = request.get_json()
+@app.route('/updateComment/', methods=['POST'])
+def update_comment():
+    comment = request.get_json()
 
-#     db_connection.COMMENTS_TABLE.update_comment(comment)
+    db_connection.COMMENTS_TABLE.update_comment(comment)
 
-#     return 'ok', 200
+    return 'ok', 200
 
 # @app.route('/getRecipeComments/<recipe_id>', methods=['GET'])
 # def get_recipe_comments(recipe_id):
