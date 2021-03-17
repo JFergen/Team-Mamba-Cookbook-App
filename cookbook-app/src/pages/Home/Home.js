@@ -15,13 +15,12 @@ class Home extends Component {
 
         this.renderItem = this.renderItem.bind(this);
     }
-
-    async componentDidMount() { //TODO:: Access the redux prop during this function
-        // if (this.googleId) {
-        //     const data = await DatabaseDriver.getUsersRecipes(this.props.user.googleId);    // Gets recipes from a user
-        //     this.setState({ recipes: data })                                                // Set the recipes in the state
-        //     console.log(data);
-        // }        
+    
+    async componentDidMount() {
+        const data = await DatabaseDriver.getUsersRecipes('108347274282317384205');
+        // console.log(data);
+        //const data = await DatabaseDriver.getAllRecipes();  // Get recipes from the database
+        this.setState({ recipes: data })                    // Set the recipes in the state
     }
 
     // //  Render an item in the list
