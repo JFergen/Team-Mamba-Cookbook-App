@@ -53,7 +53,8 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.props.user)
+        const newLocal = this.props.user;
+        console.log(newLocal)
         return (
             <div className="list">
                 <ReactList
