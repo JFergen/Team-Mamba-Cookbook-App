@@ -11,17 +11,25 @@ class Home extends Component {
     constructor() {
         super();
         this.state = {
-            recipes: []
+            recipes: [],
+            user: null
         }
 
+        this.getRecipes = this.getRecipes.bind(this);
         this.renderItem = this.renderItem.bind(this);
     }
 
-    async componentDidMount() {
-        if (this.props.user.googleId != null) {
-            const data = await DatabaseDriver.getUsersRecipes(this.props.user.googleId);    // Gets recipes from a user
-            this.setState({ recipes: data })                                                // Set the recipes in the state
-        }        
+    componentDidUpdate() {
+        if (this.state.user !== this.props.user) {
+            this.setState({ user: this.props.user }, () => {
+                this.getRecipes();
+            }) 
+        }
+    }
+
+    async getRecipes() {
+        const data = await DatabaseDriver.getUsersRecipes(this.state.user.googleId);    // Gets recipes from a user
+        this.setState({ recipes: data })
     }
 
     //  Render an item in the list
