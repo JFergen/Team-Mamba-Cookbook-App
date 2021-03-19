@@ -16,31 +16,20 @@ class Home extends Component {
         }
 
         this.getRecipes = this.getRecipes.bind(this);
-        this.updateUser = this.updateUser.bind(this);
         this.renderItem = this.renderItem.bind(this);
-    }
-    
-    async componentDidMount() {
-        console.log(this.props.user)
-        if (this.props.user != null) {
-            this.updateUser();
-            this.getRecipes();
-        }    
     }
 
     componentDidUpdate() {
-        this.updateUser();
+        if (this.state.user !== this.props.user) {
+            this.setState({ user: this.props.user }, () => {
+                this.getRecipes();
+            }) 
+        }
     }
 
     async getRecipes() {
         const data = await DatabaseDriver.getUsersRecipes(this.state.user.googleId);    // Gets recipes from a user
         this.setState({ recipes: data })
-    }
-
-    updateUser() {
-        if (this.state.user !== this.props.user) {
-            this.setState({ user: this.props.user })
-        }
     }
 
     //  Render an item in the list
