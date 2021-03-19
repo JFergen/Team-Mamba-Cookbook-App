@@ -41,6 +41,18 @@ def delete_comment(comment_id):
 
     return 'ok', 200
 
+@app.route('/follow/<user_id>', methods=['POST'])
+def follow():
+    followLinker = request.get_json()
+    db_connection.USERS_TABLE.follow(followLinker['follower'],followLinker['leader'])
+    return 'ok', 200
+
+@app.route('/unfollow/<user_id>', methods=['DELETE'])
+def unfollow():
+    followLinker = request.get_json()
+    db_connection.USERS_TABLE.unfollow(followLinker['follower'],followLinker['leader'])
+    return 'ok', 200
+
 # End Users Table
 
 
@@ -86,6 +98,12 @@ def get_users_recipes(user_id):
 def get_n_random_recipes(number):
   return db_connection.RECIPES_TABLE.get_n_random_recipes(int(number))
     
+@app.route('/getRecipesForHomepage/<user_id>', methods=['GET'])
+def getRecipesForHomepage(user_id):
+    user = db_connection.USERS_TABLE.get_user(user_id)
+    for i in list(user['followingList']):
+        frontpage.append(db_connection.RECIPES_TABLE.get_users_recipes(i))
+    return frontpage
 
 
 @app.route('/deleteRecipe/<recipe>', methods=['DELETE'])

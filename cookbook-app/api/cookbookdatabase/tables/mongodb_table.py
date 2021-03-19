@@ -26,6 +26,9 @@ class MongoDbTable:
     def does_id_exist(self, id):
         return self._table.find({'_id': id}).count() > 0
 
+    def find(self, field, value):
+        return self._table.find({field: value})
+
     def get_all(self, field, value):
         docs = list(self._table.find({field: value}))
         return dumps(docs)
