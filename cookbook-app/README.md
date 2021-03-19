@@ -21,9 +21,39 @@ How to run on Windows:
   2. Open a second terminal and cd into cookbook-app/api
       - run these commands: ./venv/Scripts/activate & yarn start
                              
-Node install:
+Node install in /Team-Mamba-Cookbook-App/edit/main/cookbook-app/:
 
-npm install --save react-bootstrap bootstrap@3
+npm install react-scripts
+
+
+npm install react-scripts
+
 
 npm install react-google-login
-  
+
+
+npm install react-icons
+
+
+npm install react-list
+
+
+npm install react-redux
+
+
+npm install react-router-dom
+
+
+npm install --save redux react-redux
+
+
+npm install --save redux-thunk
+
+
+npm install react-bootstrap
+
+
+npm install react-bootstrap bootstrap
+
+
+npm install react-awesome-stars-rating
