@@ -5,7 +5,6 @@ import DatabaseDriver from '../../database/DatabaseDriver';
 
 class Create extends Component {
     render() {
-        console.log(this.props.user);
         return (
             <div className="d-flex justify-content-center">
                 <Form className="m-3 text-center card bg-dark p-3">
@@ -34,7 +33,8 @@ class Create extends Component {
                         onClick={() => {DatabaseDriver.addRecipe(this.props.user.googleId, {
                             'name': 'pizza',
                             'ingredients': ['sauce', 'cheese'],
-                            'directions': 'do stuff'
+                            'directions': 'do stuff',
+                            'author': this.props.user.name
                         })}}
                     >
                         Create

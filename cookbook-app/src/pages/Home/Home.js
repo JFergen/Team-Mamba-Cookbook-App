@@ -34,6 +34,7 @@ class Home extends Component {
 
     //  Render an item in the list
     renderItem(index, key) {
+        console.log(this.state.recipes[index])
         return (
             <div key={key}>
                 <Card className="m-3">
