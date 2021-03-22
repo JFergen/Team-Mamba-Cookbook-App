@@ -16,16 +16,30 @@ class Create extends Component {
                     </Form.Group>
                     <Form.Group>
                         <div style={{width: '30em'}}>
-                            <Form.Control as="textarea" rows={2} placeholder="Description"/>
+                            <Form.Control as="textarea" rows={3} placeholder="Ingridents"/>
+                        </div>
+                    </Form.Group>
+                    <Form.Group>
+                        <div style={{width: '30em'}}>
+                            <Form.Control as="textarea" rows={5} placeholder="Description"/>
                         </div>
                     </Form.Group>
                     <Form.Group>
                         <div style={{width: '25em'}}>
-                            <Form.Control placeholder="Image"/>
+                            <Form.Control placeholder="Time Taken"/>
                         </div>
-                        <Form.Text>
-                            Must be a direct link to an image
-                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group>
+                        <div style={{width: '25em'}}>
+                            <Form.Control placeholder="Tags"/>
+                        </div>
+                    </Form.Group>
+                    <Form.Group>
+                        <div style={{width: '25em'}}>
+                            <Form.Control placeholder="Image URL"/>
+                        </div>
+                        <Form.Text>OR</Form.Text>
+                        <input type="file" class="form-control" id="customFile" />
                     </Form.Group>
                     <Button 
                         variant="primary" 
