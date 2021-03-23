@@ -4,6 +4,8 @@ import ReactList from 'react-list';
 import './Home.css';
 import { Card } from "react-bootstrap";
 import CardComponent from'../../components/card';
+import {MdSave, MdChatBubbleOutline} from 'react-icons/md'
+import FormComponent from '../../components/star-rating';
 import { connect } from 'react-redux';
 
 class Home extends Component {
@@ -17,33 +19,24 @@ class Home extends Component {
         this.getRecipes = this.getRecipes.bind(this);
         this.renderItem = this.renderItem.bind(this);
     }
-    
-    async componentDidMount() {
-        const data = await DatabaseDriver.getUsersRecipes('108347274282317384205');
-        // console.log(data);
-        //const data = await DatabaseDriver.getAllRecipes();  // Get recipes from the database
-        this.setState({ recipes: data })                    // Set the recipes in the state
+
+    componentDidUpdate() {
+        if (this.state.user !== this.props.user) {
+            this.setState({ user: this.props.user }, () => {
+                this.getRecipes();
+            }) 
+        }
     }
 
-    // //  Render an item in the list
-    // renderItem(index, key) {
-    //     return (
-    //         <div 
-    //             key={key}
-    //             style={{ 
-    //                 lineHeight: '20px',
-    //                 marginBottom: '50px',
-    //                 border: '2px solid white'
-    //             }}
-    //         >
-    //             Recipe {index + 1}:
-    //             <p>ID: {this.state.recipes[index]._id.$oid}</p>
-    //             <p>Name: {this.state.recipes[index].name}</p>
-    //             <p>Directions: {this.state.recipes[index].directions}</p>
-    //         </div>
-    //     )
-    // }
+    async getRecipes() {
+        const data = await DatabaseDriver.getUsersRecipes(this.state.user.googleId);    // Gets recipes from a user
+        this.setState({ recipes: data })
+    }
 
+    async getRecipes() {
+        const data = await DatabaseDriver.getUsersRecipes(this.state.user.googleId);    // Gets recipes from a user
+        this.setState({ recipes: data })
+    }
     renderItem(index, key) {
         
         return (
