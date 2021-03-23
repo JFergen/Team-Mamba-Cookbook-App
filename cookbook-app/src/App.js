@@ -1,13 +1,15 @@
 import React from 'react';
 import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
-import {BrowserRouter, Route, Switch } from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import { IconContext } from 'react-icons';
 import { MdHome } from 'react-icons/md';
 import { connect } from 'react-redux';
-import Login from './pages/Login/Login';
-import AllRoutes from './Routes/AllRoutes';
-import Logout from './components/Logout';
-
+import GoogleBtn from './GoogleBtn';
+import Home from './pages/Home/Home';
+import Discover from './pages/Discover/Discover';
+import Create from './pages/Create/Create';
+import Saved from './pages/Saved/Saved';
+import Profile from './pages/Profile/Profile';
 import './App.css';
 
 class App extends React.Component {
@@ -47,7 +49,9 @@ class App extends React.Component {
             }
           </Navbar.Collapse>  
         </Navbar>
+        {console.log('about to call allroutes')}
         <AllRoutes />
+        {console.log('ran all me routes and they returned.')}
       </React.Fragment>
       </Switch>
       </BrowserRouter>
@@ -57,8 +61,8 @@ class App extends React.Component {
   }
 }
 
-  //Allow use of google profile information from redux
-  const mapStateToProps = (state) => ({
+//  Allow use of google profile information from redux
+const mapStateToProps = (state) => ({
   user: state.usrReducer.user
 })
 

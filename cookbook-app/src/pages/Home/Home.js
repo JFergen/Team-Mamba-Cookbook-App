@@ -12,7 +12,7 @@ class Home extends Component {
 
         this.renderItem = this.renderItem.bind(this);
     }
-    
+
     async componentDidMount() {
         const data = await DatabaseDriver.getUsersRecipes('108347274282317384205');
         // console.log(data);
@@ -38,7 +38,7 @@ class Home extends Component {
             </div>
         )
     }
-    
+
     render() {
         return (
             <div className="home">
