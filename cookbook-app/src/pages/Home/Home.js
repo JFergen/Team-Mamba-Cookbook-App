@@ -32,6 +32,11 @@ class Home extends Component {
         const data = await DatabaseDriver.getUsersRecipes(this.state.user.googleId);    // Gets recipes from a user
         this.setState({ recipes: data })
     }
+
+    async getRecipes() {
+        const data = await DatabaseDriver.getUsersRecipes(this.state.user.googleId);    // Gets recipes from a user
+        this.setState({ recipes: data })
+    }
     renderItem(index, key) {
         
         return (
