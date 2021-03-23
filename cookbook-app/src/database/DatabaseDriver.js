@@ -20,6 +20,18 @@ class DatabaseDriver {
             cache: "no-cache",
         });
     }
+    
+    static follow(followerId, leaderId) {
+        var followLinker = JSON.stringify({
+            'leader': leaderId,
+            'follower': followerId
+        });
+        
+        fetch('/follow/' + followLinker,{
+            method: 'POST',
+            cache: "no-cache",
+        });
+    }
 
     // End Users
 
@@ -89,6 +101,16 @@ class DatabaseDriver {
             })
         );
     }
+
+    static async getRecipesForHomepage(userId) {
+        return fetch('/getRecipesForHomepage/' + String(userId)).then(response =>
+            response.json().then(data => {
+                return data;
+            }) 
+        );
+    }
+
+
 
     // End Recipes
 

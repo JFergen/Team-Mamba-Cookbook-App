@@ -1,58 +1,63 @@
 import React, { Component } from 'react';
 import DatabaseDriver from '../../database/DatabaseDriver';
 import ReactList from 'react-list';
+import CardComponent from'../../components/card';
+import { connect } from 'react-redux';
 import './Home.css';
 
 class Home extends Component {
     constructor() {
         super();
         this.state = {
-            recipes: []
+            recipes: [],
+            user: null
         }
 
+        this.getRecipes = this.getRecipes.bind(this);
         this.renderItem = this.renderItem.bind(this);
     }
 
-    async componentDidMount() {
-        const data = await DatabaseDriver.getUsersRecipes('108347274282317384205');
-        // console.log(data);
-        //const data = await DatabaseDriver.getAllRecipes();  // Get recipes from the database
-        this.setState({ recipes: data })                    // Set the recipes in the state
+    componentDidUpdate() {
+        if (this.state.user !== this.props.user) {
+            this.setState({ user: this.props.user }, () => {
+                this.getRecipes();
+            }) 
+        }
     }
 
-    //  Render an item in the list
+    async getRecipes() {
+        const data = await DatabaseDriver.getUsersRecipes(this.state.user.googleId);    // Gets recipes from a user
+        this.setState({ recipes: data })
+    }
+
     renderItem(index, key) {
         return (
-            <div 
-                key={key}
-                style={{ 
-                    lineHeight: '20px',
-                    marginBottom: '50px',
-                    border: '2px solid white'
-                }}
-            >
-                Recipe {index + 1}:
-                <p>ID: {this.state.recipes[index]._id.$oid}</p>
-                <p>Name: {this.state.recipes[index].name}</p>
-                <p>Directions: {this.state.recipes[index].directions}</p>
+            <div key={key}>
+                <CardComponent
+                    name={this.state.recipes[index].name}
+                    description={this.state.recipes[index].description}
+                    author={this.props.user.name}
+                />                 
             </div>
         )
     }
 
     render() {
         return (
-            <div className="home">
-                <h1>Welcome to the Home Area!</h1>
-                <div className="list">
-                    <ReactList
-                        itemRenderer={this.renderItem}
-                        length={this.state.recipes.length}
-                        type='uniform'
-                    />
-                </div>
+            <div className="list">
+                <ReactList
+                    itemRenderer={this.renderItem}
+                    length={this.state.recipes.length}
+                    type='uniform'
+                />
             </div>
         )
     }
 }
 
-export default Home;
+//  Allow use of google profile information from redux
+const mapStateToProps = (state) => ({
+    user: state.usrReducer.user
+})
+
+export default connect(mapStateToProps)(Home);
