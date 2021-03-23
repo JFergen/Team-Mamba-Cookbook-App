@@ -30,7 +30,7 @@ class App extends React.Component {
           <IconContext.Provider value ={{size:70}}> 
             <Navbar.Brand href="/"><MdHome/></Navbar.Brand>
           </IconContext.Provider>
-          <Navbar.Collapse id="navbar">
+          <Navbar.Collapse id="navbar">s
             <Nav className="mr-auto">
               <Nav.Link href="discover">Discover</Nav.Link>
               <Nav.Link href="saved">Saved</Nav.Link>
