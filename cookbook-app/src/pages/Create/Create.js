@@ -51,8 +51,7 @@ class Create extends Component {
                             'directions': 'do stuff'
                         })}}
                     >
-                        Create
-                    </Button>
+                        Create</Button>
                 </Form>
             </div>
         )
