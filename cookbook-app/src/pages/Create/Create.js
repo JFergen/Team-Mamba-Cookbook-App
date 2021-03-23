@@ -51,8 +51,7 @@ class Create extends Component {
                             'author': this.props.user.name
                         })}}
                     >
-                        Create
-                    </Button>
+                        Create</Button>
                 </Form>
             </div>
         )
