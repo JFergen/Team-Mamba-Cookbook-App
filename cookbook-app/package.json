@@ -19,12 +19,7 @@
     "react-scripts": "^4.0.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-<<<<<<< HEAD
-    "web-vitals": "^1.0.1",
-    "yarn": "^1.22.10"
-=======
     "web-vitals": "^1.0.1"
->>>>>>> c80e051a8a6511826a662ccf4445081a572c6bf9
   },
   "scripts": {
     "start": "react-scripts start",

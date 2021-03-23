@@ -3,12 +3,7 @@ import DatabaseDriver from '../../database/DatabaseDriver';
 import ReactList from 'react-list';
 import './Home.css';
 import { Card } from "react-bootstrap";
-<<<<<<< HEAD
-import {MdSave, MdChatBubbleOutline} from 'react-icons/md'
-import FormComponent from '../../components/star-rating';
-=======
 import CardComponent from'../../components/card';
->>>>>>> c80e051a8a6511826a662ccf4445081a572c6bf9
 import { connect } from 'react-redux';
 
 class Home extends Component {
@@ -22,27 +17,12 @@ class Home extends Component {
         this.getRecipes = this.getRecipes.bind(this);
         this.renderItem = this.renderItem.bind(this);
     }
-<<<<<<< HEAD
-
-    componentDidUpdate() {
-        if (this.state.user !== this.props.user) {
-            this.setState({ user: this.props.user }, () => {
-                this.getRecipes();
-            }) 
-        }
-    }
-
-    async getRecipes() {
-        const data = await DatabaseDriver.getUsersRecipes(this.state.user.googleId);    // Gets recipes from a user
-        this.setState({ recipes: data })
-=======
     
     async componentDidMount() {
         const data = await DatabaseDriver.getUsersRecipes('108347274282317384205');
         // console.log(data);
         //const data = await DatabaseDriver.getAllRecipes();  // Get recipes from the database
         this.setState({ recipes: data })                    // Set the recipes in the state
->>>>>>> c80e051a8a6511826a662ccf4445081a572c6bf9
     }
 
     // //  Render an item in the list
