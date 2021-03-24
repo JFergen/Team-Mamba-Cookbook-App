@@ -8,7 +8,6 @@ import { Switch } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Logout from './components/Logout';
 import AllRoutes from './Routes/AllRoutes';
-
 import GoogleBtn from './components/GoogleBtn';
 import Home from './pages/Home/Home';
 import Discover from './pages/Discover/Discover';

@@ -12,8 +12,10 @@ class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isSignedIn: false
-        }
+            isSignedIn: false,
+            accessToken: ''
+        };
+
         this.onSuccess = this.onSuccess.bind(this);
     };
 
@@ -27,13 +29,20 @@ class Login extends Component {
     */
 
     onSuccess(response){
+        if(response.accessToken){
+            this.setState({
+              isSignedIn: true,
+              accessToken: response.accessToken
+            });
+        }
+
         console.log('[Login Success] currentUser: ', response);
             //sets state in class to issignedin
-        this.setState({isSignedIn: true});
+        //this.setState({isSignedIn: true});
             //sets local storage to loggedin
         localStorage.setItem('loggedin', 'true');
             //redirect to homepage after sucess
-            this.props.setUser(response.profileObj);  // Save user's profile in redux
+        this.props.setUser(response.profileObj);  // Save user's profile in redux
         DatabaseDriver.login(response.profileObj);  // Add user to the database
       };
 
@@ -62,6 +71,7 @@ class Login extends Component {
                         onSuccess={this.onSuccess}
                         onFailure={this.onFailure}
                         cookiePolicy={'single_host_origin'}
+                        //responseType='code,token'
                         style={{ marginTop: '100px' }}
                         isSignedIn={true}
                     />
@@ -78,11 +88,10 @@ class Login extends Component {
             </div>
         )
     };
-
-    mapStateToProps(state) {
-        return { todos: state.todos }
-      }
-
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+    user: state.usrReducer.user
+})
+
+export default connect(mapStateToProps, { setUser }) (Login);
