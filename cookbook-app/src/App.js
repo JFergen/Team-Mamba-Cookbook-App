@@ -35,7 +35,6 @@ class App extends React.Component {
               <Nav.Link href="discover">Discover</Nav.Link>
               <Nav.Link href="saved">Saved</Nav.Link>
               <Nav.Link href="create">Create</Nav.Link>
-              <Nav.Link href="login">Login</Nav.Link>
             </Nav>
             <Form inline>
               <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -53,9 +52,7 @@ class App extends React.Component {
             }
           </Navbar.Collapse>  
         </Navbar>
-        {console.log('about to call allroutes')}
         <AllRoutes />
-        {console.log('ran all me routes and they returned.')}
       </React.Fragment>
       </Switch>
       </BrowserRouter>
