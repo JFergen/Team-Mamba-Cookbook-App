@@ -9,12 +9,6 @@ import Login from './pages/Login/Login';
 import Logout from './components/Logout';
 import AllRoutes from './Routes/AllRoutes';
 
-import GoogleBtn from './components/GoogleBtn';
-import Home from './pages/Home/Home';
-import Discover from './pages/Discover/Discover';
-import Create from './pages/Create/Create';
-import Saved from './pages/Saved/Saved';
-import Profile from './pages/Profile/Profile';
 import './App.css';
 
 class App extends React.Component {
@@ -30,12 +24,11 @@ class App extends React.Component {
           <IconContext.Provider value ={{size:70}}> 
             <Navbar.Brand href="/"><MdHome/></Navbar.Brand>
           </IconContext.Provider>
-          <Navbar.Collapse id="navbar">s
+          <Navbar.Collapse id="navbar">
             <Nav className="mr-auto">
               <Nav.Link href="discover">Discover</Nav.Link>
               <Nav.Link href="saved">Saved</Nav.Link>
               <Nav.Link href="create">Create</Nav.Link>
-              <Nav.Link href="login">Login</Nav.Link>
             </Nav>
             <Form inline>
               <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -53,9 +46,7 @@ class App extends React.Component {
             }
           </Navbar.Collapse>  
         </Navbar>
-        {console.log('about to call allroutes')}
         <AllRoutes />
-        {console.log('ran all me routes and they returned.')}
       </React.Fragment>
       </Switch>
       </BrowserRouter>
