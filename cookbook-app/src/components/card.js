@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card } from "react-bootstrap";
 import {MdSave, MdChatBubbleOutline} from 'react-icons/md'
-import FormComponent from './star-rating';
+import StarRating from 'react-awesome-stars-rating';
 import './card.css'
 
 class CardComponent extends Component {
@@ -10,7 +10,14 @@ class CardComponent extends Component {
             <Card className="m-3">
             <Card.Header className="p-0 text-center bg-secondary">
                     <h class="text-dark font-weight-bold">{this.props.name}</h>
-                    <h className="preview_usr_stars"> <FormComponent/></h>
+                    <h className="preview_usr_stars p-2">
+                        <StarRating 
+                            name="cookbook-rating"
+                            size={20}
+                            totalStars={5}
+                            value={5}
+                        />
+                    </h>
                     <a href="#" class="float-right" style={{color: 'black'}}><MdSave size={32}/></a>
             </Card.Header>
                 <Card.Body class="table-warning">

@@ -39,7 +39,7 @@ class Create extends Component {
                             <Form.Control placeholder="Image URL"/>
                         </div>
                         <Form.Text>OR</Form.Text>
-                        <input type="file" class="form-control" id="customFile" />
+                        <Form.File id="foodImg" label="Upload image of recipe"/>
                     </Form.Group>
                     <Button 
                         variant="primary" 
@@ -51,7 +51,8 @@ class Create extends Component {
                             'author': this.props.user.name
                         })}}
                     >
-                        Create</Button>
+                        Create
+                    </Button>
                 </Form>
             </div>
         )
