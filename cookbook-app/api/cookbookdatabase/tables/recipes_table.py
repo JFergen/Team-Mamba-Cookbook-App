@@ -10,7 +10,7 @@ class RecipesTable(MongoDbTable):
         super().__init__('recipes_table', table)
 
     def add_recipe(self, recipe):
-        recipe['date_added'] = datetime.now().strftime('%B %d, %Y %H:%M:%S')
+        recipe['date_added'] = datetime.now().strftime('%B %d, %Y %H:%M')
         insert_result = super().insert(recipe)
         log('Recipe added to the database: ' + str(recipe))
         db_connection.USERS_TABLE.add_recipe( recipe['user_id'], insert_result.inserted_id)

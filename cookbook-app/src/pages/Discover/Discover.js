@@ -37,6 +37,7 @@ class Discover extends Component {
                     name={this.state.recipes[index].name}
                     description={this.state.recipes[index].description}
                     author={this.state.recipes[index].author}
+                    dateAdded={this.state.recipes[index].date_added}
                 />                 
             </div>
         )
