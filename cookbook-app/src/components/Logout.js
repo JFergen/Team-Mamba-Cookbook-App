@@ -17,7 +17,7 @@ class Logout extends React.Component{
     localStorage.setItem('loggedin', 'false');
     
       // just rerenders the page by adjusting the state
-      window.location.reload(false);
+    this.setState({ state: this.state });
 
 
     //re render page, logining out
