@@ -78,11 +78,10 @@ class Login extends Component {
             </div>
         )
     };
-
-    mapStateToProps(state) {
-        return { todos: state.todos }
-      }
-
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+    user: state.usrReducer.user
+})
+
+export default connect(mapStateToProps, { setUser })(Login);
