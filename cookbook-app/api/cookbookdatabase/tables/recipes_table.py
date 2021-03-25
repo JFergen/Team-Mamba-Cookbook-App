@@ -22,6 +22,12 @@ class RecipesTable(MongoDbTable):
 
         super().update(recipe_id, recipe)
 
+    def update_recipe(self, newRecipeData):
+        recipe_id = ObjectId(newRecipeData['recipe_id'])
+        del recipe['_id']
+
+        super().update(recipe_id, recipe)
+
     def delete_recipe(self, user_id, recipe_id):
         super().delete(recipe_id)
         log('Deleted recipe from database: ' + str(recipe_id))

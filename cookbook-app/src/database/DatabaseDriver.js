@@ -49,7 +49,6 @@ class DatabaseDriver {
             body: JSON.stringify(recipe)
         }
         );
-
     }
 
     static deleteRecipe(userId, recipeId) {
@@ -94,7 +93,7 @@ class DatabaseDriver {
         );
     }
 
-    static async get_n_random_recipes(number) {
+    static async getNRandomRecipes(number) {
         return fetch('/getNRandomRecipes/' + String(number)).then(response =>
             response.json().then(data => {
                return data;
@@ -109,8 +108,6 @@ class DatabaseDriver {
             }) 
         );
     }
-
-
 
     // End Recipes
 

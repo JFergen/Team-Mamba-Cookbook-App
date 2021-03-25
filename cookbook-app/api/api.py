@@ -67,7 +67,6 @@ def add_recipe():
     return 'ok', 200
     
 
-
 @app.route('/updateRecipe/', methods=['POST'])
 def update_recipe():
     recipe = request.get_json()
