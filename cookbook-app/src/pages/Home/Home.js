@@ -43,7 +43,6 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.state.recipes)
         return (
             <div className="list">
                 <ReactList
