@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Form, Button} from 'react-bootstrap';
+import FileBase64 from 'react-file-base64';
 import DatabaseDriver from '../../database/DatabaseDriver';
 
 class Create extends Component {
+
+    state = {
+        image: null
+    }
+
+    onImageUpload(uploadResult) {
+        this.setState({
+            image: uploadResult.base64
+        })
+    }
+
     render() {
         return (
             <div className="d-flex justify-content-center">
@@ -39,7 +51,7 @@ class Create extends Component {
                             <Form.Control placeholder="Image URL"/>
                         </div>
                         <Form.Text>OR</Form.Text>
-                        <Form.File id="foodImg" label="Upload image of recipe"/>
+                        <FileBase64 id="foodImg" label="Upload image of recipe" multiple={false} onDone={(f)=>this.onImageUpload(f)}/>
                     </Form.Group>
                     <Button 
                         variant="primary" 
@@ -48,7 +60,8 @@ class Create extends Component {
                             'name': 'pizza',
                             'ingredients': ['sauce', 'cheese'],
                             'directions': 'do stuff',
-                            'author': this.props.user.name
+                            'author': this.props.user.name,
+                            'image': this.state.image
                         })}}
                     >
                         Create
