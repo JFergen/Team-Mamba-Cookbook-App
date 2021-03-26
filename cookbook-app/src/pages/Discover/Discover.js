@@ -38,6 +38,7 @@ class Discover extends Component {
                     description={this.state.recipes[index].description}
                     author={this.state.recipes[index].author}
                     dateAdded={this.state.recipes[index].date_added}
+                    image={this.state.recipes[index].image}
                 />                 
             </div>
         )
