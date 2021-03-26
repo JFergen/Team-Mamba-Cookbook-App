@@ -132,5 +132,13 @@ def add_comment():
 
 # end Comments Table
 
+@app.route('/logError/', methods=['POST'])
+def log_error():
+    error = request.get_json()
+    log('---------------------------------------------------------------------')
+    log('Log sent from front-end: ' + str(error))
+    log('---------------------------------------------------------------------')
+    return 'ok', 200
+
 if __name__ == "__main__":
     app.run(debug=True)
