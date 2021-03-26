@@ -18,15 +18,13 @@ class RecipesTable(MongoDbTable):
     def get_recipes_from_tag(self, tag):
         return super().get_all('tags', tag)
 
-    def update_recipe(self, recipe):
-        recipe_id = ObjectId(recipe['_id'])
-        del recipe['_id']
-
-        super().update(recipe_id, recipe)
-
     def update_recipe(self, newRecipeData):
         recipe_id = ObjectId(newRecipeData['recipe_id'])
         del recipe['_id']
+
+        if ('ratings' in newRecipeData.keys()):
+           avg_rating = compute_rating_avg(newRecipeData['ratings'])
+           newRecipeData['rating'] = avg_rating
 
         super().update(recipe_id, recipe)
 
@@ -43,4 +41,7 @@ class RecipesTable(MongoDbTable):
 
     def get_n_random_recipes(self, number):
         return super().get_random_docs(number)
+
+    def compute_rating_avg(self, ratings):
+        return sum(ratings) / len(ratings)
 
