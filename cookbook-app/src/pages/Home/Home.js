@@ -38,6 +38,7 @@ class Home extends Component {
                     description={this.state.recipes[index].description}
                     author={this.props.user.name}
                     dateAdded={this.state.recipes[index].date_added}
+                    image={this.state.recipes[index].image}
                 />                 
             </div>
 

@@ -1,4 +1,3 @@
-import {logError} from './../backendutils/ErrorLogger'
 
 class DatabaseDriver {
 
