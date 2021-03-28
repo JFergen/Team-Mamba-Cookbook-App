@@ -16,7 +16,7 @@ class Create extends Component {
                     </Form.Group>
                     <Form.Group>
                         <div style={{width: '30em'}}>
-                            <Form.Control as="textarea" rows={3} placeholder="Ingridents"/>
+                            <Form.Control as="textarea" rows={3} placeholder="Ingridients"/>
                         </div>
                     </Form.Group>
                     <Form.Group>
