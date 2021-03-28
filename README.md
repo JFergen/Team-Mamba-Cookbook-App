@@ -58,3 +58,5 @@ npm install react-bootstrap bootstrap
 
 
 npm install react-awesome-stars-rating
+
+npm install react-file-base64
