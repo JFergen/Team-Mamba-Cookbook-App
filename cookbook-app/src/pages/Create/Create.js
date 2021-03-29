@@ -12,12 +12,11 @@ class Create extends Component {
         super(props);
         this.state = {
             name: '',
+            description:'',
             ingridients:'',
             directions:'',
             time:'',
-            image: null, 
-            show:'',
-            setShow:'',   
+            image: null,   
             tags : [
                 {id: "1", value: 'pizza'},
                 {id: "2",value: 'pasta'},
@@ -48,10 +47,17 @@ class Create extends Component {
         return (
             <div className="d-flex justify-content-center">
                 <Form className="m-3 text-center card bg-dark p-3">
+                    <h1>
                     <Form.Label>Create Recipe</Form.Label>
+                    </h1>
                     <Form.Group>
                         <div style={{width: '20em'}}>
                             <Form.Control name="name" value={this.state.title} onChange={this.handleChange} placeholder="Title"/>
+                        </div>
+                    </Form.Group>
+                    <Form.Group>
+                        <div style={{width: '30em'}}>
+                            <Form.Control as="textarea" name="description" value={this.state.description} onChange={this.handleChange} rows={3} placeholder="A little about your recipe"/>
                         </div>
                     </Form.Group>
                     <Form.Group>
@@ -65,7 +71,7 @@ class Create extends Component {
                         </div>
                     </Form.Group>
                     <Form.Group>
-                        <div style={{width: '25em'}}>
+                        <div style={{width: '15em'}}>
                             <Form.Control name="time" value={this.state.time} onChange={this.handleChange} placeholder="Time Taken"/>
                         </div>
                     </Form.Group>
@@ -86,10 +92,11 @@ class Create extends Component {
                         <FileBase64 id="foodImg" label="Upload image of recipe" multiple={false} onDone={(f)=>this.onImageUpload(f)}/>
                     </Form.Group>
                     <Button 
-                        variant="primary" 
+                        variant="outline-success" 
                         type="submit"
-                        onClick={() => { alert(' Recipe created Successfully '); {DatabaseDriver.addRecipe(this.props.user.googleId, {
-                            'title': this.state.name,
+                        onClick={() =>  { alert(' Recipe created Successfully '); {DatabaseDriver.addRecipe(this.props.user.googleId, {
+                            'name': this.state.name,
+                            'description':this.state.description,
                             'ingredients': this.state.ingridients,
                             'directions': this.state.directions,
                             'time': this.state.time,
