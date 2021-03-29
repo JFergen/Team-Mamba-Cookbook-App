@@ -6,8 +6,6 @@ import DatabaseDriver from '../../database/DatabaseDriver';
 import { Multiselect } from 'multiselect-react-dropdown';
 
 class Create extends Component {
-
-
     constructor(props) {
         super(props);
         this.state = {
@@ -31,6 +29,7 @@ class Create extends Component {
             ]
         }
     }
+    
     onImageUpload(uploadResult) {
         this.setState({
             image: uploadResult.base64
@@ -40,10 +39,11 @@ class Create extends Component {
     handleChange = ({ target }) => {
         const { name, value } = target;
         this.setState({ [name]: value });
-      };
+    };
 
-      render() {    
-        const {tags} = this.state;  
+    render() {    
+        const {tags} = this.state;
+        
         return (
             <div className="d-flex justify-content-center">
                 <Form className="m-3 text-center card bg-dark p-3">
@@ -85,16 +85,19 @@ class Create extends Component {
                                 options={tags} // Options to display in the dropdown
                                 selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
                                 onChange={this.handleChange} // Function will trigger on select event
-                                />
+                            />
                         </div>
                     </Form.Group>
                     <Form.Group>
-                        <FileBase64 id="foodImg" label="Upload image of recipe" multiple={false} onDone={(f)=>this.onImageUpload(f)}/>
+                        <div style={{float: 'left'}}>
+                            <h style={{float: 'left'}}>Upload image of recipe</h><div></div>
+                            <FileBase64 id="foodImg" label="Upload image of recipe" multiple={false} onDone={(f)=>this.onImageUpload(f)}/>
+                        </div>
                     </Form.Group>
                     <Button 
-                        variant="outline-success" 
+                        variant="success" 
                         type="submit"
-                        onClick={() =>  { alert(' Recipe created Successfully '); {DatabaseDriver.addRecipe(this.props.user.googleId, {
+                        onClick={() => {alert('Recipe created Successfully'); {DatabaseDriver.addRecipe(this.props.user.googleId, {
                             'name': this.state.name,
                             'description':this.state.description,
                             'ingredients': this.state.ingridients,
