@@ -7,18 +7,17 @@ import { Multiselect } from 'multiselect-react-dropdown';
 
 class Create extends Component {
 
-    state = {
-        title: '',
-        ingridients:'',
-        directions:'',
-        time:'',
-        image: null,
 
-        
-    }
     constructor(props) {
         super(props);
         this.state = {
+            name: '',
+            ingridients:'',
+            directions:'',
+            time:'',
+            image: null, 
+            show:'',
+            setShow:'',   
             tags : [
                 {id: "1", value: 'pizza'},
                 {id: "2",value: 'pasta'},
@@ -43,6 +42,7 @@ class Create extends Component {
         const { name, value } = target;
         this.setState({ [name]: value });
       };
+
       render() {    
         const {tags} = this.state;  
         return (
@@ -51,7 +51,7 @@ class Create extends Component {
                     <Form.Label>Create Recipe</Form.Label>
                     <Form.Group>
                         <div style={{width: '20em'}}>
-                            <Form.Control name="title" value={this.state.title} onChange={this.handleChange} placeholder="Title"/>
+                            <Form.Control name="name" value={this.state.title} onChange={this.handleChange} placeholder="Title"/>
                         </div>
                     </Form.Group>
                     <Form.Group>
@@ -72,12 +72,13 @@ class Create extends Component {
                     <Form.Group>
                         <div class="text-dark bg-light" style={{width: '25em'}}>
                             <Multiselect
+                                selectionLimit ='3'
                                 placeholder="Tags"
                                 value={this.state.tags}
                                 displayValue="value" // Property name to display in the dropdown options
                                 options={tags} // Options to display in the dropdown
                                 selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
-                                //onSelect={this.handleChange} // Function will trigger on select event
+                                onChange={this.handleChange} // Function will trigger on select event
                                 />
                         </div>
                     </Form.Group>
@@ -87,15 +88,15 @@ class Create extends Component {
                     <Button 
                         variant="primary" 
                         type="submit"
-                        onClick={() => {DatabaseDriver.addRecipe(this.props.user.googleId, {
-                            'title': this.state.title,
+                        onClick={() => { alert(' Recipe created Successfully '); {DatabaseDriver.addRecipe(this.props.user.googleId, {
+                            'title': this.state.name,
                             'ingredients': this.state.ingridients,
                             'directions': this.state.directions,
                             'time': this.state.time,
-                            'tags':this.state.time,
+                            'tags':this.state.tags,
                             'author': this.props.user.name,
                             'image': this.state.image
-                        })}}
+                        })}}}
                     >
                         Create
                     </Button>
@@ -110,28 +111,4 @@ const mapStateToProps = (state) => ({
     user: state.usrReducer.user
 })
 
-// const Tags = () => {
-//     const 
-
-//   const [options] = useState(data);
-//   return (
-//     <div className="d-flex justify-content-center">
-//         <form>
-//         <select value={dropdown} onChange={(e)}={setDropdown(e.target.value)}>
-//         <MultiSelect options= { options } displayValue="value" />
-//         </select>
-//         </form>
-//     </div>
-//   )
-// }
-/* <Multiselect options={objectArray} displayValue="key" />
-            <code className="displayBlock mt10">
-              &lt;Multiselect
-              <br />
-              &nbsp;&nbsp;options=&#123;objectArray}
-              <br />
-              &nbsp;&nbsp;displayValue="key"
-              <br />
-              />
-            </code> */
 export default connect(mapStateToProps)(Create);
