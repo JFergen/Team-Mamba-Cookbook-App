@@ -40,6 +40,7 @@ class Home extends Component {
                     // author={this.state.recipes[index].author}
                 />                 
             </div>
+
         )
     }
 
