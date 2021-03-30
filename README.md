@@ -57,3 +57,5 @@ npm install react-bootstrap bootstrap
 npm install react-awesome-stars-rating
 
 npm install react-file-base64
+
+npm install multiselect-react-dropdown
