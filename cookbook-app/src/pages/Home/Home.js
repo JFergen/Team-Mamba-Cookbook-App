@@ -33,13 +33,7 @@ class Home extends Component {
     renderItem(index, key) {
         return (
             <div key={key}>
-                <CardComponent
-                    name={this.state.recipes[index].name}
-                    description={this.state.recipes[index].description}
-                    author={this.props.user.name}
-                    dateAdded={this.state.recipes[index].date_added}
-                    image={this.state.recipes[index].image}
-                />                 
+                <CardComponent recipe={this.state.recipes[index]}/>                 
             </div>
 
         )

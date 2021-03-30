@@ -9,7 +9,7 @@ class CardComponent extends Component {
         return (
             <Card className="m-3">
             <Card.Header className="p-0 text-center bg-secondary">
-                    <h class="text-dark font-weight-bold">{this.props.name}</h>
+                    <h class="text-dark font-weight-bold">{this.props.recipe.name}</h>
                     <h className="preview_usr_stars p-2">
                         <StarRating 
                             name="cookbook-rating"
@@ -21,8 +21,8 @@ class CardComponent extends Component {
                     <a href="#" class="float-right" style={{color: 'black'}}><MdSave size={32}/></a>
             </Card.Header>
                 <Card.Body class="table-warning">
-                    <Card.Img class="card-img-left" src={this.props.image}/>
-                    <Card.Text className="mt-2 text-dark">{this.props.description}</Card.Text>
+                    <Card.Img class="card-img-left" src={this.props.recipe.image}/>
+                    <Card.Text className="mt-2 text-dark">{this.props.recipe.description}</Card.Text>
                     <div class="d-flex justify-content-around text-dark">
                         <div class='one'>Ingredients 
                             <div class="box">
@@ -46,8 +46,8 @@ class CardComponent extends Component {
                 </Card.Body>
             <Card.Footer class="p-0 bg-secondary">
                 <h class="text-light font-weight-bold"> Made by:</h>
-                <a href="#" style={{paddingLeft: 8, color: 'blue'}}>{this.props.author}</a> 
-                <h class="text-dark float-right">3:08am</h>
+                <a href="#" style={{paddingLeft: 8, color: 'blue'}}>{this.props.recipe.author}</a> 
+                <h class="text-dark float-right">{this.props.recipe.date_added}</h>
             </Card.Footer>
         </Card>
         )
