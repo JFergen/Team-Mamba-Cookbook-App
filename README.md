@@ -24,10 +24,7 @@ How to run on Windows:
                              
 Node install in /Team-Mamba-Cookbook-App/edit/main/cookbook-app/:
 
-npm install react-scripts
-
-
-npm install react-scripts
+npm install react-scripts --save
 
 
 npm install react-google-login
@@ -60,3 +57,4 @@ npm install react-bootstrap bootstrap
 npm install react-awesome-stars-rating
 
 npm install react-file-base64
+
