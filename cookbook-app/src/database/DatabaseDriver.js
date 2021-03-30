@@ -94,8 +94,8 @@ class DatabaseDriver {
         );
     }
 
-    static async getNRandomRecipes(number) {
-        return fetch('/getNRandomRecipes/' + String(number)).then(response =>
+    static async getNRandomRecipes(id,number) {
+        return fetch('/getNRandomRecipes/' + String(id) + '/' + String(number)).then(response =>
             response.json().then(data => {
                return data;
             })

@@ -93,9 +93,9 @@ def get_users_recipes(user_id):
   return db_connection.RECIPES_TABLE.get_users_recipes(user_id)
 
 
-@app.route('/getNRandomRecipes/<number>', methods=['GET'])
-def get_n_random_recipes(number):
-  return db_connection.RECIPES_TABLE.get_n_random_recipes(int(number))
+@app.route('/getNRandomRecipes/<id>/<number>', methods=['GET'])
+def get_n_random_recipes(id,number):
+  return db_connection.RECIPES_TABLE.get_n_random_recipes(id, int(number))
     
 @app.route('/getRecipesForHomepage/<user_id>', methods=['GET'])
 def getRecipesForHomepage(user_id):

@@ -39,8 +39,8 @@ class RecipesTable(MongoDbTable):
     def get_users_recipes(self, user_id):
         return super().get_all('user_id', user_id)
 
-    def get_n_random_recipes(self, number):
-        return super().get_random_docs(number)
+    def get_n_random_recipes(self, id, number):
+        return super().get_random_docs(id, number)
 
     def compute_rating_avg(self, ratings):
         return sum(ratings) / len(ratings)
