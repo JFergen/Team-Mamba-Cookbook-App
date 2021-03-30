@@ -46,7 +46,7 @@ class CardComponent extends Component {
             <Card.Footer class="p-0 bg-secondary">
                 <h class="text-light font-weight-bold">Made by:</h>
                 <a href="#" style={{paddingLeft: 8, color: 'blue'}}>{this.props.recipe.author}</a> 
-                <h class="text-dark float-right">3:08am</h>
+                <h class="text-dark float-right">{this.props.recipe.date_added}</h>
             </Card.Footer>
         </Card>
         )
