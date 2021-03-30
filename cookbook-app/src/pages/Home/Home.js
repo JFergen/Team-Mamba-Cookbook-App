@@ -33,7 +33,12 @@ class Home extends Component {
     renderItem(index, key) {
         return (
             <div key={key}>
-                <CardComponent recipe={this.state.recipes[index]}/>                 
+                <CardComponent
+                    recipe={this.state.recipes[index]}
+                    // name={this.state.recipes[index].name}
+                    // description={this.state.recipes[index].description}
+                    // author={this.state.recipes[index].author}
+                />                 
             </div>
         )
     }
