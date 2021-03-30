@@ -98,7 +98,7 @@ class Create extends Component {
                     <Button 
                         variant="success" 
                         type="submit"
-                        onClick={() => {alert('Recipe created Successfully'); {DatabaseDriver.addRecipe(this.props.user.googleId, {
+                        onClick={() => {alert('Recipe created Successfully'); DatabaseDriver.addRecipe(this.props.user.googleId, {
                             'name': this.state.name,
                             'description':this.state.description,
                             'ingredients': this.state.ingridients,
@@ -107,7 +107,7 @@ class Create extends Component {
                             'tags': this.state.selectedValue,
                             'author': this.props.user.name,
                             'image': this.state.image
-                        })}}}
+                        })}}
                     >
                         Create
                     </Button>
