@@ -18,6 +18,9 @@ class RecipesTable(MongoDbTable):
     def get_recipes_from_tag(self, tag):
         return super().get_all('tags', tag)
 
+    def get_recipe(self, recipe_id):
+        return super().find('recipe_id', recipe_id)
+
     def update_recipe(self, recipe):
         recipe_id = ObjectId(recipe['_id'])
         del recipe['_id']
