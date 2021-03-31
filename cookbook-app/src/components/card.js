@@ -2,9 +2,30 @@ import React, { Component } from 'react';
 import { Card } from "react-bootstrap";
 import {MdSave, MdChatBubbleOutline} from 'react-icons/md'
 import StarRating from 'react-awesome-stars-rating';
+import DatabaseDriver from '../database/DatabaseDriver'
 import './card.css'
 
 class CardComponent extends Component {
+    constructor() {
+        super();
+        this.state = {
+            change: true,
+            starValue: null,
+            //saved: false    // Keep the saved recipes in redux (get from back-end) and check if the current recipe_id matches one that is in the saved array. If it is, change the saved icon to blue and add it the recipe_id to database
+        }
+
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange = (value) => {
+        if (this.state.change) {
+            this.setState({ 
+                change: false,
+                starValue: value
+            })
+        }
+    }
+
     render() {
         return (
             <Card className="m-3">
@@ -14,7 +35,9 @@ class CardComponent extends Component {
                         <StarRating 
                             size={20}
                             isHalf={false}
-                            //onChange={onChange}
+                            value={this.state.starValue}
+                            isEdit={this.state.change}
+                            onChange={this.handleChange}
                         />
                     </h>
                     <a href="#" class="float-right" style={{color: 'black'}}><MdSave size={32}/></a>
@@ -49,7 +72,7 @@ class CardComponent extends Component {
             <Card.Footer class="p-0 bg-secondary">
                 <h class="text-light font-weight-bold">Made by:</h>
                 <a href="#" style={{paddingLeft: 8, color: 'blue'}}>{this.props.recipe.author}</a> 
-                <h class="text-dark float-right">{this.props.recipe.date_added}</h>
+                <h class="text-dark float-right">Created {this.props.recipe.date_added}</h>
             </Card.Footer>
         </Card>
         )
