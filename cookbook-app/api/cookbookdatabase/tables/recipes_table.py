@@ -21,12 +21,6 @@ class RecipesTable(MongoDbTable):
     def get_recipe(self, recipe_id):
         return super().find('recipe_id', recipe_id)
 
-    def update_recipe(self, recipe):
-        recipe_id = ObjectId(recipe['_id'])
-        del recipe['_id']
-
-        super().update(recipe_id, recipe)
-
     def update_recipe(self, newRecipeData):
         recipe_id = ObjectId(newRecipeData['recipe_id'])
         del recipe['_id']
