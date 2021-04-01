@@ -43,25 +43,25 @@ def delete_comment(comment_id):
 
 @app.route('/follow/<followLinker>', methods=['POST'])
 def follow(followLinker):
-    followLinker = request.get_json()
+    followLinker = json.loads(followLinker)
     db_connection.USERS_TABLE.follow(followLinker['follower'],followLinker['leader'])
     return 'ok', 200
 
 @app.route('/unfollow/<followLinker>', methods=['DELETE'])
 def unfollow(followLinker):
-    followLinker = request.get_json()
+    followLinker = json.loads(followLinker)
     db_connection.USERS_TABLE.unfollow(followLinker['follower'],followLinker['leader'])
     return 'ok', 200
 
 @app.route('/save/<saveLinker>', methods=['POST'])
 def save(saveLinker):
-    saveLinker = request.get_json()
+    saveLinker = json.loads(saveLinker)
     db_connection.USERS_TABLE.save_recipe(saveLinker['user_id'],saveLinker['recipe_id'])
     return 'ok', 200
 
 @app.route('/unsave/<saveLinker>', methods=['DELETE'])
 def unsave(saveLinker):
-    saveLinker = request.get_json()
+    saveLinker = json.loads(saveLinker)
     db_connection.USERS_TABLE.remove_save_recipe(saveLinker['user_id'],saveLinker['recipe_id'])
     return 'ok', 200    
 
