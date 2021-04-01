@@ -29,11 +29,16 @@ class Login extends Component {
     onSuccess(response){
         console.log('[Login Success] currentUser: ', response);
             //sets state in class to issignedin
-        this.setState({isSignedIn: true});
+        if(response.accessToken){
+            this.setState({
+              isSignedIn: true,
+              accessToken: response.accessToken
+            });
+          }
             //sets local storage to loggedin
         localStorage.setItem('loggedin', 'true');
-            //redirect to homepage after sucess
-            this.props.setUser(response.profileObj);  // Save user's profile in redux
+            
+        this.props.setUser(response.profileObj);  // Save user's profile in redux
         DatabaseDriver.login(response.profileObj);  // Add user to the database
       };
 
@@ -85,4 +90,8 @@ class Login extends Component {
 
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+    user: state.usrReducer.user
+  })
+
+export default connect(mapStateToProps, { setUser }) (Login);

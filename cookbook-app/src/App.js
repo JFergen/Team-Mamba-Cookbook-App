@@ -8,7 +8,8 @@ import { Switch } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Logout from './components/Logout';
 import AllRoutes from './Routes/AllRoutes';
-
+import Create from './pages/Create/Create';
+import Home from './pages/Home/Home';
 import './App.css';
 
 class App extends React.Component {
@@ -46,6 +47,7 @@ class App extends React.Component {
             }
           </Navbar.Collapse>  
         </Navbar>
+        <Route exact path="/create" component={Create}/>
         <AllRoutes />
       </React.Fragment>
       </Switch>

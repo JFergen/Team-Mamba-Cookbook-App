@@ -8,8 +8,8 @@ import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 
 function PrivateRoute ({component: Component, ...rest}) {
-        console.log('routing from privateroute function - login status: ', localStorage.getItem('loggedin'));
-        console.log('...rest', rest);
+        //console.log('routing from privateroute function - login status: ', localStorage.getItem('loggedin'));
+        //console.log('...rest', rest);
         return (
           <Route {...rest} render={(props) => (
                 localStorage.getItem('loggedin') === 'true'
@@ -22,13 +22,13 @@ function PrivateRoute ({component: Component, ...rest}) {
 
 function AllRoutes(){
         /* all the route paths go here. */
-        console.log('loggedin status in AllRoutes() function:', localStorage.getItem('loggedin'))
+        //console.log('loggedin status in AllRoutes() function:', localStorage.getItem('loggedin'))
         
        return (
             <div>
-                    <PrivateRoute exact path="/home" compondent={Home} />
-                    <PrivateRoute exact path="/discover" component={Discover}/>
-                    <PrivateRoute exact path="/create" component={Create}/>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/discover" component={Discover}/>
+                    <Route exact path="/create" component={Create}/>
                     <PrivateRoute exact path="/saved" component={Saved}/>
                     <PrivateRoute exact path="/profile" component={Profile}/>
             </div>
