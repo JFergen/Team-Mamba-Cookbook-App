@@ -36,6 +36,9 @@ class UsersTable(MongoDbTable):
     def delete_recipe(self, user_id, recipe_id):
         super().delete_from_set(user_id, 'recipes', recipe_id)
 
+    def get_suggested_friends(self, id, number):
+        return super().get_random_docs(id, number)
+
 
     def modify(self):
         pass

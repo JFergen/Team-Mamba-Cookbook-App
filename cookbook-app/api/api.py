@@ -53,6 +53,12 @@ def unfollow():
     db_connection.USERS_TABLE.unfollow(followLinker['follower'],followLinker['leader'])
     return 'ok', 200
 
+@app.route('/getSuggestedFriends/<id>/<number>', methods=['GET'])
+def get_suggested_friends(id,number):
+  return db_connection.USERS_TABLE.get_suggested_friends(id, int(number))
+
+
+
 # End Users Table
 
 

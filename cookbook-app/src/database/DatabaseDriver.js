@@ -34,6 +34,14 @@ class DatabaseDriver {
         });
     }
 
+    static async getSuggestedFriends(id,number) {
+        return fetch('/getSuggestedFriends/' + String(id) + '/' + String(number)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
     // End Users
 
     // Recipes
