@@ -19,8 +19,9 @@ class CardComponent extends Component {
         this.unSaveRecipe = this.unSaveRecipe.bind(this)
     }
 
-    componentDidMount() {
-        let savedRecipeIds = DatabaseDriver.getSavedArray(this.props.user.googleId)
+    async componentDidMount() {
+        let savedRecipeIds = await DatabaseDriver.getSavedArray(this.props.user.googleId)
+        console.log(savedRecipeIds)
 
         for (const id in savedRecipeIds) {
             if (id === this.props.recipe.id.$oid) {
