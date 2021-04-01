@@ -45,7 +45,8 @@ class UsersTable(MongoDbTable):
 
     def get_user_saved(self, user_id):
         user = super().find_one('user_id', user_id)
-        return user['saved_recipes']
+        temp = user['saved_recipes']
+        return list(temp)
 
     def get_user_followers(self, user_id):
         user = super().find_one('user_id', user_id)
@@ -53,6 +54,7 @@ class UsersTable(MongoDbTable):
 
     def get_user_following(self, user_id):
         user = super().find_one('user_id', user_id)
+        
         return user['followingList']
 
     def modify(self):
