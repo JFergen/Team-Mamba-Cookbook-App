@@ -1,5 +1,6 @@
 from cookbookdatabase.tables.mongodb_table import MongoDbTable
 from bson.objectid import ObjectId
+from bson.json_util import dumps
 from logger import log
 
 class UsersTable(MongoDbTable):
