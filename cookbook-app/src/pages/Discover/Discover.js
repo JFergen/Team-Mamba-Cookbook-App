@@ -26,15 +26,19 @@ class Discover extends Component {
     }
 
     async getRecipes() {
-        const data = await DatabaseDriver.getNRandomRecipes(2);    // Gets recipes from a user
+        const data = await DatabaseDriver.getNRandomRecipes(10);    // Gets recipes from a user
         this.setState({ recipes: data })
     }
 
     renderItem(index, key) {
         return (
             <div key={key}>
-                <CardComponent recipe={this.state.recipes[index]}/>                 
+                <CardComponent 
+                    recipe={this.state.recipes[index]}
+                    user={this.props.user}
+                />                 
             </div>
+
         )
     }
 

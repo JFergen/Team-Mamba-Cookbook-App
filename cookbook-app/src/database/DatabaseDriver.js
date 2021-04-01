@@ -58,10 +58,11 @@ class DatabaseDriver {
         });
     }
 
-    static async getSavedArray(userId) {
-        return fetch('/checkDupe/' + String(userId)).then(response =>
+    static async getUsersSavedRecipes(userId) {
+        return fetch('/getUsersSavedRecipes/' + String(userId)).then(response =>
             response.json().then(data => {
-               return data;
+                console.log(data);
+                return data.saved_recipes == null ? data.saved_recipes : [];
             })
         );
     }
