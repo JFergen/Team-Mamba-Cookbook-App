@@ -68,6 +68,14 @@ def unsave(saveLinker):
 @app.route('/checkDupe/<user_id>', methods=['GET'])
 def getSavedArray(user_id):
     return db_connection.USERS_TABLE.get_user_saved(user_id)
+
+@app.route('/followers/<user_id>', methods=['GET'])
+def getFollowers(user_id): #People following this user
+    return db_connection.USERS_TABLE.get_user_followers(user_id)
+
+@app.route('/following/<user_id>', methods=['GET'])
+def getFollowing(user_id): #People this user is following
+    return db_connection.USERS_TABLE.get_user_following(user_id)    
     
 # End Users Table
 
