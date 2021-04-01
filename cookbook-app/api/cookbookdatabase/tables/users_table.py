@@ -1,5 +1,6 @@
 from cookbookdatabase.tables.mongodb_table import MongoDbTable
 from bson.objectid import ObjectId
+from bson.json_util import dumps
 from logger import log
 
 class UsersTable(MongoDbTable):
@@ -44,7 +45,7 @@ class UsersTable(MongoDbTable):
 
     def get_user_saved(self, user_id):
         user = super().find('user_id', user_id)
-        return list(user['saved_recipes'])
+        return dumps(list(user)[0])['saved_recipes']
 
     def modify(self):
         pass
