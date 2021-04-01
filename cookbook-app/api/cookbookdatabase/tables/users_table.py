@@ -15,7 +15,7 @@ class UsersTable(MongoDbTable):
             self.add_user(user)
 
     def get_user(self, user_id):
-        return super().find('user_id', user_id)
+        return super().find_one('user_id', user_id)
 
     def add_user(self, new_user):
         new_user['_id'] = new_user['googleId']
@@ -44,8 +44,16 @@ class UsersTable(MongoDbTable):
         super().delete_from_set(user_id, 'saved_recipes', recipe_id)   
 
     def get_user_saved(self, user_id):
-        user = super().find('user_id', user_id)
-        return dumps(list(user)[0])['saved_recipes']
+        user = super().find_one('user_id', user_id)
+        return user['saved_recipes']
+
+    def get_user_followers(self, user_id):
+        user = super().find_one('user_id', user_id)
+        return user['followerList']
+
+    def get_user_following(self, user_id):
+        user = super().find_one('user_id', user_id)
+        return user['followingList']
 
     def modify(self):
         pass

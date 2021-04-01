@@ -65,6 +65,24 @@ class DatabaseDriver {
             })
         );
     }
+
+    static async getFollowers(userId) {
+        return fetch('/followers/' + String(userId)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
+    static async getFollowing(userId) {
+        return fetch('/following/' + String(userId)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
+
     // End Users
 
     // Recipes
