@@ -106,7 +106,8 @@ class Create extends Component {
                             'time': this.state.time,
                             'tags': this.state.selectedValue,
                             'author': this.props.user.name,
-                            'image': this.state.image
+                            'image': this.state.image,
+                            'ratings': []
                         })}}
                     >
                         Create

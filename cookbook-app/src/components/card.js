@@ -19,6 +19,17 @@ class CardComponent extends Component {
         this.unSaveRecipe = this.unSaveRecipe.bind(this)
     }
 
+    componentDidMount() {
+        let savedRecipeIds = DatabaseDriver.getSavedArray(this.props.user.googleId)
+
+        for (const id in savedRecipeIds) {
+            if (id === this.props.recipe.id.$oid) {
+                this.setState({ saved: true })
+                break
+            }
+        }
+    }
+
     handleChange = (value) => {
         if (this.state.change) {
             this.setState({ 
@@ -31,8 +42,6 @@ class CardComponent extends Component {
     saveRecipe() {
         this.setState({ saved: true })
         console.log("Saved recipe in database")
-        console.log(`googleId: ${this.props.user.googleId}`)
-        console.log(`recipe_id: ${this.props.recipe._id.$oid}`)
         DatabaseDriver.save(this.props.user.googleId, this.props.recipe._id.$oid)
     }
 
