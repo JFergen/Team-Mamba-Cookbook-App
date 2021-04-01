@@ -9,7 +9,6 @@ import Login from './pages/Login/Login';
 import Logout from './components/Logout';
 import AllRoutes from './Routes/AllRoutes';
 import GoogleBtn from './components/GoogleBtn';
-import Home from './pages/Home/Home';
 import Discover from './pages/Discover/Discover';
 import Create from './pages/Create/Create';
 import Home from './pages/Home/Home';
