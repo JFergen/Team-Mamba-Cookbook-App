@@ -1,5 +1,3 @@
-
-import { getDefaultNormalizer } from '@testing-library/dom';
 import React, { Component } from 'react'
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { connect } from 'react-redux';

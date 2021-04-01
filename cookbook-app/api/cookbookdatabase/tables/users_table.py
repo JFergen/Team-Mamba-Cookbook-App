@@ -1,5 +1,6 @@
 from cookbookdatabase.tables.mongodb_table import MongoDbTable
 from bson.objectid import ObjectId
+from bson.json_util import dumps
 from logger import log
 
 class UsersTable(MongoDbTable):
@@ -14,7 +15,7 @@ class UsersTable(MongoDbTable):
             self.add_user(user)
 
     def get_user(self, user_id):
-        return super().find('user_id', user_id)
+        return super().find_one('user_id', user_id)
 
     def add_user(self, new_user):
         new_user['_id'] = new_user['googleId']
@@ -36,6 +37,23 @@ class UsersTable(MongoDbTable):
     def delete_recipe(self, user_id, recipe_id):
         super().delete_from_set(user_id, 'recipes', recipe_id)
 
+    def save_recipe(self, user_id, recipe_id):
+        super().add_to_set(user_id, 'saved_recipes', recipe_id)
+
+    def remove_save_recipe(self, user_id, recipe_id):
+        super().delete_from_set(user_id, 'saved_recipes', recipe_id)   
+
+    def get_user_saved(self, user_id):
+        user = super().find_one('user_id', user_id)
+        return user['saved_recipes']
+
+    def get_user_followers(self, user_id):
+        user = super().find_one('user_id', user_id)
+        return user['followerList']
+
+    def get_user_following(self, user_id):
+        user = super().find_one('user_id', user_id)
+        return user['followingList']
 
     def modify(self):
         pass

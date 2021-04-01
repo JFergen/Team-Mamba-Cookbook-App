@@ -1,3 +1,4 @@
+
 class DatabaseDriver {
 
     // Users
@@ -33,6 +34,55 @@ class DatabaseDriver {
         });
     }
 
+    static save(userId, recipeId) {
+        var saveLinker = JSON.stringify({
+            'user_id': userId,
+            'recipe_id': recipeId
+        });
+
+        fetch('/save/' + saveLinker,{
+            method: 'POST',
+            cache: "no-cache",
+        });
+    }
+
+    static unsave(userId, recipeId) {
+        var saveLinker = JSON.stringify({
+            'user_id': userId,
+            'recipe_id': recipeId
+        });
+
+        fetch('/unsave/' + saveLinker,{
+            method: 'DELETE',
+            cache: "no-cache",
+        });
+    }
+
+    static async getSavedArray(userId) {
+        return fetch('/checkDupe/' + String(userId)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
+    static async getFollowers(userId) {
+        return fetch('/followers/' + String(userId)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
+    static async getFollowing(userId) {
+        return fetch('/following/' + String(userId)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
+
     // End Users
 
     // Recipes
@@ -49,7 +99,6 @@ class DatabaseDriver {
             body: JSON.stringify(recipe)
         }
         );
-
     }
 
     static deleteRecipe(userId, recipeId) {
@@ -94,7 +143,7 @@ class DatabaseDriver {
         );
     }
 
-    static async get_n_random_recipes(number) {
+    static async getNRandomRecipes(number) {
         return fetch('/getNRandomRecipes/' + String(number)).then(response =>
             response.json().then(data => {
                return data;
@@ -110,7 +159,13 @@ class DatabaseDriver {
         );
     }
 
-
+    static async getUserSaved(userId) {
+        return fetch('/getUserSaved/' + String(userId)).then(response =>
+            response.json().then(data => {
+                return data;
+            }) 
+        );
+    }
 
     // End Recipes
 

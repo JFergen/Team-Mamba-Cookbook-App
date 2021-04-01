@@ -1,6 +1,7 @@
 from cookbookdatabase.tables.mongodb_table import MongoDbTable
 import cookbookdatabase.db_connection as db_connection
 from logger import log
+from datetime import datetime
 from bson.objectid import ObjectId
 
 class RecipesTable(MongoDbTable):
@@ -9,6 +10,7 @@ class RecipesTable(MongoDbTable):
         super().__init__('recipes_table', table)
 
     def add_recipe(self, recipe):
+        recipe['date_added'] = datetime.now().strftime('%B %d, %Y %H:%M')
         insert_result = super().insert(recipe)
         log('Recipe added to the database: ' + str(recipe))
         db_connection.USERS_TABLE.add_recipe( recipe['user_id'], insert_result.inserted_id)
@@ -16,8 +18,11 @@ class RecipesTable(MongoDbTable):
     def get_recipes_from_tag(self, tag):
         return super().get_all('tags', tag)
 
-    def update_recipe(self, recipe):
-        recipe_id = ObjectId(recipe['_id'])
+    def get_recipe(self, recipe_id):
+        return super().find('recipe_id', recipe_id)
+
+    def update_recipe(self, newRecipeData):
+        recipe_id = ObjectId(newRecipeData['recipe_id'])
         del recipe['_id']
 
         super().update(recipe_id, recipe)
