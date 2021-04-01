@@ -29,6 +29,9 @@ class MongoDbTable:
     def find(self, field, value):
         return self._table.find({field: value})
 
+    def find_one(self, field, value):
+        return self._table.find_one({field: value})
+
     def get_all(self, field, value):
         docs = list(self._table.find({field: value}))
         return dumps(docs)
