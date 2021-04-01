@@ -44,7 +44,7 @@ class UsersTable(MongoDbTable):
 
     def get_user_saved(self, user_id):
         user = super().find('user_id', user_id)
-        return user['saved_recipes']
+        return list(user['saved_recipes'])
 
     def modify(self):
         pass
