@@ -45,6 +45,7 @@ class Home extends Component {
     render() {
         return (
             <div className="list">
+                <h1>{this.props.user.googleId}</h1>
                 <ReactList
                     itemRenderer={this.renderItem}
                     length={this.state.recipes.length}
