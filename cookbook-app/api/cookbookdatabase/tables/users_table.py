@@ -44,16 +44,7 @@ class UsersTable(MongoDbTable):
         super().delete_from_set(user_id, 'saved_recipes', recipe_id)   
 
     def get_user_saved(self, user_id):
-        user = super().find_one('user_id', user_id)
-        return user['saved_recipes']
-
-    def get_user_followers(self, user_id):
-        user = super().find_one('user_id', user_id)
-        return user['followerList']
-
-    def get_user_following(self, user_id):
-        user = super().find_one('user_id', user_id)
-        return user['followingList']
+        return super().find('user_id', user_id)
 
     def modify(self):
         pass
