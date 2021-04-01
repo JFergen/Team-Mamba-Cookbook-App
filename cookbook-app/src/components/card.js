@@ -101,7 +101,7 @@ class CardComponent extends Component {
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="nav-link text-primary float-left"><MdChatBubbleOutline/>Comments</a> 
+                    <a href="#" class="nav-link text-primary float-left"><MdChatBubbleOutline/>Comments</a>
                     <a href="#" class="btn btn-primary btn-sm float-right p-2" id="right-panel-link">Recipe Page</a>
                     {/* {this.props.recipe.tags.map((value, index) => {
                         return (<a href="#" key={index} class= "float-right p-1" style={{ color: 'blue'}}>#{this.props.recipe.tags[index]}</a>)

@@ -122,4 +122,5 @@ const mapStateToProps = (state) => ({
     user: state.usrReducer.user
 })
 
+
 export default connect(mapStateToProps)(Create);
