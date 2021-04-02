@@ -65,9 +65,9 @@ def unsave(saveLinker):
     db_connection.USERS_TABLE.remove_save_recipe(saveLinker['user_id'],saveLinker['recipe_id'])
     return 'ok', 200    
 
-@app.route('/checkDupe/<user_id>', methods=['GET'])
-def getSavedArray(user_id):
-    return db_connection.USERS_TABLE.get_user_saved(user_id)
+@app.route('/getUsersSavedRecipes/<user_id>', methods=['GET'])
+def get_users_saved_recipes(user_id):
+    return db_connection.USERS_TABLE.get_users_saved_recipes(user_id)
 
 @app.route('/followers/<user_id>', methods=['GET'])
 def getFollowers(user_id): #People following this user
