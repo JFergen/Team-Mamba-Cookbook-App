@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import GoogleBtn from '../../GoogleBtn';
+import GoogleBtn from '../../components/GoogleBtn';
 
 class Login extends Component {
     render() {
