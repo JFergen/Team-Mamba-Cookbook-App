@@ -20,8 +20,8 @@ class CardComponent extends Component {
     }
 
     async componentDidMount() {
-        let savedRecipeIds = await DatabaseDriver.getUsersSavedRecipes(this.props.user.googleId)
-
+        let savedRecipeIds = await DatabaseDriver.getUsersSavedRecipes('102050791948382455788')
+        console.log(savedRecipeIds)
         for (const id in savedRecipeIds) {
             if (id === this.props.recipe.id.$oid) {
                 this.setState({ saved: true })
