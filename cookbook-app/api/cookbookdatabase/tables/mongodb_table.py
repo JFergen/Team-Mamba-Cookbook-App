@@ -57,4 +57,4 @@ class MongoDbTable:
 
     def get_field(self, id, field):
         doc = self._table.find_one({'_id': id})
-        return doc[field] if field in doc.keys() else None
+        return doc[field] if field in doc.keys() else []

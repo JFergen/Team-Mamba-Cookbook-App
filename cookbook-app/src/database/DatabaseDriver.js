@@ -61,6 +61,7 @@ class DatabaseDriver {
     static async getUsersSavedRecipes(userId) {
         return fetch('/getUsersSavedRecipes/' + String(userId)).then(response =>
             response.json().then(data => {
+                console.log(data)
                 return data.saved_recipes == null ? data.saved_recipes : [];
             })
         );
