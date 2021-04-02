@@ -88,11 +88,6 @@ class Create extends Component {
         return (
             <div className="d-flex justify-content-center">
                 <Form onSubmit={this.sendData} className="m-3 text-center card bg-dark p-3">
-                {/* <Button 
-                        variant="success" 
-                        type="submit"
-                        //, Alertf(this.sendData)}
-                    > */}
                     <h1>
                     <Form.Label>Create Recipe</Form.Label>
                     </h1>
@@ -154,5 +149,6 @@ class Create extends Component {
 const mapStateToProps = (state) => ({
     user: state.usrReducer.user
 })
+
 
 export default connect(mapStateToProps)(Create);

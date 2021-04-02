@@ -34,6 +34,55 @@ class DatabaseDriver {
         });
     }
 
+    static save(userId, recipeId) {
+        var saveLinker = JSON.stringify({
+            'user_id': userId,
+            'recipe_id': recipeId
+        });
+
+        fetch('/save/' + saveLinker,{
+            method: 'POST',
+            cache: "no-cache",
+        });
+    }
+
+    static unsave(userId, recipeId) {
+        var saveLinker = JSON.stringify({
+            'user_id': userId,
+            'recipe_id': recipeId
+        });
+
+        fetch('/unsave/' + saveLinker,{
+            method: 'DELETE',
+            cache: "no-cache",
+        });
+    }
+
+    static async getSavedArray(userId) {
+        return fetch('/checkDupe/' + String(userId)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
+    static async getFollowers(userId) {
+        return fetch('/followers/' + String(userId)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
+    static async getFollowing(userId) {
+        return fetch('/following/' + String(userId)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
+
     // End Users
 
     // Recipes
@@ -104,6 +153,14 @@ class DatabaseDriver {
 
     static async getRecipesForHomepage(userId) {
         return fetch('/getRecipesForHomepage/' + String(userId)).then(response =>
+            response.json().then(data => {
+                return data;
+            }) 
+        );
+    }
+
+    static async getUserSaved(userId) {
+        return fetch('/getUserSaved/' + String(userId)).then(response =>
             response.json().then(data => {
                 return data;
             }) 
