@@ -36,8 +36,8 @@ class MongoDbTable:
         docs = list(self._table.find({field: value}))
         return dumps(docs)
 
-    def get_random_docs(self, number):
-        random_docs = list(self._table.aggregate([{'$sample': {'size': number}}]))
+    def get_random_docs(self, id, number):
+        random_docs = list(self._table.aggregate([{ "$match": { "user_id": { "$ne": id } } },{'$sample': {'size': number}}]))
         return dumps(random_docs)
 
     def insert(self, data):
