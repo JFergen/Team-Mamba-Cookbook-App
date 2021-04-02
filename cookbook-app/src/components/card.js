@@ -20,17 +20,17 @@ class CardComponent extends Component {
     }
 
     async componentDidMount() {
-        let savedRecipeIds = await DatabaseDriver.getSavedArray(this.props.user.googleId)
-        console.log(savedRecipeIds.saved_recipes[0])
+        let savedRecipeIds = await DatabaseDriver.getUsersSavedRecipes(this.props.user.googleId)
+        console.log(savedRecipeIds)
         console.log(this.props.recipe._id.$oid)
 
-        for (let i = 0; i < savedRecipeIds.length; i++) {
-            if (savedRecipeIds.saved_recipes[i] === this.props.recipe._id.$oid) {
-                console.log('got here')
-                this.setState({ saved: true })
-                break
-            }
-        }
+        // for (let i = 0; i < savedRecipeIds.length; i++) {
+        //     if (savedRecipeIds.saved_recipes[i] === this.props.recipe._id.$oid) {
+        //         console.log('got here')
+        //         this.setState({ saved: true })
+        //         break
+        //     }
+        // }
         
     }
 
