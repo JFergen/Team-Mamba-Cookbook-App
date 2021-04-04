@@ -46,7 +46,7 @@ class Create extends Component {
 
 
     sendData = (e) =>{
-        {DatabaseDriver.addRecipe(this.props.user.googleId, {
+        DatabaseDriver.addRecipe(this.props.user.googleId, {
             'name': this.state.name,
             'description':this.state.description,
             'ingredients': this.state.ingredients,
@@ -55,7 +55,7 @@ class Create extends Component {
             'tags':this.state.tags,
             'author': this.props.user.name,
             'image': this.state.image
-        })}
+        })
         alert("success")
     }
 
