@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Form} from 'react-bootstrap';
+import { Route } from 'react-router-dom';
 import FileBase64 from 'react-file-base64';
 import DatabaseDriver from '../../database/DatabaseDriver';
+import RecipePage from '../Recipe/Recipe';
 import { Multiselect } from 'multiselect-react-dropdown';
 import './Create.css'
 
@@ -45,7 +47,7 @@ class Create extends Component {
     };
 
 
-    sendData = (e) =>{
+    sendData = (e) => {
         DatabaseDriver.addRecipe(this.props.user.googleId, {
             'name': this.state.name,
             'description':this.state.description,
@@ -56,7 +58,12 @@ class Create extends Component {
             'author': this.props.user.name,
             'image': this.state.image
         })
-        alert("success")
+        alert("success");
+
+        // let str = this.state.name.replace(/\s+/g, '-').toLowerCase();
+        // <Route path="/recipe/check">
+        //     <RecipePage/>
+        // </Route>
     }
 
     Alertf = (e)=>{
@@ -69,21 +76,17 @@ class Create extends Component {
 
 
     onRemove = (e) => {
-        console.log(e)
+        // console.log(e)
     }
     
     onSelect = (e) => {
-        console.log(e)
         const newArr=[];
         for(var i =0; i<e.length; i++){
             newArr.push(e[i].value);
         }
-        console.log(newArr)
         this.setState({tags: newArr})
-      }
+    }
 
-    //   Create
-    //   </Button>
     render() {
         return (
             <div className="d-flex justify-content-center">
