@@ -9,8 +9,7 @@ class CardComponent extends Component {
     constructor() {
         super();
         this.state = {
-            change: true,
-            starValue: 0,
+            changeStar: true,
             saved: false    // Keep the saved recipes in redux (get from back-end) and check if the current recipe_id matches one that is in the saved array. If it is, change the saved icon to blue and add it the recipe_id to database
         }
 
@@ -21,21 +20,37 @@ class CardComponent extends Component {
 
     async componentDidMount() {
         let savedRecipeIds = await DatabaseDriver.getUsersSavedRecipes(this.props.user.googleId)
+
         for (let i = 0; i < savedRecipeIds.length; i++) {
-            if (savedRecipeIds.[i] === this.props.recipe._id.$oid) {
+            if (savedRecipeIds[i] === this.props.recipe._id.$oid) {
                 this.setState({ saved: true })
+                break
+            }
+        }
+
+        for (let i = 0; i < this.props.recipe.ratings.googleId.length; i++) {
+            if (this.props.recipe._id.$oid === this.props.recipe.ratings.googleId[i]) {
+                this.setState({ changeStar: false })
                 break
             }
         }
     }
 
     handleChange = (value) => {
-        if (this.state.change) {
-            this.setState({ 
-                change: false,
-                starValue: value
+        if (this.state.changeStar) {
+            this.setState({ changeStar: false })
+            this.props.recipe.ratings.googleId.push(this.props.recipe._id.$oid)
+            this.props.recipe.ratings.rating.push(value)
+
+            DatabaseDriver.updateRecipe({
+                'ratings': {
+                    'googleId': this.props.recipe.ratings.googleId,
+                    'rating': this.props.recipe.ratings.rating
+                }
             })
         }
+
+        
     }
 
     saveRecipe() {
@@ -59,8 +74,8 @@ class CardComponent extends Component {
                         <StarRating 
                             size={20}
                             isHalf={false}
-                            value={this.state.starValue}
-                            isEdit={this.state.change}
+                            value={this.props.recipe.rating}
+                            isEdit={this.state.changeStar}
                             onChange={this.handleChange}
                         />
                     </h>

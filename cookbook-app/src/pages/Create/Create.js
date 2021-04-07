@@ -20,6 +20,7 @@ const tag = [
     {value: 'sweet'},
     {value: 'sour'},
 ];
+
 class Create extends Component {
     constructor(props) {
         super(props);
@@ -31,6 +32,11 @@ class Create extends Component {
             time:'',
             image: null,   
             tags:[],
+            rating: 0,
+            ratings: {
+                googleId: [],
+                rating: []
+            }
         };
         this.onSelect = this.onSelect.bind(this);
     }
@@ -56,7 +62,9 @@ class Create extends Component {
             'time': this.state.time,
             'tags':this.state.tags,
             'author': this.props.user.name,
-            'image': this.state.image
+            'image': this.state.image,
+            'rating': this.state.rating,
+            'ratings': this.state.ratings
         })
         alert("success");
 
