@@ -43,6 +43,7 @@ class CardComponent extends Component {
             this.props.recipe.ratings.rating.push(value)
 
             DatabaseDriver.updateRecipe({
+                'recipe_id': this.props.recipe._id.$oid,
                 'ratings': {
                     'googleId': this.props.recipe.ratings.googleId,
                     'rating': this.props.recipe.ratings.rating
