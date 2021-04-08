@@ -40,7 +40,6 @@ class Saved extends Component {
                     user={this.props.user}
                 />                 
             </div>
-
         )
     }
 

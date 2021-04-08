@@ -29,7 +29,7 @@ class CardComponent extends Component {
         }
 
         for (let i = 0; i < this.props.recipe.ratings.googleId.length; i++) {
-            if (this.props.recipe._id.$oid === this.props.recipe.ratings.googleId[i]) {
+            if (this.props.user.googleId === this.props.recipe.ratings.googleId[i]) {
                 this.setState({ changeStar: false })
                 break
             }
@@ -39,7 +39,7 @@ class CardComponent extends Component {
     handleChange = (value) => {
         if (this.state.changeStar) {
             this.setState({ changeStar: false })
-            this.props.recipe.ratings.googleId.push(this.props.user._id)
+            this.props.recipe.ratings.googleId.push(this.props.user.googleId)
             this.props.recipe.ratings.rating.push(value)
 
             DatabaseDriver.updateRecipe({
