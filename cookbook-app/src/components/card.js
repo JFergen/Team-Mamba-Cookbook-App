@@ -99,10 +99,10 @@ class CardComponent extends Component {
                             <div class="box font-weight-normal">
                                 {this.props.recipe.ingredients}
                             </div>
-                        </div>
-                        <div class='two font-weight-bold'>Info
-                            <div class="box font-weight-normal">
-                                {this.props.recipe.time}
+                            <div class='two font-weight-bold'>Info
+                                <div class="box font-weight-normal">
+                                    <b>Time Taken:</b> {this.props.recipe.time}
+                                </div>
                             </div>
                         </div>
                         <div class='three font-weight-bold'>Directions
