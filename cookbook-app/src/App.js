@@ -8,13 +8,10 @@ import { Switch } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Logout from './components/Logout';
 import AllRoutes from './Routes/AllRoutes';
-
 import GoogleBtn from './components/GoogleBtn';
-import Home from './pages/Home/Home';
 import Discover from './pages/Discover/Discover';
 import Create from './pages/Create/Create';
-import Saved from './pages/Saved/Saved';
-import Profile from './pages/Profile/Profile';
+import Home from './pages/Home/Home';
 import './App.css';
 
 class App extends React.Component {
@@ -30,7 +27,7 @@ class App extends React.Component {
           <IconContext.Provider value ={{size:70}}> 
             <Navbar.Brand href="/"><MdHome/></Navbar.Brand>
           </IconContext.Provider>
-          <Navbar.Collapse id="navbar">s
+          <Navbar.Collapse id="navbar">
             <Nav className="mr-auto">
               <Nav.Link href="discover">Discover</Nav.Link>
               <Nav.Link href="saved">Saved</Nav.Link>
@@ -47,11 +44,12 @@ class App extends React.Component {
               <NavDropdown title={this.props.user.name}>
               <NavDropdown.Item href="profile">Profile</NavDropdown.Item>
               <NavDropdown.Divider/>
-              <NavDropdown.Item><Logout /></NavDropdown.Item>
-              </NavDropdown>: <Logout />
+              <NavDropdown.Item><GoogleBtn /></NavDropdown.Item>
+              </NavDropdown>: <GoogleBtn />
             }
           </Navbar.Collapse>  
         </Navbar>
+        <Route exact path="/create" component={Create}/>
         <AllRoutes />
       </React.Fragment>
       </Switch>

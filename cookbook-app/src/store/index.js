@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from './reducers'
 import thunk from "redux-thunk";
+import { loadState } from '../localStorage'
 
 const initialState = {
 
@@ -8,7 +9,7 @@ const initialState = {
 const middleware = [
   thunk
 ];
-
+const persistedState = loadState();
 /*
 Store - holds our state - Only One State. State is readonly that means state is copied and modified.
 Action - state can be modified using actions. Action goes to the reducer. Action reaches to Reducer by Dispatcher.
@@ -22,7 +23,7 @@ Subscriber - listens for state change to update the UI (using connect)
 
 const store = createStore(
   rootReducer,
-  initialState,
+  persistedState,
   applyMiddleware(...middleware)
 );
 

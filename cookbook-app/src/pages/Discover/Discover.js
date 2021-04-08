@@ -3,6 +3,7 @@ import DatabaseDriver from '../../database/DatabaseDriver';
 import ReactList from 'react-list';
 import CardComponent from'../../components/card';
 import { connect } from 'react-redux';
+import GoogleBtn from '../../components/GoogleBtn';
 import './Discover.css';
 
 class Discover extends Component {
@@ -26,32 +27,35 @@ class Discover extends Component {
     }
 
     async getRecipes() {
-        const data = await DatabaseDriver.getNRandomRecipes(2);    // Gets recipes from a user
+        const data = await DatabaseDriver.getNRandomRecipes(this.state.user.googleId, 10);    // Gets recipes from a user
         this.setState({ recipes: data })
     }
 
     renderItem(index, key) {
         return (
             <div key={key}>
-                <CardComponent
-                    name={this.state.recipes[index].name}
-                    description={this.state.recipes[index].description}
-                    author={this.state.recipes[index].author}
-                    dateAdded={this.state.recipes[index].date_added}
-                    image={this.state.recipes[index].image}
+                <CardComponent 
+                    recipe={this.state.recipes[index]}
+                    user={this.props.user}
                 />                 
             </div>
+
         )
     }
 
     render() {
         return (
+            <div>
             <div className="list">
                 <ReactList
                     itemRenderer={this.renderItem}
                     length={this.state.recipes.length}
                     type='uniform'
                 />
+            </div>
+            <div class="googleMagic">
+                <GoogleBtn />
+            </div>
             </div>
         )
     }

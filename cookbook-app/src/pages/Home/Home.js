@@ -3,6 +3,7 @@ import DatabaseDriver from '../../database/DatabaseDriver';
 import ReactList from 'react-list';
 import CardComponent from'../../components/card';
 import { connect } from 'react-redux';
+import GoogleBtn from '../../components/GoogleBtn';
 import './Home.css';
 
 class Home extends Component {
@@ -33,19 +34,28 @@ class Home extends Component {
     renderItem(index, key) {
         return (
             <div key={key}>
-                <CardComponent recipe={this.state.recipes[index]}/>                 
+                <CardComponent 
+                    recipe={this.state.recipes[index]}
+                    user={this.props.user}
+                />                 
             </div>
+
         )
     }
 
     render() {
         return (
-            <div className="list">
-                <ReactList
-                    itemRenderer={this.renderItem}
-                    length={this.state.recipes.length}
-                    type='uniform'
-                />
+            <div className="center">
+                <div className="list">
+                    <ReactList
+                        itemRenderer={this.renderItem}
+                        length={this.state.recipes.length}
+                        type='uniform'
+                    />
+                </div>
+                <div class="googleMagic">
+                    <GoogleBtn />
+                </div>
             </div>
         )
     }

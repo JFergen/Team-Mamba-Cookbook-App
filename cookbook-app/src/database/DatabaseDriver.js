@@ -34,6 +34,14 @@ class DatabaseDriver {
         });
     }
 
+    static async getSuggestedFriends(id,number) {
+        return fetch('/getSuggestedFriends/' + String(id) + '/' + String(number)).then(response =>
+            response.json().then(data => {
+                return data;
+             })
+         );
+     }
+     
     static save(userId, recipeId) {
         var saveLinker = JSON.stringify({
             'user_id': userId,
@@ -58,13 +66,31 @@ class DatabaseDriver {
         });
     }
 
-    static async getSavedArray(userId) {
-        return fetch('/checkDupe/' + String(userId)).then(response =>
+    static async getUsersSavedRecipes(userId) {
+        return fetch('/getUsersSavedRecipes/' + String(userId)).then(response =>
+            response.json().then(data => {
+                return data.saved_recipes;
+            })
+        );
+    }
+
+    static async getFollowers(userId) {
+        return fetch('/followers/' + String(userId)).then(response =>
             response.json().then(data => {
                return data;
             })
         );
     }
+
+    static async getFollowing(userId) {
+        return fetch('/following/' + String(userId)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
+
     // End Users
 
     // Recipes
@@ -144,7 +170,7 @@ class DatabaseDriver {
     static async getUserSaved(userId) {
         return fetch('/getUserSaved/' + String(userId)).then(response =>
             response.json().then(data => {
-                return data;
+                return data.saved;
             }) 
         );
     }
@@ -196,6 +222,14 @@ class DatabaseDriver {
             method: 'DELETE',
             cache: "no-cache",
         });
+    }
+
+    static async getSuggestedComments(id,number) {
+        return fetch('/getSuggestedComments/' + String(id) + '/' + String(number)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
     }
 
 
