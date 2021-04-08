@@ -15,7 +15,7 @@ class UsersTable(MongoDbTable):
             self.add_user(user)
 
     def get_user(self, user_id):
-        return super().find_one('_id', user_id)
+        return super().find_one('user_id', user_id)
 
     def add_user(self, new_user):
         new_user['_id'] = new_user['googleId']
