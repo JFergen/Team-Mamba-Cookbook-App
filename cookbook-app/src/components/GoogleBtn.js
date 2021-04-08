@@ -3,7 +3,6 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { connect } from 'react-redux';
 import { setUser } from '../store/actions/user_actions';
 import DatabaseDriver from '../database/DatabaseDriver';
-import { Redirect } from 'react-router';
 
 const CLIENT_ID = '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleusercontent.com';
 class GoogleBtn extends Component {
@@ -30,11 +29,7 @@ class GoogleBtn extends Component {
     }
     this.props.setUser(response.profileObj);  // Save user's profile in redux
     DatabaseDriver.login(response.profileObj);  // Add user to the database
-    localStorage.setItem('loggedIn', true);
-    
-    // return (
-    //   <Redirect to="/discover"/>
-    // )
+    localStorage.setItem('loggedin', 'true');
   }
  
   logout (response) {
@@ -42,18 +37,16 @@ class GoogleBtn extends Component {
       isLogined: false,
       accessToken: ''
     });
-    localStorage.setItem('loggedIn', false);
     this.props.setUser(null);
+    localStorage.setItem('loggedin', 'false');
   }
 
   handleLoginFailure (response) {
     alert('Failed to log in')
-    localStorage.setItem('loggedIn', false);
   }
 
   handleLogoutFailure (response) {
     alert('Failed to log out')
-    localStorage.setItem('loggedIn', true);
   }
 
   render() {

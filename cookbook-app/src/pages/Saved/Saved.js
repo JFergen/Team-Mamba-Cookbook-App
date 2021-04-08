@@ -3,7 +3,7 @@ import DatabaseDriver from '../../database/DatabaseDriver';
 import ReactList from 'react-list';
 import CardComponent from'../../components/card';
 import { connect } from 'react-redux';
-import GoogleBtn from '../../components/GoogleBtn';
+import { Redirect } from 'react-router-dom';
 import './Saved.css';
 
 class Saved extends Component {
@@ -18,7 +18,7 @@ class Saved extends Component {
         this.renderItem = this.renderItem.bind(this);
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
         if (this.state.user !== this.props.user) {
             this.setState({ user: this.props.user }, () => {
                 this.getRecipes();
@@ -45,13 +45,18 @@ class Saved extends Component {
 
     render() {
         return (
-            <div className="list">
-                <ReactList
-                    itemRenderer={this.renderItem}
-                    length={this.state.recipes.length}
-                    type='uniform'
-                />
-            </div> 
+            <div>
+                {this.props.user ?
+                    <div className="list">
+                        <ReactList
+                            itemRenderer={this.renderItem}
+                            length={this.state.recipes.length}
+                            type='uniform'
+                        />
+                    </div>:
+                    <Redirect to="/login"/>
+                } 
+            </div>
         )
     }
 }

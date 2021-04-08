@@ -3,6 +3,7 @@ import DatabaseDriver from '../../database/DatabaseDriver';
 import ReactList from 'react-list';
 import CardComponent from'../../components/card';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import './Discover.css';
 
 class Discover extends Component {
@@ -17,7 +18,7 @@ class Discover extends Component {
         this.renderItem = this.renderItem.bind(this);
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
         if (this.state.user !== this.props.user) {
             this.setState({ user: this.props.user }, () => {
                 this.getRecipes();
@@ -42,14 +43,20 @@ class Discover extends Component {
     }
 
     render() {
+        console.log(localStorage.getItem('loggedIn'))
         return (
-            <div className="list">
-                <ReactList
-                    itemRenderer={this.renderItem}
-                    length={this.state.recipes.length}
-                    type='uniform'
-                />
-            </div>
+            <div>
+                {this.props.user ?
+                    <div className="list">
+                        <ReactList
+                            itemRenderer={this.renderItem}
+                            length={this.state.recipes.length}
+                            type='uniform'
+                        />
+                    </div>:
+                    <Redirect to="/login"/>
+                }
+            </div>   
         )
     }
 }

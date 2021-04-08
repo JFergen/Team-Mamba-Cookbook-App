@@ -18,7 +18,7 @@ class Home extends Component {
         this.renderItem = this.renderItem.bind(this);
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
         if (this.state.user !== this.props.user) {
             this.setState({ user: this.props.user }, () => {
                 this.getRecipes();

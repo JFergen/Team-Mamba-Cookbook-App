@@ -5,7 +5,6 @@ import Create from '../pages/Create/Create';
 import Saved from '../pages/Saved/Saved';
 import Profile from '../pages/Profile/Profile';
 import Home from '../pages/Home/Home';
-import Login from '../pages/Login/Login';
 
 function AllRoutes(){
         /* all the route paths go here. */
@@ -16,7 +15,6 @@ function AllRoutes(){
                         <Route exact path="/create" component={Create}/>
                         <Route exact path="/saved" component={Saved}/>
                         <Route exact path="/profile" component={Profile}/>
-                        <Route exact path="/login" component={Login}/>
                 </div>
        )
 }
