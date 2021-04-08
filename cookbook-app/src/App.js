@@ -39,8 +39,9 @@ class App extends React.Component {
               <NavDropdown title={this.props.user.name}>
               <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
               <NavDropdown.Divider/>
-              <NavDropdown.Item><GoogleBtn/></NavDropdown.Item>
-              </NavDropdown>: <GoogleBtn/>
+              <NavDropdown.Item><GoogleBtn /></NavDropdown.Item>
+              </NavDropdown>:
+              <GoogleBtn/>
             }
           </Navbar.Collapse>  
         </Navbar>

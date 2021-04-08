@@ -35,7 +35,7 @@ class Saved extends Component {
             <div key={key}>
                 <CardComponent 
                     recipe={this.state.recipes[index]}
-                    user={this.props.user}
+                    user={this.state.user}
                 />                 
             </div>
 
