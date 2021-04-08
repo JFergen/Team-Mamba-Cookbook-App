@@ -21,9 +21,6 @@ class RecipesTable(MongoDbTable):
     def get_recipes_from_tag(self, tag):
         return super().get_all('tags', tag)
 
-    def get_recipe(self, recipe_id):
-        return super().find_one('recipe_id', recipe_id)
-    
     def compute_rating_avg(self, ratings):
         log(str(ratings))
         return sum(ratings) / len(ratings)
