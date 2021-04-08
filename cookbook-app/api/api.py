@@ -127,11 +127,10 @@ def get_users_recipes(user_id):
 @app.route('/getUserSaved/<user_id>', methods=['GET'])
 def get_user_saved(user_id):
     user = db_connection.USERS_TABLE.get_user(user_id)
-    global saved
     saved = []
     for i in list(user['saved_recipes']):
         saved.append(db_connection.RECIPES_TABLE.get_recipe(i))
-    return saved
+    return {'saved': saved}
 
 
 @app.route('/getNRandomRecipes/<id>/<number>', methods=['GET'])

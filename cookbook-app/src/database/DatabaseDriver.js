@@ -170,7 +170,7 @@ class DatabaseDriver {
     static async getUserSaved(userId) {
         return fetch('/getUserSaved/' + String(userId)).then(response =>
             response.json().then(data => {
-                return data;
+                return data.saved;
             }) 
         );
     }
