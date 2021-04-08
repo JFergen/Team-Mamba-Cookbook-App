@@ -3,6 +3,7 @@ import DatabaseDriver from '../../database/DatabaseDriver';
 import ReactList from 'react-list';
 import CardComponent from'../../components/card';
 import { connect } from 'react-redux';
+import GoogleBtn from '../../components/GoogleBtn';
 import './Discover.css';
 
 class Discover extends Component {
@@ -44,12 +45,17 @@ class Discover extends Component {
 
     render() {
         return (
+            <div>
             <div className="list">
                 <ReactList
                     itemRenderer={this.renderItem}
                     length={this.state.recipes.length}
                     type='uniform'
                 />
+            </div>
+            <div class="googleMagic">
+                <GoogleBtn />
+            </div>
             </div>
         )
     }

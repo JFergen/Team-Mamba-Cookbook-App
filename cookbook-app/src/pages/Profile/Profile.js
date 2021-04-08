@@ -52,12 +52,12 @@ class Profile extends Component {
 
             // need to fix these functions that return the list of follows.
     async getFollowing() {
-        const followingData = 0; // await DatabaseDriver.getFollowing(this.state.user.googleId);    // Gets recipes from a user
+        const followingData = await DatabaseDriver.getFollowing(this.state.user.googleId);    // Gets recipes from a user
         this.setState({ following: followingData })
     }
 
     async getFollowers() {
-        const followerData = 0; // await DatabaseDriver.getFollowers(this.state.user.googleId);    // Gets recipes from a user
+        const followerData = await DatabaseDriver.getFollowers(this.state.user.googleId);    // Gets recipes from a user
         this.setState({ followers: followerData })
     }
     
@@ -95,7 +95,7 @@ class Profile extends Component {
     render() {
 
         var myBigGreenDialog = {
-            backgroundColor: '#00897B',
+            backgroundColor: '#F3F3F3',
             color: '#ffffff',
             width: '50%',
             height: '600px',
@@ -113,7 +113,7 @@ class Profile extends Component {
             cursor: pointer;
         
             ${props => props.follow && css`
-            background: white;
+            background: #F3F3F3;
             color: black;
             padding: .25em 90px;
             `}
@@ -165,42 +165,18 @@ class Profile extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="list">
+                <div style={{display:"flex"}} className="list">
                     <ReactList
                         itemRenderer={this.renderItem}
                         length={this.state.recipes.length}
                         type='uniform'
                     />
                 </div>
-                <div className="googleFake">
-                </div>
             </div>
         </div>
         )
     }
 }
-
-/*return (
-      <div>
-        <section>
-          <h1>React SkyLight</h1>
-          <button onClick={() => this.simpleDialog.show()}>Open Modal</button>
-        </section>
-        <SkyLight hideOnOverlayClicked ref={ref => this.simpleDialog = ref} title="Hi, I'm a simple modal">
-          Hello, I dont have any callback.
-        </SkyLight>
-      </div>
-    )*/
-
-
-
-
-
-
-
-
-
-
 
 const mapStateToProps = (state) => ({
     user: state.usrReducer.user
