@@ -15,13 +15,13 @@ Install guide for Windows:
       - pip install pymongo
       - pip install flask-cors
       - pip install dnspython
-  
+
 How to run on Windows:
   1. Open a terminal and cd into cookbook-app
       - run this command: yarn start-api
   2. Open a second terminal and cd into cookbook-app/api
       - run these commands: ./venv/Scripts/activate & yarn start
-                             
+
 Node install in /Team-Mamba-Cookbook-App/edit/main/cookbook-app/:
 
 npm install react-scripts --save
@@ -59,3 +59,7 @@ npm install react-awesome-stars-rating
 npm install react-file-base64
 
 npm install multiselect-react-dropdown
+
+npm install --save react-skylight
+
+npm install --save styled-components
