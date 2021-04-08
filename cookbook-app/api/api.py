@@ -130,9 +130,9 @@ def get_user_saved(user_id):
     saved = []
     for i in user['saved_recipes']:
         recipe = db_connection.RECIPES_TABLE.find_one('_id', ObjectId(i))
-        recipe['_id'] = str(recipe['_id'])
+        recipe['_id'] = {'$oid': str(recipe['_id']) }
         saved.append(recipe)
-        
+
     return {'saved': saved}
 
 
