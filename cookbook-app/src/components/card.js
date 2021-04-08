@@ -114,7 +114,7 @@ class CardComponent extends Component {
                             </div>
                             <div class='two font-weight-bold'>Info
                                 <div class="box font-weight-normal">
-                                    Time Taken: {this.props.recipe.time}
+                                    <b>Time Taken:</b> {this.props.recipe.time}
                                 </div>
                             </div>
                             <div class='three font-weight-bold'>Directions
