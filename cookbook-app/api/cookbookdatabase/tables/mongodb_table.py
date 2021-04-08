@@ -29,6 +29,9 @@ class MongoDbTable:
     def find(self, field, value):
         return self._table.find({field: value})
 
+    def find_one(self, field, value):
+        return self._table.find_one({field: value})
+
     def get_all(self, field, value):
         docs = list(self._table.find({field: value}))
         return dumps(docs)
@@ -51,3 +54,7 @@ class MongoDbTable:
 
     def delete_from_set(self, id, field, value_to_delete):
         self._table.update({ '_id': id }, { '$pull': { field:  value_to_delete} })
+
+    def get_field(self, id, field):
+        doc = self._table.find_one({'_id': id})
+        return doc[field] if field in doc.keys() else []

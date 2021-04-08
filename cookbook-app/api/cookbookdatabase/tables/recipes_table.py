@@ -15,21 +15,29 @@ class RecipesTable(MongoDbTable):
         now_ct = ct.normalize(ct.localize(datetime.now()))
         recipe['date_added'] = '{}'.format(now_ct.strftime('%Y-%m-%d %I:%M %p'))
         insert_result = super().insert(recipe)
-        log('Recipe added to the database: ' + str(recipe))
+        #log('Recipe added to the database: ' + str(recipe))
         db_connection.USERS_TABLE.add_recipe( recipe['user_id'], insert_result.inserted_id)
 
     def get_recipes_from_tag(self, tag):
         return super().get_all('tags', tag)
 
+    def compute_rating_avg(self, ratings):
+        log(str(ratings))
+        return sum(ratings) / len(ratings)
+
     def update_recipe(self, newRecipeData):
         recipe_id = ObjectId(newRecipeData['recipe_id'])
-        del recipe['_id']
+        del newRecipeData['recipe_id']
 
         if ('ratings' in newRecipeData.keys()):
-           avg_rating = compute_rating_avg(newRecipeData['ratings'])
-           newRecipeData['rating'] = avg_rating
+            ratings = newRecipeData['ratings']['rating']
+            ratings = sum(ratings) // len(ratings) 
+            log(str(ratings))
+            # avg_rating = RecipesTable.compute_rating_avg(newRecipeData['ratings']['rating'])
+            # newRecipeData['rating'] = avg_rating
+            newRecipeData['rating'] = ratings
 
-        super().update(recipe_id, recipe)
+        super().update(recipe_id, newRecipeData)
 
     def delete_recipe(self, user_id, recipe_id):
         super().delete(recipe_id)

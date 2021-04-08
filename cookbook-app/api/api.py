@@ -41,15 +41,15 @@ def delete_comment(comment_id):
 
     return 'ok', 200
 
-@app.route('/follow/<user_id>', methods=['POST'])
-def follow():
-    followLinker = request.get_json()
+@app.route('/follow/<followLinker>', methods=['POST'])
+def follow(followLinker):
+    followLinker = json.loads(followLinker)
     db_connection.USERS_TABLE.follow(followLinker['follower'],followLinker['leader'])
     return 'ok', 200
 
-@app.route('/unfollow/<user_id>', methods=['DELETE'])
-def unfollow():
-    followLinker = request.get_json()
+@app.route('/unfollow/<followLinker>', methods=['DELETE'])
+def unfollow(followLinker):
+    followLinker = json.loads(followLinker)
     db_connection.USERS_TABLE.unfollow(followLinker['follower'],followLinker['leader'])
     return 'ok', 200
 
@@ -61,6 +61,30 @@ def get_suggested_friends(id,number):
 def get_suggested_comments(id,number):
   return db_connection.COMMENTS_TABLE.get_suggested_comments(id, int(number))
 
+@app.route('/save/<saveLinker>', methods=['POST'])
+def save(saveLinker):
+    saveLinker = json.loads(saveLinker)
+    db_connection.USERS_TABLE.save_recipe(saveLinker['user_id'],saveLinker['recipe_id'])
+    return 'ok', 200
+
+@app.route('/unsave/<saveLinker>', methods=['DELETE'])
+def unsave(saveLinker):
+    saveLinker = json.loads(saveLinker)
+    db_connection.USERS_TABLE.remove_save_recipe(saveLinker['user_id'],saveLinker['recipe_id'])
+    return 'ok', 200    
+
+@app.route('/getUsersSavedRecipes/<user_id>', methods=['GET'])
+def get_users_saved_recipes(user_id):
+   return db_connection.USERS_TABLE.get_users_saved_recipes(user_id)
+
+@app.route('/followers/<user_id>', methods=['GET'])
+def getFollowers(user_id): #People following this user
+    return db_connection.USERS_TABLE.get_user_followers(user_id)
+
+@app.route('/following/<user_id>', methods=['GET'])
+def getFollowing(user_id): #People this user is following
+    return db_connection.USERS_TABLE.get_user_following(user_id)    
+    
 # End Users Table
 
 
@@ -100,6 +124,15 @@ def get_recipe_comments(recipe_id):
 def get_users_recipes(user_id):
   return db_connection.RECIPES_TABLE.get_users_recipes(user_id)
 
+@app.route('/getUserSaved/<user_id>', methods=['GET'])
+def get_user_saved(user_id):
+    user = db_connection.USERS_TABLE.get_user(user_id)
+    global saved
+    saved = []
+    for i in list(user['saved_recipes']):
+        saved.append(db_connection.RECIPES_TABLE.get_recipe(i))
+    return saved
+
 
 @app.route('/getNRandomRecipes/<id>/<number>', methods=['GET'])
 def get_n_random_recipes(id,number):
@@ -108,6 +141,8 @@ def get_n_random_recipes(id,number):
 @app.route('/getRecipesForHomepage/<user_id>', methods=['GET'])
 def getRecipesForHomepage(user_id):
     user = db_connection.USERS_TABLE.get_user(user_id)
+    global frontpage
+    frontpage = []
     for i in list(user['followingList']):
         frontpage.append(db_connection.RECIPES_TABLE.get_users_recipes(i))
     return frontpage
