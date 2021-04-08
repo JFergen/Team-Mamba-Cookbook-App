@@ -58,10 +58,10 @@ class DatabaseDriver {
         });
     }
 
-    static async getSavedArray(userId) {
-        return fetch('/checkDupe/' + String(userId)).then(response =>
+    static async getUsersSavedRecipes(userId) {
+        return fetch('/getUsersSavedRecipes/' + String(userId)).then(response =>
             response.json().then(data => {
-               return data;
+                return data.saved_recipes;
             })
         );
     }
@@ -143,8 +143,8 @@ class DatabaseDriver {
         );
     }
 
-    static async getNRandomRecipes(number) {
-        return fetch('/getNRandomRecipes/' + String(number)).then(response =>
+    static async getNRandomRecipes(id,number) {
+        return fetch('/getNRandomRecipes/' + String(id) + '/' + String(number)).then(response =>
             response.json().then(data => {
                return data;
             })

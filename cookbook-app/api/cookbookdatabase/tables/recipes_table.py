@@ -12,20 +12,29 @@ class RecipesTable(MongoDbTable):
     def add_recipe(self, recipe):
         recipe['date_added'] = datetime.now().strftime('%B %d, %Y %H:%M')
         insert_result = super().insert(recipe)
-        log('Recipe added to the database: ' + str(recipe))
+        #log('Recipe added to the database: ' + str(recipe))
         db_connection.USERS_TABLE.add_recipe( recipe['user_id'], insert_result.inserted_id)
 
     def get_recipes_from_tag(self, tag):
         return super().get_all('tags', tag)
 
-    def get_recipe(self, recipe_id):
-        return super().find('recipe_id', recipe_id)
+    def compute_rating_avg(self, ratings):
+        log(str(ratings))
+        return sum(ratings) / len(ratings)
 
     def update_recipe(self, newRecipeData):
         recipe_id = ObjectId(newRecipeData['recipe_id'])
-        del recipe['_id']
+        del newRecipeData['recipe_id']
 
-        super().update(recipe_id, recipe)
+        if ('ratings' in newRecipeData.keys()):
+            ratings = newRecipeData['ratings']['rating']
+            ratings = sum(ratings) // len(ratings) 
+            log(str(ratings))
+            # avg_rating = RecipesTable.compute_rating_avg(newRecipeData['ratings']['rating'])
+            # newRecipeData['rating'] = avg_rating
+            newRecipeData['rating'] = ratings
+
+        super().update(recipe_id, newRecipeData)
 
     def delete_recipe(self, user_id, recipe_id):
         super().delete(recipe_id)
@@ -38,6 +47,9 @@ class RecipesTable(MongoDbTable):
     def get_users_recipes(self, user_id):
         return super().get_all('user_id', user_id)
 
-    def get_n_random_recipes(self, number):
-        return super().get_random_docs(number)
+    def get_n_random_recipes(self, id, number):
+        return super().get_random_docs(id, number)
+
+    def compute_rating_avg(self, ratings):
+        return sum(ratings) / len(ratings)
 
