@@ -49,7 +49,6 @@ class App extends React.Component {
             }
           </Navbar.Collapse>  
         </Navbar>
-        <Route exact path="/create" component={Create}/>
         <AllRoutes />
       </React.Fragment>
       </Switch>
