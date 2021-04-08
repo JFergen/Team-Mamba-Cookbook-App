@@ -30,8 +30,8 @@ function AllRoutes(){
                     <Route exact path="/" component={Home} />
                     <Route exact path="/discover" component={Discover}/>
                     <Route exact path="/create" component={Create}/>
-                    <PrivateRoute exact path="/saved" component={Saved}/>
-                    <PrivateRoute path="/profile" component={Profile} />
+                    <Route exact path="/saved" component={Saved}/>
+                    <Route path="/profile" component={Profile} />
                     
             </div>
        )
