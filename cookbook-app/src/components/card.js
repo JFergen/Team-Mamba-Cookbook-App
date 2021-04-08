@@ -50,8 +50,6 @@ class CardComponent extends Component {
                 }
             })
         }
-
-        
     }
 
     saveRecipe() {
@@ -116,7 +114,7 @@ class CardComponent extends Component {
                             </div>
                             <div class='two font-weight-bold'>Info
                                 <div class="box font-weight-normal">
-                                    {this.props.recipe.time}
+                                    Time Taken: {this.props.recipe.time}
                                 </div>
                             </div>
                             <div class='three font-weight-bold'>Directions
