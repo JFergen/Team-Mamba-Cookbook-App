@@ -29,6 +29,7 @@ class Home extends Component {
     async getRecipes() {
         const data = await DatabaseDriver.getUsersRecipes(this.state.user.googleId);    // Gets recipes from a user
         this.setState({ recipes: data })
+        console.log(this.state.recipes)
     }
 
     renderItem(index, key) {
@@ -36,7 +37,7 @@ class Home extends Component {
             <div key={key}>
                 <CardComponent 
                     recipe={this.state.recipes[index]}
-                    user={this.props.user}
+                    user={this.state.user}
                 />                 
             </div>
         )

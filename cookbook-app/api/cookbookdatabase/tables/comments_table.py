@@ -25,3 +25,6 @@ class CommentsTable(MongoDbTable):
         comment_id = ObjectId(comment_id)
         super().delete(comment_id)
         log('Deleted comment from database: ' + str(comment_id))
+
+    def get_suggested_comments(self, id, number):
+        return super().get_random_docs(id, number)

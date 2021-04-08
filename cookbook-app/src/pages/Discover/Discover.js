@@ -26,7 +26,7 @@ class Discover extends Component {
     }
 
     async getRecipes() {
-        const data = await DatabaseDriver.getNRandomRecipes(10);    // Gets recipes from a user
+        const data = await DatabaseDriver.getNRandomRecipes(this.state.user.googleId, 10);    // Gets recipes from a user
         this.setState({ recipes: data })
     }
 

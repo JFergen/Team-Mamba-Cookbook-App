@@ -3,6 +3,7 @@ import DatabaseDriver from '../../database/DatabaseDriver';
 import ReactList from 'react-list';
 import CardComponent from'../../components/card';
 import { connect } from 'react-redux';
+import GoogleBtn from '../../components/GoogleBtn';
 import './Saved.css';
 
 class Saved extends Component {
@@ -26,8 +27,9 @@ class Saved extends Component {
     }
 
     async getRecipes() {
-        const data = await DatabaseDriver.getUsersRecipes(this.state.user.googleId);    // Gets recipes from a user
+        const data = await DatabaseDriver.getUserSaved(this.state.user.googleId);    // Gets recipes from a user
         this.setState({ recipes: data })
+        console.log(this.state.recipes)
     }
 
     renderItem(index, key) {
@@ -38,7 +40,6 @@ class Saved extends Component {
                     user={this.state.user}
                 />                 
             </div>
-
         )
     }
 
@@ -50,7 +51,7 @@ class Saved extends Component {
                     length={this.state.recipes.length}
                     type='uniform'
                 />
-            </div>
+            </div> 
         )
     }
 }

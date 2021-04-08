@@ -34,6 +34,14 @@ class DatabaseDriver {
         });
     }
 
+    static async getSuggestedFriends(id,number) {
+        return fetch('/getSuggestedFriends/' + String(id) + '/' + String(number)).then(response =>
+            response.json().then(data => {
+                return data;
+             })
+         );
+     }
+     
     static save(userId, recipeId) {
         var saveLinker = JSON.stringify({
             'user_id': userId,
@@ -162,7 +170,7 @@ class DatabaseDriver {
     static async getUserSaved(userId) {
         return fetch('/getUserSaved/' + String(userId)).then(response =>
             response.json().then(data => {
-                return data;
+                return data.saved;
             }) 
         );
     }
@@ -214,6 +222,14 @@ class DatabaseDriver {
             method: 'DELETE',
             cache: "no-cache",
         });
+    }
+
+    static async getSuggestedComments(id,number) {
+        return fetch('/getSuggestedComments/' + String(id) + '/' + String(number)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
     }
 
 
