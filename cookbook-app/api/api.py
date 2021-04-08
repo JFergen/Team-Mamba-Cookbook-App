@@ -128,11 +128,11 @@ def get_users_recipes(user_id):
 def get_user_saved(user_id):
     user = db_connection.USERS_TABLE.get_user(user_id)
     saved = []
-    log(str(user['saved_recipes']))
     for i in user['saved_recipes']:
         recipe = db_connection.RECIPES_TABLE.find_one('_id', ObjectId(i))
         recipe['_id'] = str(recipe['_id'])
         saved.append(recipe)
+        
     return {'saved': saved}
 
 
