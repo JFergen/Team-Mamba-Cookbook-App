@@ -167,6 +167,14 @@ class DatabaseDriver {
         });
     }
 
+    static async getSuggestedComments(id,number) {
+        return fetch('/getSuggestedComments/' + String(id) + '/' + String(number)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
 
     
     // End Comments
