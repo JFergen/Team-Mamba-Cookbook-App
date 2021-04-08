@@ -27,9 +27,8 @@ class Saved extends Component {
     }
 
     async getRecipes() {
-        const data = await DatabaseDriver.getUserSaved(this.state.user.googleId);    // Gets recipes from a user
-        const dataPostJson = JSON.parse(data) 
-        this.setState({ recipes: dataPostJson })
+        const data = await DatabaseDriver.getUsersRecipes(this.state.user.googleId);    // Gets recipes from a user
+        this.setState({ recipes: data })
     }
 
     renderItem(index, key) {
