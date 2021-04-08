@@ -45,7 +45,7 @@ class Home extends Component {
 
     render() {
         return (
-            <div className="center">
+            <div>
                 <div className="list">
                     <ReactList
                         itemRenderer={this.renderItem}
