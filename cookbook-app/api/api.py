@@ -53,6 +53,14 @@ def unfollow(followLinker):
     db_connection.USERS_TABLE.unfollow(followLinker['follower'],followLinker['leader'])
     return 'ok', 200
 
+@app.route('/getSuggestedFriends/<id>/<number>', methods=['GET'])
+def get_suggested_friends(id,number):
+  return db_connection.USERS_TABLE.get_suggested_friends(id, int(number))
+
+@app.route('/getSuggestedComments/<id>/<number>', methods=['GET'])
+def get_suggested_comments(id,number):
+  return db_connection.COMMENTS_TABLE.get_suggested_comments(id, int(number))
+
 @app.route('/save/<saveLinker>', methods=['POST'])
 def save(saveLinker):
     saveLinker = json.loads(saveLinker)
