@@ -1,5 +1,7 @@
 import React from 'react';
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, useHistory } from "react-router-dom";
+import { Router } from "react-router";
+
 import Discover from '../pages/Discover/Discover';
 import Create from '../pages/Create/Create';
 import Saved from '../pages/Saved/Saved';
@@ -19,7 +21,6 @@ function PrivateRoute ({component: Component, ...rest}) {
           )
       }
 
-
 function AllRoutes(){
         /* all the route paths go here. */
         //console.log('loggedin status in AllRoutes() function:', localStorage.getItem('loggedin'))
@@ -30,7 +31,8 @@ function AllRoutes(){
                     <Route exact path="/discover" component={Discover}/>
                     <Route exact path="/create" component={Create}/>
                     <PrivateRoute exact path="/saved" component={Saved}/>
-                    <PrivateRoute exact path="/profile" component={Profile}/>
+                    <PrivateRoute path="/profile" component={Profile} />
+                    
             </div>
        )
 }

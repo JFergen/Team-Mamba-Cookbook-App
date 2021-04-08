@@ -4,6 +4,11 @@ import ReactList from 'react-list';
 import CardComponent from'../../components/card';
 import { connect } from 'react-redux';
 import './Profile.css';
+import { Button } from 'react-bootstrap';
+import SkyLight from 'react-skylight';
+import styled, { css } from "styled-components";
+import GoogleBtn from '../../components/GoogleBtn';
+import { findAllInRenderedTree } from 'react-dom/test-utils';
 
 class Profile extends Component {
 
@@ -11,16 +16,28 @@ class Profile extends Component {
         super();
         this.state = {
             recipes: [],
-            user: null
+            user: null,
+            following: [],
+            followers: []
         }
     
         this.getRecipes = this.getRecipes.bind(this);
+        this.getFollowing = this.getFollowing.bind(this);
+        this.getFollowers = this.getFollowers.bind(this);
+
         this.renderItem = this.renderItem.bind(this);
+        this.renderFollowers = this.renderFollowers.bind(this);
+        this.renderFollowing = this.renderFollowing.bind(this);
+
         
     }
     componentDidUpdate() {
         if (this.state.user !== this.props.user) {
             this.setState({ user: this.props.user }, () => {
+                this.getFollowing();
+            }, () => {
+                this.getFollowers();
+            }, () => {
                 this.getRecipes();
             }) 
         }
@@ -32,57 +49,158 @@ class Profile extends Component {
         this.setState({ recipes: data })
     }
 
+
+            // need to fix these functions that return the list of follows.
+    async getFollowing() {
+        const followingData = 0; // await DatabaseDriver.getFollowing(this.state.user.googleId);    // Gets recipes from a user
+        this.setState({ following: followingData })
+    }
+
+    async getFollowers() {
+        const followerData = 0; // await DatabaseDriver.getFollowers(this.state.user.googleId);    // Gets recipes from a user
+        this.setState({ followers: followerData })
+    }
+    
+
+
+
+
+
+
     renderItem(index, key) {
         return (
             <div key={key}>
                 <CardComponent 
                     recipe={this.state.recipes[index]}
-                    user={this.props.user}
+                    user={this.props.givenName}
                 />                 
             </div>
 
         )
     }
+    renderFollowing(index, key){
+        return <div key={key}>{this.state.following[index].givenName}</div>
+    }
 
+    renderFollowers(index, key){
+        return <div key={key}>{this.state.followers[index].givenName}</div>
+    }
+
+    //"https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
+
+    followUser() {
+        return;
+    }
 
     render() {
+
+        var myBigGreenDialog = {
+            backgroundColor: '#00897B',
+            color: '#ffffff',
+            width: '50%',
+            height: '600px',
+            marginTop: '-300px',
+            marginLeft: '-25%',
+          };
+
+        const Button = styled.button`
+            background-color: black;
+            color: white;
+            font-size: 20px;
+            padding: .25em lem;
+            border 2px solid white;
+            margin: 10px 20px;
+            cursor: pointer;
+        
+            ${props => props.follow && css`
+            background: white;
+            color: black;
+            padding: .25em 90px;
+            `}
+        `;
+
         return (
         <div>
             <div>
                 <div style={{
                         display:"flex",
                         justifyContent:"space-around",
-                        margin:"25px 300px"
+                        margin:"25px 500px"
                     }}>
                     <div>
                         <img style={{width: "200px", height:"200px", borderRadius:"110px"}}
-                        src="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
-                        />
+                        src= {this.props.user.imageUrl}/>
+                                                
                     </div>
                     <div>
-                        <h1>this.props.user.name</h1>
-                        <div style={{display:"flex", justifyContent:"space-between", width:"90%"}}>
-                            <h5>Following</h5>
-                            <h5>Followers</h5>
+                        <div>
+                            <h1>{this.props.user.name}</h1>
+                        </div>
+                        
+                        <div style={{display:"flex", justifyContent:"space-between", width:"200%"}}>
+                            <section>
+                            <Button onClick={() => this.following.show()}>Following</Button>
+                            <Button onClick={() => this.followers.show()}>Followers</Button>
+                            </section>
+                            <SkyLight dialogStyles={myBigGreenDialog} hideOnOverlayClicked ref={ref => this.following = ref} title="Following">
+                                <ReactList 
+                                    itemRenderer={this.renderFollowing}
+                                    length={this.state.following.length}
+                                    type='uniform'
+                                />
+                            </SkyLight>
+                            <SkyLight dialogStyles={myBigGreenDialog} hideOnOverlayClicked ref={ref => this.followers = ref} title="Followers">
+                                <ReactList 
+                                    itemRenderer={this.renderFollowers}
+                                    length={this.state.followers.length}
+                                    type='uniform'
+                                />
+                            </SkyLight>
+                        </div>
+                        <div style={{display:"flex", justifyContent:"space-between", width:"300%"}}>
+                            <section>
+                                {/*  add functionality that switches based on if they are followed. */}
+                                <Button follow onClick={this.followUser()}>Follow</Button>
+                            </section>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div>
                 <div className="list">
-                    <h1>{this.props.user.googleId}</h1>
                     <ReactList
                         itemRenderer={this.renderItem}
-                        length='6'
+                        length={this.state.recipes.length}
                         type='uniform'
                     />
+                </div>
+                <div className="googleFake">
                 </div>
             </div>
         </div>
         )
     }
 }
+
+/*return (
+      <div>
+        <section>
+          <h1>React SkyLight</h1>
+          <button onClick={() => this.simpleDialog.show()}>Open Modal</button>
+        </section>
+        <SkyLight hideOnOverlayClicked ref={ref => this.simpleDialog = ref} title="Hi, I'm a simple modal">
+          Hello, I dont have any callback.
+        </SkyLight>
+      </div>
+    )*/
+
+
+
+
+
+
+
+
+
+
 
 const mapStateToProps = (state) => ({
     user: state.usrReducer.user

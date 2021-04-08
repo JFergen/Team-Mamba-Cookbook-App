@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { setUser } from '../../store/actions/user_actions';
 import { Redirect } from "react-router-dom";
 import DatabaseDriver from '../../database/DatabaseDriver'
+import GoogleBtn from '../../components/GoogleBtn'
 
 
 const CLIENT_ID = '503429243436-tmfnhmholf6frccbc0f41a3vp0rpo7hq.apps.googleusercontent.com';
@@ -70,6 +71,14 @@ class Login extends Component {
                 <h1>Login through Google below!</h1>
                 <div>
 
+                    <GoogleBtn />
+                </div>
+            </div>
+            )
+        }
+    }
+    /*<div>
+
                     <GoogleLogin
                         clientId={CLIENT_ID}
                         buttonText="Login"
@@ -80,11 +89,7 @@ class Login extends Component {
                         style={{ marginTop: '100px' }}
                         isSignedIn={true}
                     />
-                </div>
-            </div>
-            )
-        }
-    }
+                </div> */
 
     render() { //just calls get content
         return (
