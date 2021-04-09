@@ -5,7 +5,19 @@ import FileBase64 from 'react-file-base64';
 import DatabaseDriver from '../../database/DatabaseDriver';
 import { Multiselect } from 'multiselect-react-dropdown';
 
+const tags = [
+    {value: 'pizza'},
+    {value: 'pasta'},
+    {value: 'soup'},
+    {value: 'chicken'},
+    {value: 'thai'},
+    {value: 'mongolian'},
+    {value: 'indian'},
+    {value: 'spicy'},
+    {value: 'sour'},
+];
 class Create extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -14,19 +26,8 @@ class Create extends Component {
             ingridients:'',
             directions:'',
             time:'',
-            image: null,   
-            tags : [
-                {value: 'pizza'},
-                {value: 'pasta'},
-                {value: 'soup'},
-                {value: 'chicken'},
-                {value: 'thai'},
-                {value: 'mongolian'},
-                {value: 'indian'},
-                {value: 'spicy'},
-                {value: 'sour'},
-            ],
-            selectedValue: ''
+            image: null,
+            selectedOption: null,
         }
     }
 
@@ -39,11 +40,25 @@ class Create extends Component {
     handleChange = ({ target }) => {
         const { name, value } = target;
         this.setState({ [name]: value });
-    };
+    }
 
+    onSelect = ({ target }) => {
+        const { name, value } = target.join();
+        this.setState({ [name]: value });
+    }
+    // selectedOption => {
+    //     this.setState({ selectedOption });
+    //     console.log(`Option selected:`, selectedOption);
+    //   };
+
+    // onSelect(selectedItem) {
+    //     const options = selectedItem.toString();
+    //     this.setState({ selectedOption: options})
+    // }
     render() {    
-        const {tags} = this.state;
-        
+        //const {tags} = this.state;
+        //const { selectedOption } = this.state;
+
         return (
             <div className="d-flex justify-content-center">
                 <Form className="m-3 text-center card bg-dark p-3">
@@ -78,14 +93,15 @@ class Create extends Component {
                     <Form.Group>
                         <div class="text-dark bg-light" style={{width: '25em'}}>
                             <Multiselect
-                                name="tags"
+                                name="selectedOption"
                                 selectionLimit ='3'
                                 placeholder="Select upto 3 tags"
-                                value={this.state.tags}
+                                //value={selectedOption}
                                 displayValue="value" // Property name to display in the dropdown options
                                 options={tags} // Options to display in the dropdown
-                                //selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
-                                onSelect={this.handleChange.bind(this)} // Function will trigger on select event
+                                selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
+                                onSelect={this.onSelect} // Function will trigger on select event
+                                //onSelect={this.handleChange}
                             />
                         </div>
                     </Form.Group>
@@ -104,7 +120,7 @@ class Create extends Component {
                             'ingredients': this.state.ingridients,
                             'directions': this.state.directions,
                             'time': this.state.time,
-                            'tags': this.state.tags,
+                            'tags': this.state.selectedOption,
                             'author': this.props.user.name,
                             'image': this.state.image
                         })}}}
