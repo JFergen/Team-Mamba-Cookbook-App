@@ -1,4 +1,10 @@
 # Team-Mamba-Cookbook-App
+
+
+***** Most of our individual efforts are on our own respective branches ********
+***** Occasionaly we commit to other branches if we're helping one another *****
+
+
 Install guide for Windows:
   1. install node
   2. install yarn
