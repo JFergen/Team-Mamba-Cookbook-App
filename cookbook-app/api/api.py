@@ -149,7 +149,7 @@ def getRecipesForHomepage(user_id):
         
         for j in FollowedUser['recipes'] #Then get all of the user recipes
             recipe = db_connection.RECIPES_TABLE.find_one('_id', ObjectId(j))
-            recipe['_id'] = str(recipe['_id'])
+           recipe['_id'] = {'$oid': str(recipe['_id']) }
             frontpage.append(recipe)
 
 
