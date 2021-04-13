@@ -152,7 +152,8 @@ def getRecipesForHomepage(user_id):
             recipe['_id'] = {'$oid': str(recipe['_id']) }
             frontpage.append(recipe)
 
-
+    # frontpage.sort(key = ['date_added']) #This ideally would sort the recipes based on when they were added
+    #I can't figure it out though
     return {'frontpage': frontpage}
 
 
