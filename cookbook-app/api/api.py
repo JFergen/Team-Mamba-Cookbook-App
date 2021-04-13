@@ -135,8 +135,7 @@ def getRecipesForHomepage(user_id):
     user = db_connection.USERS_TABLE.get_user(user_id)
     frontpage = []
     for i in user['followingList']: 
-        frontpage.append(db_connection.RECIPES_TABLE.get_users_recipes(i)) #First get the user
-        FollowedUser = db_connection.USERS_TABLE.find_one('_id', ObjectId(i))
+        FollowedUser = db_connection.USERS_TABLE.find_one('_id', ObjectId(i)) #First get the user
         
         for j in FollowedUser['recipes'] #Then get all of the user recipes
             recipe = db_connection.RECIPES_TABLE.find_one('_id', ObjectId(j))
