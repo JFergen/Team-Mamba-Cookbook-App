@@ -133,11 +133,18 @@ def get_n_random_recipes(number):
 @app.route('/getRecipesForHomepage/<user_id>', methods=['GET'])
 def getRecipesForHomepage(user_id):
     user = db_connection.USERS_TABLE.get_user(user_id)
-    global frontpage
     frontpage = []
-    for i in list(user['followingList']):
-        frontpage.append(db_connection.RECIPES_TABLE.get_users_recipes(i))
-    return frontpage
+    for i in user['followingList']: 
+        frontpage.append(db_connection.RECIPES_TABLE.get_users_recipes(i)) #First get the user
+        FollowedUser = db_connection.USERS_TABLE.find_one('_id', ObjectId(i))
+        
+        for j in FollowedUser['recipes'] #Then get all of the user recipes
+            recipe = db_connection.RECIPES_TABLE.find_one('_id', ObjectId(j))
+            recipe['_id'] = str(recipe['_id'])
+            frontpage.append(recipe)
+
+
+    return {'frontpage': frontpage}
 
 
 @app.route('/deleteRecipe/<recipe>', methods=['DELETE'])
