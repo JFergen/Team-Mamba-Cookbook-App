@@ -8,6 +8,7 @@ import { Button } from 'react-bootstrap';
 import SkyLight from 'react-skylight';
 import styled, { css } from "styled-components";
 import GoogleBtn from '../../components/GoogleBtn';
+import { Redirect } from 'react-router-dom';
 import { findAllInRenderedTree } from 'react-dom/test-utils';
 
 class Profile extends Component {
@@ -147,61 +148,66 @@ class Profile extends Component {
         `;
 
         return (
-        <div>
             <div>
-                <div style={{
-                        display:"flex",
-                        justifyContent:"space-around",
-                        margin:"25px 500px"
-                    }}>
-                    <div>
-                        <img style={{width: "200px", height:"200px", borderRadius:"110px"}}
-                        src= {this.props.user.imageUrl}/>
-                                                
-                    </div>
+                {this.props.user ?
                     <div>
                         <div>
-                            <h1>{this.props.user.name}</h1>
-                        </div>
-                        
-                        <div style={{display:"flex", justifyContent:"space-between", width:"200%"}}>
-                            <section>
-                            <Button onClick={() => this.following.show()}>Following</Button>
-                            <Button onClick={() => this.followers.show()}>Followers</Button>
-                            </section>
-                            <SkyLight dialogStyles={myBigGreenDialog} hideOnOverlayClicked ref={ref => this.following = ref} title="Following">
-                                {console.log('rendering skylight')}
-                                <ReactList 
-                                    itemRenderer={this.renderFollowing}
-                                    length={this.state.following.length}
+                            <div style={{
+                                    display:"flex",
+                                    justifyContent:"space-around",
+                                    margin:"25px 500px"
+                                }}>
+                                <div>
+                                    <img style={{width: "200px", height:"200px", borderRadius:"110px"}}
+                                    src= {this.props.user.imageUrl}/>
+
+                                </div>
+                                <div>
+                                    <div>
+                                        <h1>{this.props.user.name}</h1>
+                                    </div>
+
+                                    <div style={{display:"flex", justifyContent:"space-between", width:"200%"}}>
+                                        <section>
+                                        <Button onClick={() => this.following.show()}>Following</Button>
+                                        <Button onClick={() => this.followers.show()}>Followers</Button>
+                                        </section>
+                                        <SkyLight dialogStyles={myBigGreenDialog} hideOnOverlayClicked ref={ref => this.following = ref} title="Following">
+                                            <ReactList 
+                                                itemRenderer={this.renderFollowing}
+                                                length={this.state.following.length}
+                                                type='uniform'
+                                            />
+                                        </SkyLight>
+                                        <SkyLight dialogStyles={myBigGreenDialog} hideOnOverlayClicked ref={ref => this.followers = ref} title="Followers">
+                                            <ReactList 
+                                                itemRenderer={this.renderFollowers}
+                                                length={this.state.followers.length}
+                                                type='uniform'
+                                            />
+                                        </SkyLight>
+                                    </div>
+                                    <div style={{display:"flex", justifyContent:"space-between", width:"300%"}}>
+                                        <section>
+                                            {/*  add functionality that switches based on if they are followed. */}
+                                            <Button follow onClick={this.followUser()}>Follow</Button>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style={{display:"flex"}} className="list">
+                                <ReactList
+                                    itemRenderer={this.renderItem}
+                                    length={this.state.recipes.length}
                                     type='uniform'
                                 />
-                            </SkyLight>
-                            <SkyLight dialogStyles={myBigGreenDialog} hideOnOverlayClicked ref={ref => this.followers = ref} title="Followers">
-                                <ReactList 
-                                    itemRenderer={this.renderFollowers}
-                                    length={this.state.followers.length}
-                                    type='uniform'
-                                />
-                            </SkyLight>
+                            </div>
                         </div>
-                        <div style={{display:"flex", justifyContent:"space-between", width:"300%"}}>
-                            <section>
-                                {/*  add functionality that switches based on if they are followed. */}
-                                <Button follow onClick={this.followUser()}>Follow</Button>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-                <div style={{display:"flex"}} className="list">
-                    <ReactList
-                        itemRenderer={this.renderItem}
-                        length={this.state.recipes.length}
-                        type='uniform'
-                    />
-                </div>
+                    </div>:
+                    <Redirect to="/login"/>
+                }
             </div>
-        </div>
+        
         )
     }
 }
