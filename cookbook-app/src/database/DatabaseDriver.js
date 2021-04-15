@@ -77,7 +77,7 @@ class DatabaseDriver {
     static async getFollowers(userId) {
         return fetch('/followers/' + String(userId)).then(response =>
             response.json().then(data => {
-               return data;
+               return data.followerList;
             })
         );
     }
@@ -85,7 +85,7 @@ class DatabaseDriver {
     static async getFollowing(userId) {
         return fetch('/following/' + String(userId)).then(response =>
             response.json().then(data => {
-               return data;
+               return data.followingList;
             })
         );
     }
@@ -162,7 +162,7 @@ class DatabaseDriver {
     static async getRecipesForHomepage(userId) {
         return fetch('/getRecipesForHomepage/' + String(userId)).then(response =>
             response.json().then(data => {
-                return data;
+                return data.frontpage;
             }) 
         );
     }

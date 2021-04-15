@@ -10,6 +10,7 @@ import styled, { css } from "styled-components";
 import GoogleBtn from '../../components/GoogleBtn';
 import { Redirect } from 'react-router-dom';
 import { findAllInRenderedTree } from 'react-dom/test-utils';
+import FollowCard from '../../components/followCard';
 
 class Profile extends Component {
 
@@ -36,12 +37,10 @@ class Profile extends Component {
     componentDidMount() {
         if (this.state.user !== this.props.user) {
             this.setState({ user: this.props.user }, () => {
-                this.getFollowing();
-            }, () => {
                 this.getFollowers();
-            }, () => {
+                this.getFollowing();
                 this.getRecipes();
-            }) 
+            })
         }
     }
 
@@ -56,16 +55,15 @@ class Profile extends Component {
             // need to fix these functions that return the list of follows.
     async getFollowing() {
         const followingData = await DatabaseDriver.getFollowing(this.state.user.googleId);    // Gets recipes from a user
-        console.log('following:');
-        console.log(followingData);
         this.setState({ following: followingData })
-        console.log(this.state.following)
+        console.log("following: " + this.state.following)
     }
 
     async getFollowers() {
+        console.log("hello")
         const followerData = await DatabaseDriver.getFollowers(this.state.user.googleId);    // Gets recipes from a user
         this.setState({ followers: followerData })
-        console.log(this.state.followers)
+        console.log("followers: " + this.state.followers)
     }
     
 
@@ -79,28 +77,27 @@ class Profile extends Component {
             <div key={key}>
                 <CardComponent 
                     recipe={this.state.recipes[index]}
-                    user={this.props.givenName}
+                    user={this.props.user}
                 />                 
             </div>
 
         )
     }
     renderFollowing(index, key){
-        console.log('rendering following');
 
-        return <div key={key}>
-                    <followCard
-                        foll={this.state.followers}
+        return (<div key={key}>
+                    <FollowCard
+                        foll={this.state.following[index]}
                     />
-                </div>
+                </div>)
     }
 
     renderFollowers(index, key){
-        return <div key={key}>
-                    <followCard
-                        foll={this.state.followers}
+        return (<div key={key}>
+                    <FollowCard
+                        foll={this.state.followers[index]}
                     />
-                </div>
+                </div>)
     }
 
 
@@ -121,7 +118,6 @@ class Profile extends Component {
     //"https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
 
     followUser() {
-        console.log('followed user');
         DatabaseDriver.follow(
             this.props.user.googleId,
             this.props.user.googleId
@@ -181,13 +177,16 @@ class Profile extends Component {
                                         <Button onClick={() => this.followers.show()}>Followers</Button>
                                         </section>
                                         <SkyLight dialogStyles={myBigGreenDialog} hideOnOverlayClicked ref={ref => this.following = ref} title="Following">
+                                        {console.log(this.state.following.length)}
                                             <ReactList 
                                                 itemRenderer={this.renderFollowing}
                                                 length={this.state.following.length}
                                                 type='uniform'
                                             />
+                                            
                                         </SkyLight>
                                         <SkyLight dialogStyles={myBigGreenDialog} hideOnOverlayClicked ref={ref => this.followers = ref} title="Followers">
+                                            {console.log(this.state.followers.length)}
                                             <ReactList 
                                                 itemRenderer={this.renderFollowers}
                                                 length={this.state.followers.length}
@@ -203,7 +202,7 @@ class Profile extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div style={{display:"flex"}} className="list">
+                            <div className="list">
                                 <ReactList
                                     itemRenderer={this.renderItem}
                                     length={this.state.recipes.length}

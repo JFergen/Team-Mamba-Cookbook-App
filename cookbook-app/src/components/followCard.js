@@ -6,7 +6,7 @@ import DatabaseDriver from '../database/DatabaseDriver'
 import './followCard.css'
 
 
-class FollowComponent extends Component {
+class FollowCard extends Component {
     constructor() {
         super();
         this.state = {
@@ -19,15 +19,16 @@ class FollowComponent extends Component {
     async componentDidMount() {
     }
 
-    render() {
-        return <Card className="foll">
+   render() {
+        return (<Card className="foll">
             <Card.Body class="table-primary">
                 <div class="box font-weight-normal">
-                    <b>this.props.follow.name</b>
+                    <b>{this.props.foll}</b>
                 </div>
             </Card.Body>
-        </Card>
+        </Card>)
     }
+
 }
 
-export default FollowComponent;
+export default FollowCard;
