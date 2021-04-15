@@ -29,10 +29,11 @@ class Profile extends Component {
         this.renderItem = this.renderItem.bind(this);
         this.renderFollowers = this.renderFollowers.bind(this);
         this.renderFollowing = this.renderFollowing.bind(this);
+        this.followUser = this.followUser.bind(this);
 
         
     }
-    componentDidUpdate() {
+    componentDidMount() {
         if (this.state.user !== this.props.user) {
             this.setState({ user: this.props.user }, () => {
                 this.getFollowing();
@@ -45,6 +46,7 @@ class Profile extends Component {
     }
 
 
+
     async getRecipes() {
         const data = await DatabaseDriver.getUsersRecipes(this.state.user.googleId);    // Gets recipes from a user
         this.setState({ recipes: data })
@@ -54,6 +56,8 @@ class Profile extends Component {
             // need to fix these functions that return the list of follows.
     async getFollowing() {
         const followingData = await DatabaseDriver.getFollowing(this.state.user.googleId);    // Gets recipes from a user
+        console.log('following:');
+        console.log(followingData);
         this.setState({ following: followingData })
         console.log(this.state.following)
     }
@@ -83,7 +87,7 @@ class Profile extends Component {
     }
     renderFollowing(index, key){
         console.log('rendering following');
-        
+
         return <div key={key}>
                     <followCard
                         foll={this.state.followers}
@@ -117,14 +121,18 @@ class Profile extends Component {
     //"https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
 
     followUser() {
-        return;
+        console.log('followed user');
+        DatabaseDriver.follow(
+            this.props.user.googleId,
+            this.props.user.googleId
+        );
     }
 
     render() {
 
         var myBigGreenDialog = {
             backgroundColor: '#F3F3F3',
-            color: '#ffffff',
+            color: '#000000',
             width: '50%',
             height: '600px',
             marginTop: '-300px',
@@ -190,7 +198,7 @@ class Profile extends Component {
                                     <div style={{display:"flex", justifyContent:"space-between", width:"300%"}}>
                                         <section>
                                             {/*  add functionality that switches based on if they are followed. */}
-                                            <Button follow onClick={this.followUser()}>Follow</Button>
+                                            <Button follow onClick={this.followUser}>Follow</Button>
                                         </section>
                                     </div>
                                 </div>

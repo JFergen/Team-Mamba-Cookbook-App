@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import {MdSave, MdChatBubbleOutline} from 'react-icons/md'
 import StarRating from 'react-awesome-stars-rating';
 import DatabaseDriver from '../database/DatabaseDriver'
-import './card.css'
+import './followCard.css'
 
 
 class FollowComponent extends Component {
@@ -21,7 +21,11 @@ class FollowComponent extends Component {
 
     render() {
         return <Card className="foll">
-            <Card.Body>this.props.follow.name</Card.Body>
+            <Card.Body class="table-primary">
+                <div class="box font-weight-normal">
+                    <b>this.props.follow.name</b>
+                </div>
+            </Card.Body>
         </Card>
     }
 }
