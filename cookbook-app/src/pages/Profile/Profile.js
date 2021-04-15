@@ -54,11 +54,13 @@ class Profile extends Component {
     async getFollowing() {
         const followingData = await DatabaseDriver.getFollowing(this.state.user.googleId);    // Gets recipes from a user
         this.setState({ following: followingData })
+        console.log(this.state.following)
     }
 
     async getFollowers() {
         const followerData = await DatabaseDriver.getFollowers(this.state.user.googleId);    // Gets recipes from a user
         this.setState({ followers: followerData })
+        console.log(this.state.followers)
     }
     
 
@@ -79,12 +81,37 @@ class Profile extends Component {
         )
     }
     renderFollowing(index, key){
-        return <div key={key}>{this.state.following[index].givenName}</div>
+        console.log('rendering following');
+        
+        return <div key={key}>
+                    <followCard
+                        foll={this.state.followers}
+                    />
+                </div>
     }
 
     renderFollowers(index, key){
-        return <div key={key}>{this.state.followers[index].givenName}</div>
+        return <div key={key}>
+                    <followCard
+                        foll={this.state.followers}
+                    />
+                </div>
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //"https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
 
@@ -143,6 +170,7 @@ class Profile extends Component {
                             <Button onClick={() => this.followers.show()}>Followers</Button>
                             </section>
                             <SkyLight dialogStyles={myBigGreenDialog} hideOnOverlayClicked ref={ref => this.following = ref} title="Following">
+                                {console.log('rendering skylight')}
                                 <ReactList 
                                     itemRenderer={this.renderFollowing}
                                     length={this.state.following.length}
