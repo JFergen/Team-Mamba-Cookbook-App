@@ -90,6 +90,11 @@ def getFollowing(user_id): #People this user is following
 
 # Recipes Table
 
+@app.route('/find/<field>/<criteria>', methods=['GET'])
+def find(field, criteria):
+    return db_connection.RECIPES_TABLE.get_all(field, criteria)
+
+
 @app.route('/addRecipe/', methods=['POST'])
 def add_recipe():
     recipe = request.get_json()
