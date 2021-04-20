@@ -1,4 +1,3 @@
-import { getDefaultNormalizer } from '@testing-library/dom';
 import React, { Component } from 'react'
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { connect } from 'react-redux';
@@ -30,8 +29,7 @@ class GoogleBtn extends Component {
     }
     this.props.setUser(response.profileObj);  // Save user's profile in redux
     DatabaseDriver.login(response.profileObj);  // Add user to the database
-    localStorage.setItem('loggedIn', true);
-    
+    localStorage.setItem('loggedin', 'true');
   }
  
   logout (response) {
@@ -39,18 +37,16 @@ class GoogleBtn extends Component {
       isLogined: false,
       accessToken: ''
     });
-    localStorage.setItem('loggedIn', false);
-    window.location.reload(true);
+    this.props.setUser(null);
+    localStorage.setItem('loggedin', 'false');
   }
 
   handleLoginFailure (response) {
     alert('Failed to log in')
-    localStorage.setItem('loggedIn', false);
   }
 
   handleLogoutFailure (response) {
     alert('Failed to log out')
-    localStorage.setItem('loggedIn', true);
   }
 
   render() {

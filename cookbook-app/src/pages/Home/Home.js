@@ -3,6 +3,7 @@ import DatabaseDriver from '../../database/DatabaseDriver';
 import ReactList from 'react-list';
 import CardComponent from'../../components/card';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import './Home.css';
 
 class Home extends Component {
@@ -17,7 +18,7 @@ class Home extends Component {
         this.renderItem = this.renderItem.bind(this);
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
         if (this.state.user !== this.props.user) {
             this.setState({ user: this.props.user }, () => {
                 this.getRecipes();
@@ -28,30 +29,33 @@ class Home extends Component {
     async getRecipes() {
         const data = await DatabaseDriver.getUsersRecipes(this.state.user.googleId);    // Gets recipes from a user
         this.setState({ recipes: data })
+        console.log(this.state.recipes)
     }
 
     renderItem(index, key) {
         return (
             <div key={key}>
-                <CardComponent
+                <CardComponent 
                     recipe={this.state.recipes[index]}
-                    // name={this.state.recipes[index].name}
-                    // description={this.state.recipes[index].description}
-                    // author={this.state.recipes[index].author}
+                    user={this.state.user}
                 />                 
             </div>
-
         )
     }
 
     render() {
         return (
-            <div className="list">
-                <ReactList
-                    itemRenderer={this.renderItem}
-                    length={this.state.recipes.length}
-                    type='uniform'
-                />
+            <div>
+                {this.props.user ?
+                    <div className="list">
+                        <ReactList
+                            itemRenderer={this.renderItem}
+                            length={this.state.recipes.length}
+                            type='uniform'
+                        />
+                    </div>:
+                    <Redirect to="/login"/>
+                }
             </div>
         )
     }

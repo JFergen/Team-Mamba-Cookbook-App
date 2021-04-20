@@ -4,14 +4,16 @@ import ReactList from 'react-list';
 import CardComponent from'../../components/card';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import './Discover.css';
 
-class Discover extends Component {
+
+class Search extends Component {
+
     constructor() {
         super();
         this.state = {
             recipes: [],
-            user: null
+            user: null,
+            //search: ''
         }
 
         this.getRecipes = this.getRecipes.bind(this);
@@ -19,6 +21,10 @@ class Discover extends Component {
     }
 
     componentDidMount() {
+        const { tag } =this.props.location.state.search
+        
+        console.log(tag)
+        //console.log(this.props.location.state.search)
         if (this.state.user !== this.props.user) {
             this.setState({ user: this.props.user }, () => {
                 this.getRecipes();
@@ -27,7 +33,8 @@ class Discover extends Component {
     }
 
     async getRecipes() {
-        const data = await DatabaseDriver.getNRandomRecipes(this.state.user.googleId, 10);    // Gets recipes from a user
+        console.log("Got here")
+        const data = await DatabaseDriver.getRecipesFromTag('sweet');    // Gets recipes from a user
         this.setState({ recipes: data })
     }
 
@@ -42,7 +49,10 @@ class Discover extends Component {
         )
     }
 
-    render() {
+
+    render() {        
+        const { tag } =this.props.location
+        console.log(tag)
         console.log(localStorage.getItem('loggedIn'))
         return (
             <div>
@@ -61,9 +71,11 @@ class Discover extends Component {
     }
 }
 
+
 //  Allow use of google profile information from redux
 const mapStateToProps = (state) => ({
     user: state.usrReducer.user
 })
 
-export default connect(mapStateToProps)(Discover);
+
+export default connect(mapStateToProps)(Search);

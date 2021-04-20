@@ -25,11 +25,11 @@
 
 .box {
     background-color: lightgrey;
-  height: 4rem;
-  border: 2px solid green;
-  padding: 2px;
-  margin-right: 40px;
-  padding-right: 4rem;
+    height: 5rem;
+    border: 2px solid green;
+    padding: 2px;
+    margin-right: 40px;
+    padding-right: 4rem;
 }
 
 .directions {
@@ -45,6 +45,5 @@
     float: left;
     width: 200px;
     height: 200px;
-    object-fit: contain;
-
+    object-fit: fill;
 }

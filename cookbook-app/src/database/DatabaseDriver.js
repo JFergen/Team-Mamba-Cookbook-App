@@ -34,6 +34,63 @@ class DatabaseDriver {
         });
     }
 
+    static async getSuggestedFriends(id,number) {
+        return fetch('/getSuggestedFriends/' + String(id) + '/' + String(number)).then(response =>
+            response.json().then(data => {
+                return data;
+             })
+         );
+     }
+     
+    static save(userId, recipeId) {
+        var saveLinker = JSON.stringify({
+            'user_id': userId,
+            'recipe_id': recipeId
+        });
+
+        fetch('/save/' + saveLinker,{
+            method: 'POST',
+            cache: "no-cache",
+        });
+    }
+
+    static unsave(userId, recipeId) {
+        var saveLinker = JSON.stringify({
+            'user_id': userId,
+            'recipe_id': recipeId
+        });
+
+        fetch('/unsave/' + saveLinker,{
+            method: 'DELETE',
+            cache: "no-cache",
+        });
+    }
+
+    static async getUsersSavedRecipes(userId) {
+        return fetch('/getUsersSavedRecipes/' + String(userId)).then(response =>
+            response.json().then(data => {
+                return data.saved_recipes;
+            })
+        );
+    }
+
+    static async getFollowers(userId) {
+        return fetch('/followers/' + String(userId)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
+    static async getFollowing(userId) {
+        return fetch('/following/' + String(userId)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
+    }
+
+
     // End Users
 
     // Recipes
@@ -89,13 +146,15 @@ class DatabaseDriver {
     static async getRecipesFromTag(tag) {
         return fetch('/getRecipesFromTag/' + tag).then(response =>
             response.json().then(data => {
+                console.log(data)
+                console.log(tag)
                return data;
             })
         );
     }
 
-    static async getNRandomRecipes(number) {
-        return fetch('/getNRandomRecipes/' + String(number)).then(response =>
+    static async getNRandomRecipes(id,number) {
+        return fetch('/getNRandomRecipes/' + String(id) + '/' + String(number)).then(response =>
             response.json().then(data => {
                return data;
             })
@@ -106,6 +165,14 @@ class DatabaseDriver {
         return fetch('/getRecipesForHomepage/' + String(userId)).then(response =>
             response.json().then(data => {
                 return data;
+            }) 
+        );
+    }
+
+    static async getUserSaved(userId) {
+        return fetch('/getUserSaved/' + String(userId)).then(response =>
+            response.json().then(data => {
+                return data.saved;
             }) 
         );
     }
@@ -141,7 +208,6 @@ class DatabaseDriver {
             body: JSON.stringify(comment)
         }
         );
-
     }
 
     static async getRecipeComments(recipeId) {
@@ -157,6 +223,14 @@ class DatabaseDriver {
             method: 'DELETE',
             cache: "no-cache",
         });
+    }
+
+    static async getSuggestedComments(id,number) {
+        return fetch('/getSuggestedComments/' + String(id) + '/' + String(number)).then(response =>
+            response.json().then(data => {
+               return data;
+            })
+        );
     }
 
 

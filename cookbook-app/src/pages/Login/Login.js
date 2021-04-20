@@ -1,15 +1,27 @@
 import React, { Component } from 'react'
-import GoogleBtn from '../../components/GoogleBtn';
+import { connect } from 'react-redux';
+import { setUser } from '../../store/actions/user_actions';
+import { Redirect } from "react-router-dom";
+import GoogleBtn from '../../components/GoogleBtn'
 
 class Login extends Component {
     render() {
         return (
             <div className="center">
-                <h1>Welcome to the Login Screen!</h1>
-                <GoogleBtn/>
+                {this.props.user ?
+                    <Redirect to="/"/>:
+                    <div>
+                        <h1>Login through Google below!</h1>
+                        <GoogleBtn/>
+                    </div>
+                }
             </div>
         )
     }
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+    user: state.usrReducer.user
+})
+
+export default connect(mapStateToProps, { setUser })(Login);

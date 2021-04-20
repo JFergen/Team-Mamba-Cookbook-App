@@ -6,8 +6,12 @@ import store from './store';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
+import { saveState } from './localStorage';
 
-console.log(localStorage.getItem('loggedIn'));
+store.subscribe(() => {
+  console.log('storesubscribe running');
+  saveState(store.getState());
+});
 
 ReactDOM.render(
   <React.StrictMode>
