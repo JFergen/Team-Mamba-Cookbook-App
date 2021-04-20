@@ -15,3 +15,20 @@ it("Should get N random recipes", async () => {
         return isPass;
     }
 });
+
+it("Deleting User", async () => {
+    async function deleteUser(id) {
+        let isPass;
+        await DatabaseDriver.deleteUser("108347274282317384205")
+        .then(() => {
+            console.log("Successfully deleted user.");
+            isPass = true;
+        })
+        .catch((error) => {
+            alert("Error delete user.", error);
+            isPass = false;
+        });
+        return isPass;
+    }
+});
+
