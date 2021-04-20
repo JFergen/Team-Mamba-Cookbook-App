@@ -49,6 +49,12 @@ class UsersTable(MongoDbTable):
     def get_users_saved_recipes(self, user_id):
         return {'saved_recipes': super().get_field(user_id, 'saved_recipes')}
 
+    def get_user_followers(self, user_id):
+        return {'followerList': super().get_field(user_id, 'followerList')}
+
+    def get_user_following(self, user_id):
+        return {'followingList': super().get_field(user_id, 'followingList')}
+
     def modify(self):
         pass
 
