@@ -9,21 +9,25 @@ import AllRoutes from './Routes/AllRoutes';
 import GoogleBtn from './components/GoogleBtn';
 import Login from './pages/Login/Login';
 import './App.css';
+import Search from './pages/Search/Search';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-        Search: ''
+        value: ''
     }
   }
 
+                    // use querry parameters
 OnChange= (e) => {
   console.log(e.target.value)
-  this.setState({Search: e.target.value})
+  this.setState({value: e.target.value})
 }
 
+
+  naming="Value from parent";
   render() {
     return (
       //  Navbar
@@ -45,11 +49,11 @@ OnChange= (e) => {
                 </Nav>
                 <Form inline onSubmit={this.sendData} >
                   <FormControl type="text" placeholder="Search Tags" className="mr-sm-2" name="Search" onChange={this.OnChange}/>
-                    <Link to= {{ pathname : "search", state: this.state.Search}}>
-                    <Button variant="outline-success" href= {'search/'+ this.state.Search} >Search</Button>
+                    <Link to= {{ pathname : "search" }}>  {/* , state: this.props.location} }> */}
+                    
+                    <Button variant="outline-success" >Search</Button>
                   </Link>
                 </Form>
-
                 {/* Display name of user if logged in along with dropdown to go to profile. Otherwise show loginbutton */}
                 {/* TODO:: This needs to probably be updated when Jon finishes login screen functionality */}
                 { this.props.user ?
@@ -62,6 +66,7 @@ OnChange= (e) => {
                 }
               </Navbar.Collapse>  
             </Navbar>
+            <Search parentCallback = {this.state.value}/>
             <AllRoutes />
           </React.Fragment>
         </Switch>

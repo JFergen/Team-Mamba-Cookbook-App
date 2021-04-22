@@ -96,14 +96,17 @@ class DatabaseDriver {
     // Recipes
 
     static async find(field, criteria) {
-
         return fetch('/find/' + field + '/' + criteria).then(response =>
             response.json().then(data => {
+                console.log(data)
                 return data;
              })
          );
 
     }
+
+    //auth, name, tag
+
 
     static addRecipe(userId, recipe) {
         recipe.user_id = userId

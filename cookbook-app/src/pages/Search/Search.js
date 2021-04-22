@@ -13,18 +13,21 @@ class Search extends Component {
         this.state = {
             recipes: [],
             user: null,
-            //search: ''
+            value: null
         }
 
         this.getRecipes = this.getRecipes.bind(this);
         this.renderItem = this.renderItem.bind(this);
     }
 
-    componentDidMount() {
-        const { tag } =this.props.location.state.search
+
+    setvalue() {
+
+        //console.log(e.target.value)
+        this.setState({value: this.props.parentCallback})
         
-        console.log(tag)
-        //console.log(this.props.location.state.search)
+    }
+    componentDidMount() {
         if (this.state.user !== this.props.user) {
             this.setState({ user: this.props.user }, () => {
                 this.getRecipes();
@@ -32,10 +35,19 @@ class Search extends Component {
         }
     }
 
-    async getRecipes() {
-        console.log("Got here")
-        const data = await DatabaseDriver.getRecipesFromTag('sweet');    // Gets recipes from a user
-        this.setState({ recipes: data })
+    async getRecipes() {        
+         const data = await DatabaseDriver.find('tags','sweet');
+         if(data !=0) { 
+            this.setState({ recipes: data })
+            }
+         const data1 = await DatabaseDriver.find('author','sweet'); 
+            if(data1 !=0) { 
+             this.setState({ recipes: data1 })
+            }
+         const data2 = await DatabaseDriver.find('name','sweet');
+            if(data2!=0){
+                this.setState({ recipes: data2 })
+            } 
     }
 
     renderItem(index, key) {
@@ -48,25 +60,15 @@ class Search extends Component {
             </div>
         )
     }
-
+    //newval= this.props.parentCallback
 
     render() {        
-        const { tag } =this.props.location
-        console.log(tag)
+       // const { value } = this.state.value
         console.log(localStorage.getItem('loggedIn'))
         return (
             <div>
-                {this.props.user ?
-                    <div className="list">
-                        <ReactList
-                            itemRenderer={this.renderItem}
-                            length={this.state.recipes.length}
-                            type='uniform'
-                        />
-                    </div>:
-                    <Redirect to="/login"/>
-                }
-            </div>   
+                <h2 class="text-light"> The value is: {this.props.parentCallback} </h2>
+            </div>
         )
     }
 }
