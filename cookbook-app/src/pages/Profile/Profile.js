@@ -35,6 +35,7 @@ class Profile extends Component {
         
     }
     componentDidMount() {
+        const { match: { params } } = this.props;
         if (this.state.user !== this.props.user) {
             this.setState({ user: this.props.user }, () => {
                 this.getFollowers();
@@ -156,6 +157,7 @@ class Profile extends Component {
                 {this.props.user ?
                     <div>
                         <div>
+                            {console.log(this.props.user.givenName)}
                             <div style={{
                                     display:"flex",
                                     justifyContent:"space-around",

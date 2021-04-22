@@ -15,6 +15,7 @@ function AllRoutes(){
                         <Route exact path="/create" component={Create}/>
                         <Route exact path="/saved" component={Saved}/>
                         <Route exact path="/profile" component={Profile}/>
+                        {/*<Route path="/profile/:profile" component={Profile} /> */}
                 </div>
        )
 }
