@@ -8,43 +8,57 @@ import { Redirect } from 'react-router-dom';
 
 class Search extends Component {
 
-    constructor() {
-        super();
+
+    constructor(props) {
+        super(props);
         this.state = {
             recipes: [],
             user: null,
-            value: null
+            value: props.location.aboutProps.query,
+            check: null
         }
 
         this.getRecipes = this.getRecipes.bind(this);
         this.renderItem = this.renderItem.bind(this);
+        console.log(this.newVal);
+       // console.log(value);
     }
 
+    
+        newVal = this.props.location.aboutProps.query
 
-    setvalue() {
+    // setvalue() {
+    //     console.log(this.props.location.aboutProps);
 
-        //console.log(e.target.value)
-        this.setState({value: this.props.parentCallback})
-        
-    }
+    //     if( this.props.location.aboutProps >0 ){
+    //         this.setState({ value: this.props.location.aboutProps.query})
+    //     }
+    //     else
+    //     <Redirect to="/"/>        
+    // }
+
     componentDidMount() {
+        console.log(this.value);
+
         if (this.state.user !== this.props.user) {
             this.setState({ user: this.props.user }, () => {
                 this.getRecipes();
             }) 
         }
+
+        
     }
 
     async getRecipes() {        
-         const data = await DatabaseDriver.find('tags','sweet');
+         const data = await DatabaseDriver.find('tags',this.newVal);
          if(data !=0) { 
             this.setState({ recipes: data })
             }
-         const data1 = await DatabaseDriver.find('author','sweet'); 
+         const data1 = await DatabaseDriver.find('author',this.newVal); 
             if(data1 !=0) { 
              this.setState({ recipes: data1 })
             }
-         const data2 = await DatabaseDriver.find('name','sweet');
+         const data2 = await DatabaseDriver.find('name',this.newVal);
             if(data2!=0){
                 this.setState({ recipes: data2 })
             } 
@@ -60,16 +74,22 @@ class Search extends Component {
             </div>
         )
     }
-    //newval= this.props.parentCallback
 
     render() {        
-       // const { value } = this.state.value
-       const { handle } = this.props.match.params
         console.log(localStorage.getItem('loggedIn'))
         return (
             <div>
-                <h2 class="text-light"> The value is: {handle} </h2>
-            </div>
+                {this.props.user ?
+                    <div className="list">
+                        <ReactList
+                            itemRenderer={this.renderItem}
+                            length={this.state.recipes.length}
+                            type='uniform'
+                        />
+                    </div>:
+                    <Redirect to="/login"/>
+                }
+            </div>   
         )
     }
 }

@@ -20,14 +20,11 @@ class App extends React.Component {
     }
   }
 
-                    // use querry parameters
 OnChange= (e) => {
   console.log(e.target.value)
   this.setState({value: e.target.value})
 }
-
-
-  naming="Value from parent";
+  
   render() {
     return (
       //  Navbar
@@ -47,10 +44,17 @@ OnChange= (e) => {
                   <Nav.Link href="saved">Saved</Nav.Link>
                   <Nav.Link href="create">Create</Nav.Link>
                 </Nav>
-                <Form inline onSubmit={this.sendData} >
-                  <FormControl type="text" placeholder="Search Tags" className="mr-sm-2" name="Search" onChange={this.OnChange}/>
-                    <Link to= {{ pathname : "search" }}>  {/* , state: this.props.location} }> */}
-                        <Button variant="outline-success" >Search</Button>
+                <Form inline >
+                  <FormControl type="text" placeholder="Search Tags" className="mr-sm-2" name="Search"  onChange={this.OnChange}/>
+                    <Link
+                      to={{
+                      href: "/",
+                      pathname:'search',
+                      aboutProps:{
+                        query: this.state.value
+                      }
+                    }}>
+                        <Button variant="outline-success">Search</Button>
                     </Link>
                 </Form>
                 {/* Display name of user if logged in along with dropdown to go to profile. Otherwise show loginbutton */}
@@ -65,6 +69,7 @@ OnChange= (e) => {
                 }
               </Navbar.Collapse>  
             </Navbar>
+            {/* <Search parentCallback = {this.state.value}/> */}
             <AllRoutes />
           </React.Fragment>
         </Switch>
