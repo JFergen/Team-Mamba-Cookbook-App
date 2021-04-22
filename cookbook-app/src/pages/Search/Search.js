@@ -7,19 +7,19 @@ import { Redirect } from 'react-router-dom';
 
 
 class Search extends Component {
-
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             recipes: [],
             user: null,
-            value: null
+            value: null,
+            check: null
         }
 
         this.getRecipes = this.getRecipes.bind(this);
         this.renderItem = this.renderItem.bind(this);
+        console.log(props.location.aboutProps.name)
     }
-
 
     setvalue() {
 
@@ -33,6 +33,8 @@ class Search extends Component {
                 this.getRecipes();
             }) 
         }
+
+        
     }
 
     async getRecipes() {        

@@ -25,6 +25,12 @@ OnChange= (e) => {
   console.log(e.target.value)
   this.setState({value: e.target.value})
 }
+  
+  linkToSearch() {
+    return (
+      <Link to='/search'>Test Man</Link>
+    )
+  }
 
 
   naming="Value from parent";
@@ -49,10 +55,16 @@ OnChange= (e) => {
                 </Nav>
                 <Form inline onSubmit={this.sendData} >
                   <FormControl type="text" placeholder="Search Tags" className="mr-sm-2" name="Search" onChange={this.OnChange}/>
-                    <Link to= {{ pathname : "search" }}>  {/* , state: this.props.location} }> */}
                     
-                    <Button variant="outline-success" >Search</Button>
-                  </Link>
+                    {/* <Button variant="outline-success" compon onClick={this.linkToSearch}>Search</Button> */}
+                    <Link
+                      to={{
+                      pathname:'search',
+                      aboutProps:{
+                        name: 'test'
+                      }
+                    }}>Test</Link>
+                  
                 </Form>
                 {/* Display name of user if logged in along with dropdown to go to profile. Otherwise show loginbutton */}
                 {/* TODO:: This needs to probably be updated when Jon finishes login screen functionality */}
@@ -66,7 +78,7 @@ OnChange= (e) => {
                 }
               </Navbar.Collapse>  
             </Navbar>
-            <Search parentCallback = {this.state.value}/>
+            {/* <Search parentCallback = {this.state.value}/> */}
             <AllRoutes />
           </React.Fragment>
         </Switch>
