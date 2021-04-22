@@ -64,10 +64,11 @@ class Search extends Component {
 
     render() {        
        // const { value } = this.state.value
+       const { handle } = this.props.match.params
         console.log(localStorage.getItem('loggedIn'))
         return (
             <div>
-                <h2 class="text-light"> The value is: {this.props.parentCallback} </h2>
+                <h2 class="text-light"> The value is: {handle} </h2>
             </div>
         )
     }
